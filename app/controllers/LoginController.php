@@ -20,7 +20,7 @@ class LoginController extends Controller
                 {
                     $alertUseCar=null;
                     $alertActExp=null;
-                    $sqlAlertUseCar = Car::where(DB::raw('(car_dst_alert-car_dst_count)>500'));
+                    $sqlAlertUseCar = Car::where(DB::raw('(car_dst_alert-car_dst_count)'),'<=',500);
                     $sqlAlertActExp = Car::where('car_exp_alert',1);
                     if($level==4) // นายก แสดงรายการรถทั้งหมด
                     {

@@ -7,7 +7,7 @@ class NotificationController extends Controller
         $alertActExp=null;
         $level = Session::get('level');
         $str="";
-        $sqlAlertUseCar = Car::where(DB::raw('(car_dst_alert-car_dst_count)>500'))
+        $sqlAlertUseCar = Car::where(DB::raw('(car_dst_alert-car_dst_count)'),'<=',500)
                 ->select('id','car_no','car_province',DB::raw('car_dst_alert-car_dst_count AS dst'))
                 ->orderBy('dst','ASC');
         $sqlAlertActExp = Car::where('car_exp_alert',1) 
@@ -30,7 +30,7 @@ class NotificationController extends Controller
         }
         foreach ($alertUseCar as $u)
         {
-            $str .= '<li><a href="#">'.$u->car_no.' '.$u->car_province.'อีก'.$u->dst.'กม. ครบระยะ</a></li>';
+            $str .= '<li><a href="#">'.$u->car_no.' '.$u->car_province.'อีก '.$u->dst.' กม. ครบระยะ</a></li>';
           
         }
         foreach ($alertActExp as $a)
@@ -50,4 +50,5 @@ class NotificationController extends Controller
         }
         return $str;
     }
+  
 }
