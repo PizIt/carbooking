@@ -57,6 +57,7 @@ class Manage_ManageCarController extends Controller{
     {
         $inputs = Input::all();
         $car = Car::find($inputs['id']);
+        $util=new Util;
         if(is_object($car))
         {
             $photoNewName='';
@@ -78,8 +79,7 @@ class Manage_ManageCarController extends Controller{
             $car->car_pic =  $photoNewName;
             $car->car_dept= $inputs['car_dept'];
             $car->car_color = $inputs['car_color'];
-            $dateExp=  explode("-",$inputs['car_act_exp']); // format date dd-mm-yyyy
-            $car->car_act_exp = $dateExp[2]."-".$dateExp[1]."-".$dateExp[0]; 
+            $car->car_act_exp = $util->DateConvertToDate($inputs['car_act_exp']);
             $car->car_exp_alert = 0; 
             $car->car_dst_alert = $inputs['car_dst_alert'];
             $car->save();

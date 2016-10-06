@@ -52,7 +52,7 @@
                                              $dateExp = $util->DateConvertToView($car->car_act_exp);
                                             }
                                             ?>
-                                            <input type="text" name="car_act_exp" id="car_act_exp" placeholder="dd-MM-YYYY" class="form-control border-input" value="{{!empty($dateFarmat)?$dateExp:''}}" required>
+                                            <input type="text" name="car_act_exp" id="car_act_exp" placeholder="dd-MM-YYYY" class="form-control border-input" value="{{!empty($dateExp)?$dateExp:''}}" required>
                                         </div>
                                     </div>
 

@@ -14,11 +14,11 @@ class Report_ReportBookingController extends Controller{
             $dateVal = array($dateStart,$dateEnd);
             $listBooking->where(function($result) use($dateVal){
                     
-                    $result->orWhere(function($q)use($dateVal)
+                    $result->where(function($q)use($dateVal)
                     {
                         $q->whereBetween('book_date_from',$dateVal);
                     });
-                    $result->orWhere(function($q)use($dateVal)
+                    $result->where(function($q)use($dateVal)
                     {
                         $q->whereBetween('book_date_to',$dateVal);
                     });

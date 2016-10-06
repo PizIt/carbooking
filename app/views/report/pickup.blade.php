@@ -97,7 +97,7 @@
                                                                     <?php $totalAll+=$sum;?>
                                                             @endforeach
                                                             <tr>
-                                                                <td colspan="4"></td>
+                                                                <td colspan="4" style="text-align: center"><label>รวม</label></td>
                                                                 <td style="text-align:right">{{ number_format($totalCol3);}}</td>
                                                                 <td style="text-align:right">{{ number_format($totalCol4);}}</td>
                                                                 <td style="text-align:right">{{ number_format($totalCol5); }}</td>
@@ -150,7 +150,7 @@
                                                                     </tr>
                                                            <?php $total += $sum; ?>
                                                             @endforeach
-                                                             <td colspan="5"></td>
+                                                             <td colspan="5" style="text-align: center"><label>รวม</label></td>
                                                              <td style="text-align:center">{{number_format($total);}}</td>
                                                         @endif
                                                     </tbody>

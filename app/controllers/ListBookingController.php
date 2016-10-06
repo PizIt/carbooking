@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Pagination;
 class ListBookingController extends Controller{
     public function getIndex()
     {   

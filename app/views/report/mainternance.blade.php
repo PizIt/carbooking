@@ -51,18 +51,23 @@
                                                     </thead>
                                                     <tbody>
                                                         @if(count($list)>0)
-                                                        <?php $cnt=1;?>
+                                                            <?php $cnt=1; $sum=0;?>
                                                             @foreach($list as $l)
-                                                        <tr>
-                                                            <td>{{$cnt++}}</td>
-                                                            <td><a href="#">{{$l[0];}}</a></td>
-                                                            <td>{{$l[1];}}</td>
-                                                            <td>{{$l[2];}}</td>
-                                                            <td>{{$l[3];}}</td>
-                                                            <td>{{$l[4];}}</td>                                                          
-                                                            <td style="text-align:right">{{number_format($l[5]);}}</td>
-                                                        </tr>
+                                                                <tr>
+                                                                    <td>{{$cnt++}}</td>
+                                                                    <td><a href="#">{{$l[0];}}</a></td>
+                                                                    <td>{{$l[1];}}</td>
+                                                                    <td>{{$l[2];}}</td>
+                                                                    <td>{{$l[3];}}</td>
+                                                                    <td>{{$l[4];}}</td>                                                          
+                                                                    <td style="text-align:right">{{number_format($l[5]);}}</td>
+                                                                </tr>
+                                                                <?php $sum +=$l[5]; ?>
                                                             @endforeach
+                                                            <tr>
+                                                                <td colspan="6" style="text-align: center"><label>รวม</label></td>
+                                                                <td style="text-align: right">{{number_format($sum);}}</td>
+                                                            </tr>
                                                         @endif
                                                     </tbody>
                                                 </table>

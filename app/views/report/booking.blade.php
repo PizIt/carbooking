@@ -1,7 +1,4 @@
 @extends('default')
-@section('brand')
-รายงานการจองรถ
-@stop
 @section('content')
     <div class="content">
             <div class="container-fluid">
@@ -45,8 +42,7 @@
                                  
                                     <hr>
                                     <div class="row">
-                                      
-                                        <div class="card">
+                                        <div class="col-md-12">
                                             <div class="header">
                                                 <strong>รายการจองรถ</strong>
                                             </div>
@@ -65,54 +61,62 @@
                                                     </thead>
                                                     <tbody>
                                                         @if(count($listBooking)>=0)
-                                                        @foreach($listBooking as $l)
-                                                          <?php 
-                                                            $status = $l->book_confirm;
-                                                            $color = "";
-                                                           if($status=='1' || $status=='2')
-                                                            {
-                                                                $status = "รอการอนุมัติ";
-                                                                $color = "text-warning";
-                                                            }else  if($status=='3'){
-                                                                $status = "อนุมัติแล้ว";
-                                                                $color = "text-success"; 
-                                                            }
-                                                            else if($status=='0'){
-                                                                $status = "ไม่อนุมัติ";
-                                                                $color = "text-danger"; 
-                                                            }
-                                                            $util = new Util;
-                                                            $dataStart = substr($util->ThaiDateTime($l->book_date_from),0,16);
-                                                            $dataEnd = substr($util->ThaiDateTime($l->book_date_to),0,16);
+                                                            <?php 
+                                                                $util = new Util;
+                                                                $currentPage=$listBooking->getCurrentPage();
+                                                                $perPage = $listBooking->getPerPage();
+                                                                $cnt=($perPage*$currentPage)-$perPage;
                                                             ?>
-                                                            <tr>
-                                                                <td>1</td>
-                                                                <td><a href="{{URL::to('report/booking/detail')}}">{{$l->mem_name.' '.$l->mem_lname}}</a></td>
-                                                                <td>{{$l->book_for}}</td>
-                                                                <td>{{$l->book_location}}</td>
-                                                                <td>{{$dataStart}}</td>
-                                                                <td>{{$dataEnd}}</td>
-                                                                <td class="{{$color}}">{{$status}}</td>
-                                                            </tr>
-                                                        @endforeach
+                                                            @foreach($listBooking as $l)
+                                                                <?php 
+                                                                      $status = $l->book_confirm;
+                                                                      $color = "";
+                                                                     if($status=='1' || $status=='2')
+                                                                      {
+                                                                          $status = "รอการอนุมัติ";
+                                                                          $color = "text-warning";
+                                                                      }else  if($status=='3'){
+                                                                          $status = "อนุมัติแล้ว";
+                                                                          $color = "text-success"; 
+                                                                      }
+                                                                      else if($status=='0'){
+                                                                          $status = "ไม่อนุมัติ";
+                                                                          $color = "text-danger"; 
+                                                                      }
+
+                                                                      $dataStart = substr($util->ThaiDateTime($l->book_date_from),0,16);
+                                                                      $dataEnd = substr($util->ThaiDateTime($l->book_date_to),0,16);
+                                                                  ?>
+                                                                <tr>
+                                                                    <td>{{++$cnt}}</td>
+                                                                    <td>
+                                                                        <a href="{{URL::to('report/booking/detail')}}">
+                                                                            {{$l->mem_name.' '.$l->mem_lname}}
+                                                                        </a>
+                                                                    </td>
+                                                                    <td>{{$l->book_for}}</td>
+                                                                    <td>{{$l->book_location}}</td>
+                                                                    <td>{{$dataStart}}</td>
+                                                                    <td>{{$dataEnd}}</td>
+                                                                    <td class="{{$color}}">{{$status}}</td>
+                                                                </tr>
+                                                            @endforeach
                                                         @endif
                                                     </tbody>
                                                 </table>
-                                                <hr>
                                                 <center>
                                                   {{$listBooking->links()}}
                                                 </center>
                                             </div>
                                         </div>
-                                    </div>
-                                    <hr>                                 
+                                    </div>                           
                              </form>
-                        </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 <script type="text/javascript">
     $('#dateStart').datetimepicker({
         value:'',

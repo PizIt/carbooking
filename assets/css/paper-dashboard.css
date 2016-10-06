@@ -1256,7 +1256,7 @@ textarea.form-control {
 .table-striped > thead > tr > td,
 .table-striped > tbody > tr > td,
 .table-striped > tfoot > tr > td {
-  padding: 15px 8px;
+  padding: 9px 8px;  /*default 9px 8px*/
 }
 
 /*      Checkbox and radio         */

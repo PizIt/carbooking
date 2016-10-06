@@ -8,14 +8,11 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <!--<div class="header">
-                                <p>เลือกรถและพนักงานขับรถที่ต้องการบันทึกข้อมูล</p>
-                            </div>-->
                             <div class="content">
                                 <form>
                                         <div class="row">
                                             <div class="col-md-3">
-                                                 <label><strong>รายงาน</strong> {{$txtDate}}</label>
+                                                 <label><strong>เดือน / ปี </strong>[{{$txtDate}}] </label>
                                                 <!--<input type="text"  class="form-control border-input" disabled value="{{$driver->mem_name.' '.$driver->mem_lname}}">-->
                                             </div>
                                             <div class="col-md-3">
@@ -64,8 +61,11 @@
                                                         <tbody>
                                                             @if(count($usecar)>0)
                                                                 <?php 
-                                                                    $cnt=1;
                                                                     $date = new Util;
+                                                                    $currentPage=$usecar->getCurrentPage();
+                                                                    $perPage = $usecar->getPerPage();
+                                                                    $cnt = ($currentPage*$perPage)-$perPage;
+                                                                    $cnt=1;
                                                                 ?>
                                                                 @foreach($usecar as $u)
                                                                     <?php 
@@ -73,7 +73,7 @@
                                                                         $dstEnd = $u->us_dst_end;
                                                                     ?>
                                                                     <tr>
-                                                                        <td>{{$cnt++}}</td>
+                                                                        <td>{{++$cnt}}</td>
                                                                         <td>{{$date->ThaiDate(substr($u->us_date_start,0,10));}}</td>
                                                                         <td>{{$date->DateTimeConvertToTimeView($u->us_date_start);}}</td>
                                                                         <td>{{$u->us_name_user}}</td>
@@ -99,18 +99,16 @@
                                             </div>
                                         </div>
                                     <hr>
-                                  
-
                             </form>
-                        </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 <script type="text/javascript">
     $(function () {
   $('[data-toggle="note"]').tooltip()
 })
-    </script>
+ </script>
 @stop

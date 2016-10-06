@@ -17,7 +17,7 @@
                                                     if(!empty($pickup->pk_date_save))
                                                     {
                                                         $util = new Util;
-                                                        $dateSave = $util->DateConvertToDate($pickup->pk_date_save);
+                                                        $dateSave = $util->DateConvertToView($pickup->pk_date_save);
                                                     }
                                                 ?>
                                                 <input type="text" id="dateSave" class="form-control border-input" name="pk_date_save" 
@@ -47,7 +47,6 @@
                                                 @foreach($memberPick as $m)
                                                 <option value="{{$m->id}}" {{!empty($pickup->pk_id_driver) &&($pickup->pk_id_driver==$m->id) ? 'selected': ''}}>{{$m->mem_name.' '.$m->mem_lname }} (พนักงานขับรถ)</option>
                                                 @endforeach
-<!--                                                <option>User1  (หัวหน้าช่าง)</option>-->
                                             </select>
                                         </div>
                                         <div class="col-md-3 form-group">
@@ -56,7 +55,6 @@
                                                 @foreach($cars as $c)
                                                     <option value="{{$c->id}}" {{!empty($pickup->pk_car_id) &&($pickup->pk_car_id==$c->id) ? 'selected': ''}}>{{$c->car_no.' '.$c->car_province.' ('.$c->car_type.')' }}</option>
                                                 @endforeach
-<!--                                            <option>มม 5591 กรุงเทพมหานคร(รถตู้)</option>-->
                                             </select>
                                         </div>
                                         <div class="col-md-3 form-group">

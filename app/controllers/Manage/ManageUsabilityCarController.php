@@ -1,11 +1,22 @@
 <?php
-
 class Manage_ManageUsabilityCarController extends Controller{
     public function getIndex()
     {
-        $useCar = DB::table('members')->join('usability_car','usability_car.us_id_driver','=','members.id')
-                                ->orderBy('usability_car.id','desc')->paginate(30);
-        $data = array('useCar'=>$useCar);
+        $sql =  DB::table('usability_car')->join('members','usability_car.us_id_driver','=','members.id');
+        if(!empty(Input::get('id')))//id car
+        {
+           $sql->where('us_car_id',Input::get('id'));
+        }
+        $dateNow = date('Y-m-d');
+        $checkUpdate = "IF(DATEDIFF('".$dateNow."',usability_car.created_at) <= 30 ,true,false) AS updated"; // 30day later created
+        $useCar=$sql->orderBy('us_date_start','desc')
+                ->select(DB::raw('usability_car.id AS usid'),DB::raw('members.id AS mid')
+                        ,'mem_name','mem_lname','us_location','us_name_user','us_date_start'
+                        ,'us_date_end','us_dst_start','us_dst_end','us_note'
+                        ,DB::raw($checkUpdate))
+                ->paginate(30);
+        $car = Car::all();
+        $data = array('useCar'=>$useCar,'car'=>$car);
         return View::make('manage.usability.index',$data);
     }
     public function getCreate()

@@ -1,23 +1,5 @@
 <!doctype html>
 <html lang="en">
-@section('costom-html')
-@show
-<!--Login -->
-  @if(!Auth::check())
-   <link rel="stylesheet" href="{{URL::to('assets/login/login.css')}}">
-   <div class="modal fade" id="ShowFormLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="loginmodal-container">
-               	<h1>Login to Your Account</h1><br>
-          <form>
-                <input type="text" name="username" id="username" placeholder="Username" class="form-control">
-                <input type="password" name="password" id="password" placeholder="Password" class="form-control">
-		<input type="button" name="login" id="login" class="btn-block login loginmodal-submit" value="Login">
-          </form>
-        </div>
-    </div>
-</div>
-  @endif
 <head>
     <meta charset="utf-8" name="csrf-token" content="{{csrf_token()}}"/>
 
@@ -55,7 +37,12 @@
         <script src="{{URL::to('assets/validator/js/validator.js')}}"></script>
     <!-- End Validator -->   
     @section('costom-style') @show
-   
+     <!--Login -->
+    @if(!Auth::check())
+      <link href="{{URL::to('assets/login/login.css')}}" rel="stylesheet" />
+     <?php include('assets/login/login.html')?>
+    @endif
+    @section('costom-html')@show
 </head>
 <body>
 
@@ -101,6 +88,12 @@
                             <p style="font-family:TH SarabunPSK;font-size:16px;">จัดการข้อมูลสมาชิก</p>
                         </a>
                     </li>
+                    <li class="{{((Request::segment(1)=="manage")&&(Request::segment(2)=="car"))?'active':''}}">
+                        <a href="{{url('manage/car')}}">
+                            <i class="ti-truck"></i>
+                            <p style="font-family:TH SarabunPSK;font-size:16px;">จัดการข้อมูลรถ</p>
+                        </a>
+                    </li>
                        <li class="{{((Request::segment(1)=="manage")&&(Request::segment(2)=="usability"))?'active':''}}">
                         <a href="{{url('manage/usability')}}">
                             <i class="glyphicon glyphicon-dashboard"></i>
@@ -115,7 +108,7 @@
                     </li>
                          <li class="{{((Request::segment(1)=="manage")&&(Request::segment(2)=="mainternance"))?'active':''}}">
                         <a href="{{url('manage/mainternance')}}">
-                            <i class="ti-truck "></i>
+                            <i class="glyphicon glyphicon-wrench"></i>
                             <p style="font-family:TH SarabunPSK;font-size:16px;">บันทึกการซ่อมบำรุงรถ</p>
                         </a>
                     </li>
@@ -303,8 +296,9 @@
     
     <!--     Paper Dashboard Core javascript and methods for Demo purpose -->
 	<script src="{{URL::to('assets/js/paper-dashboard.js')}}"></script>
-  @if(!Auth::check())
-    <script src="{{URL::to('assets/login/login.js')}}"></script>
-  @endif
+    <!--Login -->
+    @if(!Auth::check())
+      <script src="{{URL::to('assets/login/login.js')}}"></script>
+    @endif
 </html>
 
