@@ -53,6 +53,7 @@ class ListBookingController extends Controller{
                     if($confrimLeader>0)
                     {
                         $confrim =$confrimLeader;
+                        $booking->book_id_leader=Auth::id();
                     }else
                     {
                         $confrim=0;
@@ -64,6 +65,7 @@ class ListBookingController extends Controller{
                 if($confrimMaster>0)
                 {
                  $confrim =$confrimMaster;
+                 $booking->book_id_master=Auth::id();
                 }else
                 {
                  $confrim=0;
