@@ -81,7 +81,7 @@ class BookingController extends Controller{
         $driverBusyId= (array)$driverBusy;
         //dd($driverBusyId);
         
-        $carFree = Car::WhereNotIn('id',$carBusyId)->get();    
+        $carFree = Car::WhereNotIn('id',$carBusyId)->where('car_status','Y')->get();    
         $driverFree = Member::WhereNotIn('id',$driverBusyId)->where('mem_level',1)->get(); 
         //dd($driverFree);
        
@@ -115,6 +115,12 @@ class BookingController extends Controller{
                     $str.= '<td><input type="checkbox" value="'.$c->id.'" name="bc_car_id[]"></td>';
                     $str.= '</tr>';
                 }
+            }
+            else
+            {
+                 $str.= '<tr>';
+                 $str.= '<td colspan="5"><center><strong>ไม่มีรายการรถที่ว่าง</strong></center></td>';
+                 $str.= '</tr>';
             }
             $str.= '</tbody>';
             $str.= '</table>';
@@ -151,6 +157,12 @@ class BookingController extends Controller{
                     $str.= '<td><input type="checkbox" value="'.$d->id.'"  name="bd_driver_id[]"></td>';
                     $str.= '</tr>';
                  }
+            }
+            else
+            {
+                 $str.= '<tr>';
+                 $str.= '<td colspan="4"><center><strong>ไม่มีพนักงานที่ว่าง</strong></center></td>';
+                 $str.= '</tr>';
             }
             $str.= '</tbody>';
             $str.= '</table>';
