@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <img src="{{URL::to('img/members/'.$member->mem_pic.'')}}" width="250px" height="250px">
+                                            <img src="{{URL::to('img/members/'.$member->mem_pic.'')}}" class="img-rounded" width="250px" height="250px">
                                         </div>
 <!--                                        <div class="col-md-3">
                                             <img src="signature.png" width="150px" height="150px">

@@ -22,11 +22,13 @@
                                                     <input type="submit" class="btn btn-danger btn-block" value="แสดงข้อมูล">
                                                  </div>
                                         </div>
+                                        @if(Session::get('level')==1)
                                         <div class="col-md-5">
                                               <div class="pull-right">
                                                   <a href="{{url('manage/usability/create')}}" class="btn btn-info">เพิ่มข้อมูลการใช้งานรถ</a>
                                               </div>
                                         </div>
+                                        @endif
                                     </form>
                                 </div>
                                 <div class="row">

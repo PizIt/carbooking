@@ -7,7 +7,7 @@ class Manage_ManagePickupController extends Controller
         $pickup = DB::table('pick_fuel')->join('members','members.id','=','pick_fuel.pk_id_driver')
                 ->join('cars','cars.id','=','pick_fuel.pk_car_id')
                 ->orderBy('pick_fuel.pk_date_save','desc')
-                ->select('pick_fuel.id','pick_fuel.pk_date_save','pick_fuel.pk_type_fuel','pick_fuel.pk_qty',
+                ->select(DB::raw('pick_fuel.id as id'),DB::raw('pick_fuel.pk_id_driver as idmem'),'pick_fuel.pk_date_save','pick_fuel.pk_type_fuel','pick_fuel.pk_qty',
                         'members.mem_name','mem_lname','cars.car_no','cars.car_province')
                 ->paginate(30);
         $data = array('pickup'=>$pickup);

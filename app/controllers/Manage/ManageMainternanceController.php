@@ -6,7 +6,8 @@ class Manage_ManageMainternanceController extends Controller
         $sql =  MainternanceCar::join('members','members.id','=','mn_mem_id')
                                 ->join('cars','cars.id','=','mn_car_id')
                                 ->join('shop','shop.id','=','mn_shop_id');
-        $main  =$sql->select('mainternance_car.id','mn_date_save','mem_name','mem_lname'
+        $main  =$sql->select(DB::raw('mainternance_car.id as id'),DB::raw('mainternance_car.mn_mem_id as idmem')
+                                ,'mn_date_save','mem_name','mem_lname'
                                 ,'shop_name','car_no','car_province')
                                 ->orderBy('mn_date_save','DESC')->paginate(30);
         $details = $sql->lists('mainternance_car.id');
@@ -32,6 +33,7 @@ class Manage_ManageMainternanceController extends Controller
                 }
             }
             $list[$row][5]=$m->id;
+            $list[$row][6]=$m->idmem;
             $row++;
         }
         $data = array('list'=>$list,'main'=>$main);

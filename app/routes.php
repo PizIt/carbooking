@@ -27,13 +27,13 @@ Route::group(array('before'=>'auth'),function(){
 
     Route::controller('member','MemberController');
 
-      //Manage 
-        Route::controller('manage/member','Manage_ManageMemberController');
-        Route::controller('manage/car','Manage_ManageCarController');
-        
-        Route::controller('manage/usability','Manage_ManageUsabilityCarController');
-        Route::controller('manage/pickup','Manage_ManagePickupController');
-        Route::controller('manage/mainternance','Manage_ManageMainternanceController');
+        //Manage 
+    Route::controller('manage/member','Manage_ManageMemberController');
+    Route::controller('manage/car','Manage_ManageCarController');
+
+    Route::controller('manage/usability','Manage_ManageUsabilityCarController');
+    Route::controller('manage/pickup','Manage_ManagePickupController');
+    Route::controller('manage/mainternance','Manage_ManageMainternanceController');
 
     //Report 
     Route::controller('report/booking','Report_ReportBookingController');

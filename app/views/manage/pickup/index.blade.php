@@ -8,11 +8,13 @@
                             <div class="content">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="header">
-                                              <div class="pull-right">
-                                                  <a href="{{url('manage/pickup/create')}}" class="btn btn-info">เพิ่มข้อมูลการเบิกน้ำมัน</a>
-                                              </div>
-                                        </div>
+                                            @if(Session::get('level')==1)
+                                                <div class="header">
+                                                      <div class="pull-right">
+                                                          <a href="{{url('manage/pickup/create')}}" class="btn btn-info">เพิ่มข้อมูลการเบิกน้ำมัน</a>
+                                                      </div>
+                                                </div>
+                                            @endif
                                         <div class="content table-responsive table-full-width">
                                             <table class="table table-striped">
                                                 <thead>
@@ -43,9 +45,11 @@
                                                                 <td>{{$p->car_no.' '.$p->car_province}}</td>
                                                                 <td>{{$p->pk_type_fuel}}</td>
                                                                 <td>{{$p->pk_qty}}</td>
-                                                                <td style="text-align:center">
-                                                                            <a href="{{url("manage/pickup/update/$p->id")}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
-                                                                            <a href="#" onclick="del({{$p->id}})"> <i class="glyphicon glyphicon-trash"></i></a>&nbsp;
+                                                                <td style="text-align:left">
+                                                                    <a href="{{url("manage/pickup/update/$p->id")}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
+                                                                    @if(($p->idmem==Auth::id())||(Session::get('level')>2))
+                                                                    <a href="#" onclick="del({{$p->id}})"> <i class="glyphicon glyphicon-trash"></i></a>&nbsp;
+                                                                    @endif
                                                                 </td>
                                                             </tr>
                                                        @endforeach
