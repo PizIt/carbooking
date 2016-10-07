@@ -6,7 +6,7 @@
                     <div class="col-md-12">
                         <div class="card">
                                 <div class="header">
-                                    <h4 class="title">รายละเอียดการจองรถ</h4>
+                                   <strong>รายละเอียดการจองรถ</strong>
                                 </div>
                                 <div class="content">
                                     <form method="POST" name="form" data-toggle="validator" role="form">
@@ -35,7 +35,7 @@
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>ประเภท</label>
-                                                    <select class="form-control border-input" name="book_type" readonly>
+                                                    <select class="form-control border-input" name="book_type" disabled>
                                                         <option value="ภายใน" {{!empty($booking->book_type=='ภายใน')?'selected':''}}>ภายใน</option>
                                                         <option value="ภายนอก" {{!empty($booking->book_type=='ภายนอก')?'selected':''}}>ภายนอก</option>
                                                     </select>
@@ -64,13 +64,15 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>ใช้เพื่อ</label>
-                                                    <input type="text" name="book_for" class="form-control border-input" placeholder="จุดประสงค์การใช้งาน" value="{{$booking->book_for}}">
+                                                    <input type="text" name="book_for" class="form-control border-input" placeholder="จุดประสงค์การใช้งาน" value="{{$booking->book_for}}" 
+                                                           {{((Auth::id()==$booking->book_mem_id) || (Session::get('level')>2)) ? '' : 'disabled'}}>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>สถานที่เดินทาง</label>
-                                                    <input type="text" name="book_location" class="form-control border-input" placeholder="ไปที่ไหน" value="{{$booking->book_location}}">
+                                                    <input type="text" name="book_location" class="form-control border-input" placeholder="ไปที่ไหน" value="{{$booking->book_location}}"
+                                                            {{((Auth::id()==$booking->book_mem_id) || (Session::get('level')>2)) ? '' : 'disabled'}}>
                                                 </div>
                                             </div>
                                         </div>
@@ -87,7 +89,8 @@
                                             <div class="col-md-8">
                                                 <div class="form-group">
                                                     <label>รายละเอียดเพิ่มเติม</label>
-                                                    <textarea rows="5" name="book_details" class="form-control border-input">{{$booking->book_details}}</textarea>
+                                                    <textarea rows="5" name="book_details" class="form-control border-input"
+                                                               {{((Auth::id()==$booking->book_mem_id) || (Session::get('level') > 2)) ? '' : 'disabled'}}>{{$booking->book_details}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -110,7 +113,7 @@
                                                         @foreach($carBook as $c)
                                                         <tr>
                                                             <td><?=++$cnt?></td>
-                                                            <td><img src="{{URL::to('img/cars/'.$c->car_pic.'')}}" width="80px" height="80px"></td>
+                                                            <td><img src="{{URL::to('img/cars/'.$c->car_pic.'')}}" class="img-rounded" width="80px" height="80px"></td>
                                                             <td>{{$c->car_no.' '.$c->car_province}}</td>
                                                             <td>{{$c->car_type}}</td>
                                                         </tr>
@@ -136,7 +139,7 @@
                                                         @foreach($driverBook as $d)
                                                         <tr>
                                                             <td><?=++$cnt?></td>
-                                                            <td><img src="{{URL::to('img/members/'.$d->mem_pic.'')}}" width="80px" height="80px"></td>
+                                                            <td><img src="{{URL::to('img/members/'.$d->mem_pic.'')}}"  class="img-rounded"  width="80px" height="80px"></td>
                                                             <td>{{$d->mem_name.' '.$d->mem_lname}}</td>
                                                         </tr>
                                                         @endforeach
@@ -201,9 +204,11 @@
                                         <input type="hidden" name="lat" id="lat" value="{{!empty($booking->book_gps_lat) ? $booking->book_gps_lat:''}}">
                                         <input type="hidden" name="lng" id="lng" value="{{!empty($booking->book_gps_lon) ? $booking->book_gps_lon:''}}">
                                         <input type="hidden" name="id" value="{{$booking->id}}">
+                                        @if((Auth::id()==$booking->book_mem_id) || (Session::get('level') > 2))
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-danger btn-fill btn-wd">บันทึก</button>
                                         </div>
+                                        @endif
                                         <div class="clearfix"></div>
                                     </form>
                                 </div>
@@ -227,8 +232,10 @@
         $('#rowMap').hide();
     } 
        function initMap() {
-          var lat = {{!empty($booking->book_gps_lat)?$booking->book_gps_lat:'17.485257695007665'}};
-          var lng = {{!($booking->book_gps_lon)?$booking->book_gps_lon:'101.73062393839837'}};
+          var latDefault = 17.485257695007665;
+          var lngDefault = 101.73062393839837;
+          var lat = {{!empty($booking->book_gps_lat) ? $booking->book_gps_lat : '17.485257695007665'}};
+          var lng = {{!empty($booking->book_gps_lon) ? $booking->book_gps_lon : '101.73062393839837'}};
           var map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: lat, lng: lng},
             zoom: 15

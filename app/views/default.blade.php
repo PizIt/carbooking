@@ -75,25 +75,27 @@
                         </a>
                     </li>
                     @endif
-                    @if(Session::get('level')!=2)
-                    <li class="{{Request::segment(1)=="listbooking"?'active':''}}">
+                     <li class="{{Request::segment(1)=="listbooking"?'active':''}}">
                         <a href="{{url('listbooking')}}">
                             <i class="ti-view-list-alt"></i>
                             <p style="font-family:TH SarabunPSK;font-size:16px;">รายการจองรถ</p>
                         </a>
                     </li>
-                    <li class="{{((Request::segment(1)=="manage")&&(Request::segment(2)=="member"))?'active':''}}">
-                        <a href="{{url('manage/member')}}">
-                            <i class="glyphicon glyphicon-user"></i>
-                            <p style="font-family:TH SarabunPSK;font-size:16px;">จัดการข้อมูลสมาชิก</p>
-                        </a>
-                    </li>
-                    <li class="{{((Request::segment(1)=="manage")&&(Request::segment(2)=="car"))?'active':''}}">
-                        <a href="{{url('manage/car')}}">
-                            <i class="ti-truck"></i>
-                            <p style="font-family:TH SarabunPSK;font-size:16px;">จัดการข้อมูลรถ</p>
-                        </a>
-                    </li>
+                    @if(Session::get('level')!=2)
+                        @if(Session::get('level')>=2)
+                            <li class="{{((Request::segment(1)=="manage")&&(Request::segment(2)=="member"))?'active':''}}">
+                                <a href="{{url('manage/member')}}">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    <p style="font-family:TH SarabunPSK;font-size:16px;">จัดการข้อมูลสมาชิก</p>
+                                </a>
+                            </li>
+                            <li class="{{((Request::segment(1)=="manage")&&(Request::segment(2)=="car"))?'active':''}}">
+                                <a href="{{url('manage/car')}}">
+                                    <i class="ti-truck"></i>
+                                    <p style="font-family:TH SarabunPSK;font-size:16px;">จัดการข้อมูลรถ</p>
+                                </a>
+                            </li>
+                        @endif
                        <li class="{{((Request::segment(1)=="manage")&&(Request::segment(2)=="usability"))?'active':''}}">
                         <a href="{{url('manage/usability')}}">
                             <i class="glyphicon glyphicon-dashboard"></i>

@@ -58,8 +58,8 @@
                                                             <td>{{$m->mem_tel}}</td>
                                                             <td><?=$position?></td>
                                                             <td style="text-align:center">
-                                                                        <a href="{{url("manage/member/update/$m->id")}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
-                                                                        <a href="#" onclick="del({{$m->id}})"> <i class="glyphicon glyphicon-trash"></i></a>&nbsp;
+                                                                <a href="{{url("manage/member/update/$m->id")}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
+                                                                <a href="#" onclick="del({{$m->id}})"> <i class="glyphicon glyphicon-trash"></i></a>&nbsp;
                                                             </td>
                                                         </tr>
                                                         @endforeach
