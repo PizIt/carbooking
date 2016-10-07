@@ -15,12 +15,13 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <th style="text-align:center"><label>#</label></th>
+                                            <th style="text-align:center"><label>รูปรถ</label></th>
                                             <th><label>เลขทะเบียนรถ</label></th>
                                             <th><label>จังหวัด</label></th>
                                             <th><label>ประเภท</label></th>
                                             <th><label>กอง</label></th>
-                                            <th><label>สี</label></th>
                                             <th><label>วันหมดอายุพรบ.</label></th>
+                                             <th><label>สถานะ</label></th>
                                             <th style="text-align: center"><label>จัดการ</label></th>
                                         </thead>
                                         <tbody>
@@ -35,12 +36,13 @@
                                                     <?php $dateExp = $util->ThaiDate($c->car_act_exp);?>
                                                     <tr>
                                                         <td style="text-align:center">{{++$cnt}}</td>
+                                                        <td style="text-align:center"><img src="{{URL::to('img/cars/'.$c->car_pic)}}" class="img-rounded" width="80px" height="80px"></td>
                                                         <td>{{$c->car_no}}</td>
                                                         <td>{{$c->car_province}}</td>
                                                         <td>{{$c->car_type}}</td>
                                                         <td>{{$c->car_dept}}</td>
-                                                        <td>{{$c->car_color}}</td>
                                                         <td>{{$dateExp}}</td>
+                                                        <td><i class="{{$c->car_status=='Y' ? 'glyphicon glyphicon-ok icon-success icon-next' : 'glyphicon glyphicon-remove icon-danger'}}"></i></td>
                                                         <td style="text-align:center">
                                                             <a href="{{url("manage/car/update/$c->id")}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
                                                             <a href="#" onclick="del({{$c->id}})"> <i class="glyphicon glyphicon-trash"></i></a>&nbsp;

@@ -47,7 +47,7 @@ class Manage_ManageCarController extends Controller{
         $car->car_type = $inputs['car_type'];
         $car->car_pic =  $photoNewName;
         $car->car_dept= $inputs['car_dept'];
-        $car->car_color = $inputs['car_color'];
+        $car->car_status = $inputs['car_status'];
         $car->car_act_exp = $util->DateConvertToDate($inputs['car_act_exp']); 
         $car->car_dst_alert = $inputs['car_dst_alert'];
         $car->save();
@@ -78,7 +78,7 @@ class Manage_ManageCarController extends Controller{
             $car->car_type = $inputs['car_type'];
             $car->car_pic =  $photoNewName;
             $car->car_dept= $inputs['car_dept'];
-            $car->car_color = $inputs['car_color'];
+            $car->car_status = $inputs['car_status'];
             $car->car_act_exp = $util->DateConvertToDate($inputs['car_act_exp']);
             $car->car_exp_alert = 0; 
             $car->car_dst_alert = $inputs['car_dst_alert'];

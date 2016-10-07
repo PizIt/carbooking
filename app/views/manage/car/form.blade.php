@@ -41,8 +41,11 @@
                                            </select>
                                         </div>
                                         <div class="col-md-2 form-group">
-                                            <label>สี</label>
-                                            <input type="text" name="car_color" class="form-control border-input" value="{{!empty($car->car_color) ? $car->car_color :''}}" required>
+                                            <label>สถานะ</label>
+                                            <select  class="form-control border-input" required>
+                                                <option value="Y" {{(!empty($car->car_status)&&($car->car_status=='Y')) ? 'selected':''}}>พร้อมใช้งาน</option>
+                                                <option value="N" {{(!empty($car->car_status)&&($car->car_status=='N')) ? 'selected':''}}>ไม่พร้อมใช้งาน</option>
+                                            </select>
                                         </div>
                                         <div class="col-md-3 form-group">
                                             <label>วันที่หมดอายุพรบ.</label>

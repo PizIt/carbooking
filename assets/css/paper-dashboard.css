@@ -131,7 +131,7 @@ strong {
 }
 
 .icon-success {
-  color: #7AC29A;
+  color: #5cb85c;
 }
 
 .icon-warning {
@@ -139,7 +139,7 @@ strong {
 }
 
 .icon-danger {
-  color: #EB5E28;
+  color: #d9534f;
 }
 
 .chart-legend .text-primary, .chart-legend .text-primary:hover {
