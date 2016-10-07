@@ -15,19 +15,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>ชื่อผู้จอง</label>
-                                                    <input type="text" class="form-control border-input"  value="{{$member->mem_name." ".$member->mem_lname}}" disabled>
+                                                    <input type="text" class="form-control border-input"  value="{{$member->mem_name." ".$member->mem_lname}}" disabled style="background-color: #eee">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>ตำแหน่ง</label>
-                                                    <input type="text" class="form-control border-input" value="{{$member->mem_position}}" disabled>
+                                                    <input type="text" class="form-control border-input" value="{{$member->mem_position}}" disabled style="background-color: #eee">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>เบอร์โทรศัพท์</label>
-                                                    <input type="text" class="form-control border-input" value="{{$member->mem_tel}}" disabled>
+                                                    <input type="text" class="form-control border-input" value="{{$member->mem_tel}}" disabled style="background-color: #eee">
                                                 </div>
                                             </div>
                                         </div>

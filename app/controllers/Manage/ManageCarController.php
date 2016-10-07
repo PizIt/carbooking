@@ -70,13 +70,12 @@ class Manage_ManageCarController extends Controller{
                 $photo = Input::file('car_pic');
                 $photoNewName = date('YmdHis').'.'.$photo->getClientOriginalExtension();
                 $photo->move('img/cars/',$photoNewName);
-
+                $car->car_pic =  $photoNewName;
             }
             $car->car_driver_id = $inputs['car_driver_id'];
             $car->car_no = $inputs['car_no'];
             $car->car_province = $inputs['car_province'];
             $car->car_type = $inputs['car_type'];
-            $car->car_pic =  $photoNewName;
             $car->car_dept= $inputs['car_dept'];
             $car->car_status = $inputs['car_status'];
             $car->car_act_exp = $util->DateConvertToDate($inputs['car_act_exp']);

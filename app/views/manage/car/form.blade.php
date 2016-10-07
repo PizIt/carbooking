@@ -42,7 +42,7 @@
                                         </div>
                                         <div class="col-md-2 form-group">
                                             <label>สถานะ</label>
-                                            <select  class="form-control border-input" required>
+                                            <select  class="form-control border-input" name="car_status" required>
                                                 <option value="Y" {{(!empty($car->car_status)&&($car->car_status=='Y')) ? 'selected':''}}>พร้อมใช้งาน</option>
                                                 <option value="N" {{(!empty($car->car_status)&&($car->car_status=='N')) ? 'selected':''}}>ไม่พร้อมใช้งาน</option>
                                             </select>

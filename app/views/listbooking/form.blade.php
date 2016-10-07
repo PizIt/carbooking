@@ -14,19 +14,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>ชื่อผู้จอง</label>
-                                                    <input type="text" class="form-control border-input"  value="{{$member->mem_name." ".$member->mem_lname}}" disabled>
+                                                    <input type="text" class="form-control border-input"  value="{{$member->mem_name." ".$member->mem_lname}}" disabled style="background-color:#eee">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>ตำแหน่ง</label>
-                                                    <input type="text" class="form-control border-input" value="{{$member->mem_position}}" disabled>
+                                                    <input type="text" class="form-control border-input" value="{{$member->mem_position}}" disabled style="background-color:#eee">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>เบอร์โทรศัพท์</label>
-                                                    <input type="text" class="form-control border-input" value="{{$member->mem_tel}}" disabled>
+                                                    <input type="text" class="form-control border-input" value="{{$member->mem_tel}}" disabled style="background-color:#eee">
                                                 </div>
                                             </div>
                                         </div>
@@ -35,7 +35,7 @@
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>ประเภท</label>
-                                                    <select class="form-control border-input" name="book_type" disabled>
+                                                    <select class="form-control border-input" name="book_type" disabled style="background-color:#eee">
                                                         <option value="ภายใน" {{!empty($booking->book_type=='ภายใน')?'selected':''}}>ภายใน</option>
                                                         <option value="ภายนอก" {{!empty($booking->book_type=='ภายนอก')?'selected':''}}>ภายนอก</option>
                                                     </select>
@@ -49,13 +49,13 @@
                                                     $dateStart = $util->DateTimeConvertToView($booking->book_date_from) ;      
                                                     $dateEnd = $util->DateTimeConvertToView($booking->book_date_to) ;
                                                     ?>
-                                                    <input type="text" id="dateStart" name="book_date_from"  class="form-control border-input" placeholder="dd/MM/YYYY HH:ii" value="{{substr($dateStart,0,16)}}" readonly>
+                                                    <input type="text" id="dateStart" name="book_date_from"  class="form-control border-input" placeholder="dd/MM/YYYY HH:ii" value="{{substr($dateStart,0,16)}}" readonly style="background-color:#eee">
                                                 </div>
                                             </div> 
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>ถึงวันที่</label>
-                                                    <input type="text" id="dateEnd" name="book_date_to" class="form-control border-input" placeholder="dd/MM/YYYY HH:ii" value="{{substr($dateEnd,0,16)}}" readonly>
+                                                    <input type="text" id="dateEnd" name="book_date_to" class="form-control border-input" placeholder="dd/MM/YYYY HH:ii" value="{{substr($dateEnd,0,16)}}" readonly style="background-color:#eee">
                                                 </div>
                                             </div>
                                         </div>
