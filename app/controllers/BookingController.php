@@ -20,6 +20,15 @@ class BookingController extends Controller{
         $booking->book_date_from = $util->DateTimeConvertToDate($inputs['book_date_from']);
         $booking->book_date_to = $util->DateTimeConvertToDate($inputs['book_date_to']);
         $booking->book_mem_id = Auth::id();
+        if(Session::get('level')==3)
+        {
+            $booking->book_confirm=2;
+            $booking->book_id_leader=Auth::id();
+        }else if(Session::get('level')==4)
+        {
+            $booking->book_confirm=3;
+            $booking->book_id_master=Auth::id();
+        }
         if($booking->save())
         {
             //Insert Booking Cars
@@ -100,7 +109,7 @@ class BookingController extends Controller{
                     $urlImg = URL::to('img/cars/'.$c->car_pic);
                     $str.= '<tr>';
                     $str.= '<td>'.++$cnt.'</td>';
-                    $str.= '<td><img src="'.$urlImg.'" width="80px" height="80px"></td>';
+                    $str.= '<td><img src="'.$urlImg.'" class="img-rounded" width="80px" height="80px"></td>';
                     $str.= '<td>'.$c->car_no.' '.$c->car_province.'</td>';
                     $str.= '<td>'.$c->car_type.'</td>';
                     $str.= '<td><input type="checkbox" value="'.$c->id.'" name="bc_car_id[]"></td>';
@@ -137,7 +146,7 @@ class BookingController extends Controller{
                     $urlImg = URL::to('img/members/'.$d->mem_pic);
                     $str.= '<tr>';
                     $str.= '<td>'.++$cnt.'</td>';
-                    $str.= '<td><img src="'.$urlImg.'" width="80px" height="80px"></td>';
+                    $str.= '<td><img src="'.$urlImg.'" class="img-rounded" width="80px" height="80px"></td>';
                     $str.= '<td>'.$d->mem_name.' '.$d->mem_lname.'</td>';
                     $str.= '<td><input type="checkbox" value="'.$d->id.'"  name="bd_driver_id[]"></td>';
                     $str.= '</tr>';

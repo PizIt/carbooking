@@ -188,6 +188,19 @@
                                                         </label>
                                                     </td>
                                                 </tr>
+                                                
+                                                <tr style="text-align:left">
+                                                    <td style="width:50%" colspan="2">
+                                                        <label>
+                                                            <strong>{{!empty($leader) ? $leader->mem_name.' '.$leader->mem_lname.' : '.$leader->mem_position : ''}}</strong>
+                                                        </label>
+                                                    </td>
+                                                      <td style="width:50%" colspan="2">
+                                                        <label>
+                                                            <strong>{{!empty($master) ? $master->mem_name.' '.$master->mem_lname.' : '.$master->mem_position : ''}}</strong>
+                                                        </label>
+                                                    </td>
+                                                </tr>
                                                  <tr style="text-align:center">
                                                      <td colspan="2"><strong>หมายเหตุ  </strong>
                                                             <input type="text" name="book_note_leader" class="form-control border-input" placeholder="หมายเหตุ" 
