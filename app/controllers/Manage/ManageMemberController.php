@@ -71,7 +71,6 @@ class Manage_ManageMemberController extends Controller{
         $member->mem_dept = $inputs['mem_dept'];
         $member->mem_position = $inputs['mem_position'];
         $member->mem_tel = $inputs['mem_tel'];
-        $member->mem_user = $inputs['mem_user'];
         $member->mem_pass = $inputs['mem_pass'];
         $member->mem_email = !empty($inputs['mem_email'])?$inputs['mem_email']:'null';
         $member->mem_sig = 'null';

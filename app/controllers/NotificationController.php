@@ -30,7 +30,7 @@ class NotificationController extends Controller
         }
         foreach ($alertUseCar as $u)
         {
-            $str .= '<li><a href="#">'.$u->car_no.' '.$u->car_province.'อีก '.$u->dst.' กม. ครบระยะ</a></li>';
+            $str .= '<li><a href="#">'.$u->car_no.' '.$u->car_province.' อีก '.$u->dst.' กม. ครบระยะ</a></li>';
           
         }
         foreach ($alertActExp as $a)
