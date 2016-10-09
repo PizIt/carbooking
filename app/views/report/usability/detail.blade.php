@@ -33,9 +33,9 @@
 
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div class="header">
+<!--                                                <div class="header">
                                                     <strong>รายงานแบบสรุปตามเดือน</strong>
-                                                </div>
+                                                </div>-->
                                                 <div class="content table-responsive table-full-width" style="overflow-x:auto;">
                                                     <table class="table table-bordered table-striped fix" >
                                                         <thead>

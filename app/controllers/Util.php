@@ -68,5 +68,22 @@ class Util
 	}
         return $m;
     }
+     public function colvertListMonth($m){
+        switch($m) {
+		case "มาราคม":	$m = "ม.ค."; break;
+		case "กุมภาพันธ์":	$m = "ก.พ."; break;
+		case "มีนาคม":	$m = "มี.ค."; break;
+		case "เมษายน":	$m = "เม.ย."; break;
+		case "พฤษภาคม":	$m = "พ.ค."; break;
+		case "มิถุนายน":	$m = "มิ.ย."; break;
+		case "กรกฎาคม":	$m = "ก.ค."; break;
+		case "สิงหาคม":	$m = "ส.ค."; break;
+		case "กันยายน":	$m = "ก.ย."; break;
+		case "ตุลาคม":	$m = "ต.ค."; break;
+		case "พฤศจิกายน":$m = "พ.ย."; break;
+		case "ธันวาคม":	$m = "ธ.ค."; break;
+	}
+        return $m;
+    }
 
 }

@@ -49,6 +49,7 @@ class Report_ReportPickFuelController extends Controller{
 
                                 }
                         }
+                        $list[$row][6]=$l->id;
                         $row++;
                 }
             }
@@ -97,6 +98,28 @@ class Report_ReportPickFuelController extends Controller{
             }
         }
     $data = array('list'=>$list);
-    return View::make('report.pickup',$data); 
+    return View::make('report.pickup.index',$data); 
+    }
+    public function getDetail($idCar,$month,$year)
+    {
+        $car = Car::find($idCar);
+        $driver = Member::find($car->car_driver_id);
+        $pickup = DB::table('pick_fuel')->join('members','members.id','=','pick_fuel.pk_id_driver')
+                ->where('pk_car_id','=',$idCar)
+                ->where(DB::raw('YEAR(pk_date_save)'),'=',($year-543))
+                ->where(DB::raw('MONTH(pk_date_save)'),'=',$month+1)
+                ->orderBy('pick_fuel.pk_date_save','desc')
+                ->select(DB::raw('pick_fuel.id as id'),DB::raw('pick_fuel.pk_id_driver as idmem')
+                        ,'pk_date_save','pk_type_fuel','pk_qty','pk_order_no','pk_early_km','pk_now_km'
+                        ,'members.mem_name','mem_lname','pk_no','pk_month','pk_for')
+                ->paginate(30);
+        $txtDate ='';
+        $util = new Util;
+        $month=$util->listMonth($month);
+       
+        $txtDate =$month.' / ';
+        $txtDate .=($year);
+        $data = array('car'=>$car,'driver'=>$driver,'txtDate'=>$txtDate,'pickup'=>$pickup);
+        return View::make('report.pickup.detail',$data);
     }
 }

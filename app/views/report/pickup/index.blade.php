@@ -86,7 +86,7 @@
                                                             ;?>
                                                                     <tr>
                                                                         <td style="text-align:center">{{$cnt++;}}</td>
-                                                                        <td><a href="#">{{$l[0]}}</a></td>
+                                                                        <td><a href="{{URL::to('report/pickup/detail/'.$l[6].'/'.Input::get('month').'/'.Input::get('year'))}}" target="_blank">{{$l[0]}}</a></td>
                                                                         <td>{{$l[1]}}</td>
                                                                         <td>{{$l[2]}}</td>
                                                                         <td style="text-align:right">{{!empty($l[3]) ? $l[3] : '0'}}</td>

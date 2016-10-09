@@ -8,7 +8,7 @@ class Manage_ManagePickupController extends Controller
                 ->join('cars','cars.id','=','pick_fuel.pk_car_id')
                 ->orderBy('pick_fuel.pk_date_save','desc')
                 ->select(DB::raw('pick_fuel.id as id'),DB::raw('pick_fuel.pk_id_driver as idmem')
-                        ,'pk_date_save','pk_type_fuel','pk_qty','pk_order_no','pk_early_km','pk_now_km'
+                        ,'pk_date_save','pk_type_fuel','pk_qty','pk_order_no','pk_early_km','pk_now_km','pk_no','pk_month'
                         ,'members.mem_name','mem_lname','car_no','car_province','car_dept')
                 ->paginate(30);
         $data = array('pickup'=>$pickup);

@@ -14,10 +14,11 @@
                                                         <tr>
                                                             <th rowspan="2" width="1%"><label>#</label></th>
                                                             <th rowspan="2"  width="9%" style="text-align:center"><label>วันที่เบิก</label></th>
+                                                            <th rowspan="2" width="5.5%" style="text-align:center"><label>ครั้งที่</label></th>
                                                             <th rowspan="2" width="15%" style="text-align:center"><label>ผู้เบิก</label></th>
                                                             <th colspan="2" width="27%" style="text-align:center"><label>รถที่เบิก</label></th>
-                                                            <th colspan="2" style="text-align:center"><label>น้ำมัน</label></th>
-                                                            <th rowspan="2" style="text-align:center"><label>เลขที่ใบสั่งจ่าย</label></th>
+                                                            <th colspan="2" width="18%" style="text-align:center"><label>น้ำมัน</label></th>
+                                                            <th rowspan="2" width="7%" style="text-align:center"><label>เลขที่ใบสั่งจ่าย</label></th>
                                                             <th colspan="2" style="text-align:center"><label>ระยะทางเบิก</label></th>
                                                             <th rowspan="2" widht="3%" style="text-align:center"><label>จัดการ</label></th>
                                                         </tr>
@@ -41,10 +42,12 @@
                                                        @foreach($pickup as $p)
                                                             <?php 
                                                                  $date = $util->ThaiDate($p->pk_date_save);
+                                                                 $month = $util->colvertListMonth($p->pk_month)
                                                             ?>
                                                         <tr>
                                                             <td style="text-align:center">{{++$cnt}}</td>
                                                             <td>{{$date}}</td>
+                                                             <td>{{$p->pk_no.' / '.$month}}</td>
                                                             <td>{{$p->mem_name.' '.$p->mem_lname}}</td>
                                                             <td>{{$p->car_no.' '.$p->car_province}}</td>
                                                             <td>{{$p->car_dept}}</td>
