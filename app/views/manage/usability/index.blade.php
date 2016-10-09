@@ -41,6 +41,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th rowspan="2" width="1%"><label>#</label></th>
+                                                            <th rowspan="2" width="10%"  style="text-align:center"><label>รถ</label></th>
                                                             <th colspan="2" width="6%" style="text-align:center"><label>ออกเดินทาง</label></th>
                                                             <th rowspan="2" width="15%" style="text-align:center"><label>ผู้ใช้รถ</label></th>
                                                             <th rowspan="2" width="15%" style="text-align:center"><label>สถานที่ไป</label></th>
@@ -48,7 +49,7 @@
                                                             <th colspan="2" width="6%" style="text-align:center"><label>กลับถึงสำนักงาน</label></th>
                                                             <th rowspan="2" style="text-align:center"><label>ระยะทางหลังใช้</label></th>
                                                             <th rowspan="2" style="text-align:center"><label>รวมระยะ</label></th>
-                                                            <th rowspan="2" style="text-align:center"><label>พนักงานขับรถ</label></th>
+                                                            <th rowspan="2" width="10%" style="text-align:center"><label>พนักงานขับรถ</label></th>
                                                             <th rowspan="2" style="text-align:center"><label><i class="glyphicon glyphicon-asterisk"></i></label></th>
                                                             <th rowspan="2" style="text-align:center"><label>จัดการ</label></th>
                                                         </tr>
@@ -74,10 +75,11 @@
                                                                 ?>
                                                                 <tr>
                                                                         <td>{{++$cnt}}</td>
+                                                                        <td>{{$u->car_no.' '.$u->car_province}}</td>
                                                                         <td>{{$date->ThaiDate(substr($u->us_date_start,0,10));}}</td>
                                                                         <td>{{$date->DateTimeConvertToTimeView($u->us_date_start);}}</td>
                                                                         <td>{{$u->us_name_user}}</td>
-                                                                        <td>{{$u->us_location}}</td>
+                                                                        <td><div id="mylayout">{{$u->us_location}}</div></td>
                                                                         <td style="text-align:right">{{$dstStart}}</td>
                                                                         <td>{{$date->ThaiDate(substr($u->us_date_end,0,10));}}</td>
                                                                         <td>{{$date->DateTimeConvertToTimeView($u->us_date_end);}}</td>

@@ -40,7 +40,7 @@
                                     <div class="row">
                                         <div class="col-md-3 form-group">
                                             <label>Username</label>
-                                            <input type="text" name="mem_user" placeholder="Username" class="form-control border-input" value="{{!empty($member->mem_user) ? $member->mem_user :''}}" required>
+                                            <input type="text" name="mem_user" placeholder="Username" class="form-control border-input" value="{{!empty($member->mem_user) ? $member->mem_user :''}}" disabled style="background-color: #eee">
                                         </div>
                                         <div class="col-md-3 form-group">
                                             <label>Password</label>

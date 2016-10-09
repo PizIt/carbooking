@@ -2,7 +2,8 @@
 class Manage_ManageUsabilityCarController extends Controller{
     public function getIndex()
     {
-        $sql =  DB::table('usability_car')->join('members','usability_car.us_id_driver','=','members.id');
+        $sql =  DB::table('usability_car')->join('members','usability_car.us_id_driver','=','members.id')
+                ->join('cars','usability_car.us_car_id','=','cars.id');
         if(!empty(Input::get('id')))//id car
         {
            $sql->where('us_car_id',Input::get('id'));
@@ -12,10 +13,10 @@ class Manage_ManageUsabilityCarController extends Controller{
         $useCar=$sql->orderBy('us_date_start','desc')
                 ->select(DB::raw('usability_car.id AS usid'),DB::raw('members.id AS mid')
                         ,'mem_name','mem_lname','us_location','us_name_user','us_date_start'
-                        ,'us_date_end','us_dst_start','us_dst_end','us_note'
+                        ,'us_date_end','us_dst_start','us_dst_end','us_note','car_no','car_province'
                         ,DB::raw($checkUpdate))
                 ->paginate(30);
-        $car = Car::all();
+        $car = Car::orderBy('car_no','ASC')->get();
         $data = array('useCar'=>$useCar,'car'=>$car);
         return View::make('manage.usability.index',$data);
     }

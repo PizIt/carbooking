@@ -21,7 +21,7 @@
                                             <th><label>ประเภท</label></th>
                                             <th><label>กอง</label></th>
                                             <th><label>วันหมดอายุพรบ.</label></th>
-                                             <th><label>สถานะ</label></th>
+                                            <th style="text-align: center"><label>สถานะ</label></th>
                                             <th style="text-align: center"><label>จัดการ</label></th>
                                         </thead>
                                         <tbody>
@@ -42,10 +42,12 @@
                                                         <td>{{$c->car_type}}</td>
                                                         <td>{{$c->car_dept}}</td>
                                                         <td>{{$dateExp}}</td>
-                                                        <td><i class="{{$c->car_status=='Y' ? 'glyphicon glyphicon-ok icon-success icon-next' : 'glyphicon glyphicon-remove icon-danger'}}"></i></td>
+                                                        <td style="text-align: center"><i class="{{$c->car_status=='Y' ? 'glyphicon glyphicon-ok icon-success icon-next' : 'glyphicon glyphicon-remove icon-danger'}}"></i></td>
                                                         <td style="text-align:center">
                                                             <a href="{{url("manage/car/update/$c->id")}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
-                                                            <a href="#" onclick="del({{$c->id}})"> <i class="glyphicon glyphicon-trash"></i></a>&nbsp;
+                                                            @if(Session::get('level')>2)
+                                                                <a href="#" onclick="del({{$c->id}})"> <i class="glyphicon glyphicon-trash"></i></a>&nbsp;
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach
