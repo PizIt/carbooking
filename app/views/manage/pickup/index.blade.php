@@ -6,8 +6,16 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="content">
-                                <div class="row">      
-                                        <div class="col-md-12">
+                                
+                                <div class="row">
+                                    <div class="content">
+                                   <div class="col-md-12">
+                                          <p class="text-left">
+                                            <a href="{{url('manage/member/create')}}" class="btn btn-default">
+                                                <i class="glyphicon glyphicon-plus"></i> เพิ่มข้อมูลสมาชิก
+                                            </a>
+                                          </p>
+                                        </div>
                                             <div class="content table-responsive table-full-width" style="overflow-x:auto;">
                                                 <table class="table table-bordered table-striped fix" >
                                                     <thead>
@@ -78,6 +86,7 @@
                 </div>
             </div>
         </div>
+    </div>
 <script type="text/javascript">
     function del(id)
     {

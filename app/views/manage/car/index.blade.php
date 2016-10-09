@@ -7,9 +7,11 @@
                         <div class="card">
                             <div class="content">
                                 <div class="header">
-                                      <div class="pull-right">
-                                          <a href="{{url('manage/car/create')}}" class="btn btn-info">เพิ่มข้อมูลรถ</a>
-                                      </div>
+                                    <p class="text-left">
+                                        <a href="{{url('manage/car/create')}}" class="btn btn-default">
+                                            <i class="glyphicon glyphicon-plus"></i> เพิ่มข้อมูลสมาชิก
+                                        </a>
+                                    </p>
                                 </div>
                                 <div class="content table-responsive table-full-width">
                                     <table class="table table-striped">

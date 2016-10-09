@@ -25,7 +25,7 @@
                                         @if(Session::get('level')==1)
                                         <div class="col-md-5">
                                               <div class="pull-right">
-                                                  <a href="{{url('manage/usability/create')}}" class="btn btn-info">เพิ่มข้อมูลการใช้งานรถ</a>
+                                                  <a href="{{url('manage/usability/create')}}" class="btn btn-default">เพิ่มข้อมูลการใช้งานรถ</a>
                                               </div>
                                         </div>
                                         @endif

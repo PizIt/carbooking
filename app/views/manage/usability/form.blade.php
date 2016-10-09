@@ -8,7 +8,7 @@
                             <div class="header">
                                 <strong>เลือกรถและพนักงานขับรถที่ต้องการบันทึกข้อมูล</strong>
                                 <div class="pull-right">
-                                    <a href="{{url('manage/usability/index')}}" class="btn btn-info">กลับ</a>
+                                    <a href="{{url('manage/usability/index')}}" class="btn btn-default">กลับ</a>
                             </div>
                             </div>
                             <div class="content">

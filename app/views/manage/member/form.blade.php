@@ -6,11 +6,10 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <div class="pull-right">
-                                    <a href="{{url('manage/member/index')}}" class="btn btn-info">กลับ</a>
+                                    <a href="{{url('manage/member/index')}}" class="btn btn-default">
+                                        <i class="glyphicon glyphicon-arrow-left"></i> กลับ
+                                    </a>
                             </div>
-                            </div>
-                           
                             <div class="content">
                               <form name="form" data-toggle="validator" role="form" method="POST" enctype="multipart/form-data">
                                     <div class="row">

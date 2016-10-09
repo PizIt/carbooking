@@ -8,10 +8,11 @@
                             <div class="content">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="header">
-                                              <div class="pull-right">
-                                                  <a href="{{url('manage/member/create')}}" class="btn btn-info">เพิ่มข้อมูลสมาชิก</a>
-                                              </div>
+                                          <p class="text-left">
+                                            <a href="{{url('manage/member/create')}}" class="btn btn-default">
+                                                <i class="glyphicon glyphicon-plus"></i> เพิ่มข้อมูลสมาชิก
+                                            </a>
+                                          </p>
                                         </div>
                                         <div class="content table-responsive table-full-width">
                                             <table class="table table-striped">

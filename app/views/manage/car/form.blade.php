@@ -6,7 +6,9 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                               <a href="{{URL::to('manage/car')}}">กลับ</a>
+                                <a href="{{url('manage/car')}}" class="btn btn-default">
+                                    <i class="glyphicon glyphicon-arrow-left"></i> กลับ
+                                </a>
                             </div>
                             <div class="content">
                                 <form name="form" data-toggle="validator" role="form" method="POST" enctype="multipart/form-data">
