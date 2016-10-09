@@ -14,7 +14,7 @@
                                                 <select class="form-control border-input" name="id">
                                                     <option value="">ทั้งหมด</option>
                                                     @foreach($car as $c)
-                                                    <option value="{{$c->id}}" {{Input::get('id')==$c->id ? 'selected' : ''}}>{{$c->car_no.' '.$c->car_province}}</option>
+                                                        <option value="{{$c->id}}" {{Input::get('id')==$c->id ? 'selected' : ''}}>{{$c->car_no.' '.$c->car_province}}</option>
                                                     @endforeach
                                                  </select>
                                                  </div>
@@ -31,11 +31,9 @@
                                         @endif
                                     </form>
                                 </div>
+                                <hr>
                                 <div class="row">
                                         <div class="col-md-12">
-                                            <div class="header">
-                                                <!--<strong>รายงานแบบสรุปตามเดือน</strong>-->
-                                            </div>
                                             <div class="content table-responsive table-full-width" style="overflow-x:auto;">
                                                 <table class="table table-bordered table-striped fix" >
                                                     <thead>
@@ -94,7 +92,7 @@
                                                                         <td style="text-align:left">
                                                                             <a href="{{url("manage/usability/update/$u->usid")}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
                                                                             <?php 
-                                                                            if(($u->mid==Auth::id())&&($u->updated==TRUE) || (Session::get('level')>=3)) { ?>
+                                                                            if((($u->mid==Auth::id()) || (Session::get('level')>=3))&&($u->updated==TRUE)) { ?>
                                                                                 <a href="#" onclick="del({{$u->usid}})"> <i class="glyphicon glyphicon-trash"></i></a>&nbsp;
                                                                             <?php } ?>
                                                                         </td>

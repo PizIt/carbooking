@@ -8,7 +8,7 @@
                             <div class="header">
                                 <strong>ข้อมูลการซ่อมบำรุงรถ</strong>
                                 <div class="pull-right">
-                                    <a href="{{URL::to('manage/mainternance')}}" class="btn btn-info">กลับ</a>
+                                    <a href="{{URL::to('manage/mainternance')}}" class="btn btn-default">กลับ</a>
                                 </div>
                             </div>
                             <div class="content">

@@ -6,16 +6,34 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="content">
-                                
+                                 <div class="row">
+                                    <form method="GET" class="form-inline">
+                                        <div class="col-md-7">
+                                            <div class="form-group">
+                                                <label>เรียงตามรถ</label>
+                                                <select class="form-control border-input" name="id">
+                                                   <option value="">ทั้งหมด</option>
+                                                    @foreach($car as $c)
+                                                        <option value="{{$c->id}}" {{Input::get('id')==$c->id ? 'selected' : ''}}>{{$c->car_no.' '.$c->car_province}}</option>
+                                                    @endforeach
+                                                 </select>
+                                                 </div>
+                                                 <div class="form-group">
+                                                    <input type="submit" class="btn btn-danger btn-block" value="แสดงข้อมูล">
+                                                 </div>
+                                        </div>
+                                        @if(Session::get('level')==1)
+                                        <div class="col-md-5">
+                                              <div class="pull-right">
+                                                  <a href="{{url('manage/pickup/create')}}" class="btn btn-default">เพิ่มข้อมูลการเบิกน้ำมัน</a>
+                                              </div>
+                                        </div>
+                                        @endif
+                                    </form>
+                                </div>
+                                <hr>
                                 <div class="row">
                                     <div class="content">
-                                   <div class="col-md-12">
-                                          <p class="text-left">
-                                            <a href="{{url('manage/member/create')}}" class="btn btn-default">
-                                                <i class="glyphicon glyphicon-plus"></i> เพิ่มข้อมูลสมาชิก
-                                            </a>
-                                          </p>
-                                        </div>
                                             <div class="content table-responsive table-full-width" style="overflow-x:auto;">
                                                 <table class="table table-bordered table-striped fix" >
                                                     <thead>
@@ -66,16 +84,16 @@
                                                             <td style="text-align:right">{{$p->pk_now_km}}</td>
                                                              <td style="text-align:left">
                                                                     <a href="{{url("manage/pickup/update/$p->id")}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
-                                                                    @if(($p->idmem==Auth::id())||(Session::get('level')>2))
+                                                                    <?php if((($p->idmem==Auth::id()) || (Session::get('level')>=3))&&($p->updated==TRUE)) {?>
                                                                     <a href="#" onclick="del({{$p->id}})"> <i class="glyphicon glyphicon-trash"></i></a>&nbsp;
-                                                                    @endif
+                                                                    <?php } ?>
                                                             </td>
                                                         </tr>
                                                     @endforeach
                                                     @endif
                                                 </tbody>
                                             </table>
-                                            <center>{{$pickup->links()}} </center>
+                                            <center>{{$pickup->appends(array('id'=>Input::get('id')))->links()}} </center>
                                             </div>
                                         </div>
                                     </div>

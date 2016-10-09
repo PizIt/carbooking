@@ -4,14 +4,21 @@ class Manage_ManagePickupController extends Controller
 {
     public function getIndex()
     {
-        $pickup = DB::table('pick_fuel')->join('members','members.id','=','pick_fuel.pk_id_driver')
-                ->join('cars','cars.id','=','pick_fuel.pk_car_id')
-                ->orderBy('pick_fuel.pk_date_save','desc')
-                ->select(DB::raw('pick_fuel.id as id'),DB::raw('pick_fuel.pk_id_driver as idmem')
+        $sql= DB::table('pick_fuel')->join('members','members.id','=','pick_fuel.pk_id_driver')
+                ->join('cars','cars.id','=','pick_fuel.pk_car_id');
+        if(!empty(Input::get('id')))//id car
+        {
+           $sql->where('pk_car_id',Input::get('id'));
+        }
+        $dateNow = date('Y-m-d');
+        $checkUpdate = "IF(DATEDIFF('".$dateNow."',pick_fuel.created_at) <= 30 ,true,false) AS updated"; // 30day later created
+        $pickup =$sql->orderBy('pick_fuel.pk_date_save','desc')
+                     ->select(DB::raw('pick_fuel.id as id'),DB::raw('pick_fuel.pk_id_driver as idmem')
                         ,'pk_date_save','pk_type_fuel','pk_qty','pk_order_no','pk_early_km','pk_now_km','pk_no','pk_month'
-                        ,'members.mem_name','mem_lname','car_no','car_province','car_dept')
-                ->paginate(30);
-        $data = array('pickup'=>$pickup);
+                        ,'members.mem_name','mem_lname','car_no','car_province','car_dept',DB::raw($checkUpdate))
+                    ->paginate(30);
+        $car = Car::orderBy('car_no','ASC')->get();
+        $data = array('pickup'=>$pickup,'car'=>$car);
         return View::make('manage.pickup.index',$data);
     }
     public function getCreate()

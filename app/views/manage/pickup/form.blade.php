@@ -7,6 +7,8 @@
                         <div class="card">
                             <div class="header">
                                 <strong>เลือกรถและพนักงานขับรถที่ต้องการบันทึกข้อมูล</strong>
+                                 <div class="pull-right">
+                                    <a href="{{url('manage/pickup/index')}}" class="btn btn-default">กลับ</a>
                             </div>
                             <div class="content">
                                 <form method="POST" name="form" data-toggle="validator" role="form">
