@@ -78,8 +78,8 @@
                                                                     <td style="text-align:right">{{$p->pk_order_no}}</td>
                                                                     <td style="text-align:right">{{$p->pk_early_km}}</td>
                                                                     <td style="text-align:right">{{$p->pk_now_km}}</td>
-                                                                    <td style="text-align:left">
-                                                                            <a href="{{url("manage/pickup/update/$p->id")}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
+                                                                    <td style="text-align:center">
+                                                                        <a href="{{url("report/pickup/sub-detail/$p->id")}}" target="_blank"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
                                                                     </td>
                                                                 </tr>
                                                             @endforeach
@@ -99,12 +99,6 @@
             </div>
         </div>
     </div>
-<script type="text/javascript">
-    $(function () {
-  $('[data-toggle="note"]').tooltip()
-})
- </script>
- 
 @stop
 @section('custom-style')
 <style>

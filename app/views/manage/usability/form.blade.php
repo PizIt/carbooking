@@ -48,18 +48,22 @@
                                             <label>วันเวลาที่เดินทาง</label>
                                             <input type="text" id="dateStart"  name="us_date_start" class="form-control border-input" value="{{!empty($useCar->us_date_start)? $dateStart : ''}}" required placeholder="dd-MM-YYYY HH:ii">
                                         </div>
+                                         <div class="col-md-3 form-group">
+                                            <label>วันเวลาที่กลับสำนักงาน</label>
+                                            <input type="text" id="dateEnd"  name="us_date_end" class="form-control border-input" value="{{!empty($useCar->us_date_end)? $dateEnd : ''}}" required placeholder="dd-MM-YYYY HH:ii">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                      
                                         <div class="col-md-3 form-group">
                                             <label>ชื่อผู้ใช้รถ</label>
                                             <input type="text"  name="us_name_user" class="form-control border-input" value="{{!empty($useCar->us_name_user)? $useCar->us_name_user : ''}}" required>
                                         </div>
-                                        <div class="col-md-3 form-group">
+                                        <div class="col-md-4 form-group">
                                             <label>สถานที่ไป</label>
                                             <input type="text"  name="us_location" class="form-control border-input" value="{{!empty($useCar->us_location)? $useCar->us_location : ''}}" required>
                                         </div>
-                                        <div class="col-md-3 form-group">
-                                            <label>วันเวลาที่กลับสำนักงาน</label>
-                                            <input type="text" id="dateEnd"  name="us_date_end" class="form-control border-input" value="{{!empty($useCar->us_date_end)? $dateEnd : ''}}" required placeholder="dd-MM-YYYY HH:ii">
-                                        </div>
+                                       
                                     </div>
                                     <div class="row">
                                         <div class="col-md-2 form-group">
@@ -70,7 +74,7 @@
                                             <label>เลขกิโลหลังเดินทาง</label>
                                             <input type="number"  name="us_dst_end" class="form-control border-input" value="{{!empty($useCar->us_dst_end)? $useCar->us_dst_end : ''}}" required> 
                                         </div>
-                                        <div class="col-md-6 form-group">
+                                        <div class="col-md-3 form-group">
                                             <label>หมายเหตุ</label>
                                             <input type="text"  name="us_note" class="form-control border-input" value="{{!empty($useCar->us_note)? $useCar->us_note : ''}}">
                                         </div>

@@ -109,7 +109,7 @@ class Report_ReportPickFuelController extends Controller{
                 ->where(DB::raw('YEAR(pk_date_save)'),'=',($year-543))
                 ->where(DB::raw('MONTH(pk_date_save)'),'=',$month+1)
                 ->orderBy('pick_fuel.pk_date_save','desc')
-                ->select(DB::raw('pick_fuel.id as id'),DB::raw('pick_fuel.pk_id_driver as idmem')
+                ->select(DB::raw('pick_fuel.id as id')
                         ,'pk_date_save','pk_type_fuel','pk_qty','pk_order_no','pk_early_km','pk_now_km'
                         ,'members.mem_name','mem_lname','pk_no','pk_month','pk_for')
                 ->paginate(30);
@@ -121,5 +121,13 @@ class Report_ReportPickFuelController extends Controller{
         $txtDate .=($year);
         $data = array('car'=>$car,'driver'=>$driver,'txtDate'=>$txtDate,'pickup'=>$pickup);
         return View::make('report.pickup.detail',$data);
+    }
+    public function getSubDetail($id)
+    {
+        $pickup = PickFuel::find($id);
+        $car = Car::find($pickup->pk_car_id);
+        $driver = Member::find($pickup->pk_id_driver);
+        $data=array('pickup'=>$pickup,'car'=>$car,'driver'=>$driver);
+        return View::make('report.pickup.sub-detail',$data);
     }
 }
