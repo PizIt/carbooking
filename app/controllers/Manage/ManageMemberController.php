@@ -28,25 +28,37 @@ class Manage_ManageMemberController extends Controller{
         $inputs = Input::all();
         $member = new Member;
         $photoNewName='';
-        if(Input::hasFile('mem_pic'))
+        
+        $rule = array('mem_user'=>'unique:members,mem_user');
+        $validation =  Validator::make($inputs,$rule);
+        if($validation->fails())
         {
-            $photo = Input::file('mem_pic');
-            $photoNewName=date('YmdHis').'.'.$photo->getClientOriginalExtension();
-            $photo->move('img/members/',$photoNewName); 
+            dd('if validation');
+            return Redirect::back()->withErrors($validation)->withInput();
         }
-        $member->mem_name = $inputs['mem_name'];
-        $member->mem_lname= $inputs['mem_lname'];
-        $member->mem_dept = $inputs['mem_dept'];
-        $member->mem_position = $inputs['mem_position'];
-        $member->mem_tel = $inputs['mem_tel'];
-        $member->mem_user = $inputs['mem_user'];
-        $member->mem_pass = $inputs['mem_pass'];
-        $member->mem_email = !empty($inputs['mem_email'])?$inputs['mem_email']:'';
-        $member->mem_pic = $photoNewName;
-        $member->mem_sig = 'null';
-        $member->mem_level = $inputs['mem_level'];
-        $member->save();
-        return Redirect::back()->with('message','เพิ่มข้อมูลเรียบร้อย');
+        else
+        {   
+             if(Input::hasFile('mem_pic'))
+            {
+                $photo = Input::file('mem_pic');
+                $photoNewName=date('YmdHis').'.'.$photo
+                        ->getClientOriginalExtension();
+                $photo->move('img/members/',$photoNewName); 
+            }
+            $member->mem_name = $inputs['mem_name'];
+            $member->mem_lname= $inputs['mem_lname'];
+            $member->mem_dept = $inputs['mem_dept'];
+            $member->mem_position = $inputs['mem_position'];
+            $member->mem_tel = $inputs['mem_tel'];
+            $member->mem_user = $inputs['mem_user'];
+            $member->mem_pass = $inputs['mem_pass'];
+            $member->mem_email = !empty($inputs['mem_email'])?$inputs['mem_email']:'';
+            $member->mem_pic = $photoNewName;
+            $member->mem_sig = 'null';
+            $member->mem_level = $inputs['mem_level'];
+            $member->save();
+            return Redirect::back()->with('message','เพิ่มข้อมูลเรียบร้อย');
+        }
     }
      public  function postUpdate()
     {
@@ -62,7 +74,8 @@ class Manage_ManageMemberController extends Controller{
                     File::delete('img/members/'.$member->mem_pic);
                 }
                 $photo = Input::file('mem_pic');
-                $photoNewName=date('YmdHis').'.'.$photo->getClientOriginalExtension();
+                $photoNewName=date('YmdHis').'.'.$photo
+                        ->getClientOriginalExtension();
                 $photo->move('img/members/',$photoNewName); 
                 $member->mem_pic =$photoNewName;
             }
@@ -72,7 +85,7 @@ class Manage_ManageMemberController extends Controller{
         $member->mem_position = $inputs['mem_position'];
         $member->mem_tel = $inputs['mem_tel'];
         $member->mem_pass = $inputs['mem_pass'];
-        $member->mem_email = !empty($inputs['mem_email'])?$inputs['mem_email']:'null';
+        $member->mem_email = !empty($inputs['mem_email'])? $inputs['mem_email']:'null';
         $member->mem_sig = 'null';
         $member->mem_level = $inputs['mem_level'];
         $member->save();
