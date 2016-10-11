@@ -63,18 +63,25 @@ class BookingController extends Controller{
         
         $dateDif=$dateDif->val;
         $reutlt = FALSE;
-        if($dateDif < 0) // date format true
-        {
-            $reutlt=TRUE;
-        }
-        else if ($dateDif == 0) // date booking today
-        {
-            $strSql = " SELECT TIMEDIFF(TIME('".$dateStart."'),TIME('".$dateEnd."')) as val";
-            $timeDif = DB::select($strSql)[0]; // return int;
-            if($timeDif->val <= 0);
+        if($dateDif <= 0) // date format true
+        {   if($dateDif == 0)
+            {
+                $strSql = "SELECT IF( TIMEDIFF(TIME('".$dateStart."'),TIME('".$dateEnd."'))";
+                $strSql.= " <= TIME('00:00:00')";
+                $strSql.= " ,true,false";
+                $strSql.= " ) as val";
+               // dd($strSql);
+                $timeDif = DB::select(DB::raw($strSql))[0]; // return bool
+                if($timeDif->val == true)
+                {
+                    $reutlt=TRUE;
+                }
+            }
+            else
             {
                 $reutlt=TRUE;
             }
+           
         }
         else if($dateDif > 0)
         {
@@ -203,7 +210,7 @@ class BookingController extends Controller{
         }
         else
         {
-             return 'FALSE';
+             return 'false';
         }
     }
 }

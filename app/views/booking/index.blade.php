@@ -174,8 +174,17 @@
                        type: 'get' ,
                        url: "booking/car-and-driver?dateStart="+dateStart+"&dateEnd="+dateEnd,
                        success: function (data) {
-                           $("#listFree").html(data);
-                           $("#listFree").fadeIn('slow');
+                           if(data!='false')
+                           {
+                                $("#listFree").html(data);
+                                $("#listFree").fadeIn('slow');
+                           }
+                           else
+                           {
+                               swal({title:'ไม่พบรายการ',text:'โปรดตรวจสอบวัน-เวลาที่จอง;',type:'error'}); 
+                                $("#listFree").html('');
+                                $("#listFree").fadeOut('slow');
+                           }
                         }
                     });
           }
