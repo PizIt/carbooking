@@ -58,29 +58,26 @@ class BookingController extends Controller{
         $dateEnd =  $util->DateTimeConvertToDate($inputs['dateEnd']);
         
         $dateVal = array($dateStart,$dateEnd);
-        $strSql  =  " SELECT DATEDIFF('".$dateStart."','".$dateEnd."')";
-        $dateDif = DB::select($strSql); // return int;
-        // ยังไม่เสร็จ--
-        dd($dateDif);
+        $strSql  =  " SELECT DATEDIFF('".$dateStart."','".$dateEnd."') as val";
+        $dateDif = DB::select(DB::raw($strSql))[0]; // return array int;
+        
+        $dateDif=$dateDif->val;
         $reutlt = FALSE;
         if($dateDif < 0) // date format true
         {
-            dd('$dateDif<0');
             $reutlt=TRUE;
         }
         else if ($dateDif == 0) // date booking today
         {
-             dd('$dateDif==0');
-            $strSql = " SELECT TIMEDIFF(TIME('".$dateStart."'),TIME('".$dateEnd."'))";
-            $timeDif = DB::select($strSql); // return int;
-            if($timeDif <= 0)
+            $strSql = " SELECT TIMEDIFF(TIME('".$dateStart."'),TIME('".$dateEnd."')) as val";
+            $timeDif = DB::select($strSql)[0]; // return int;
+            if($timeDif->val <= 0);
             {
                 $reutlt=TRUE;
             }
         }
         else if($dateDif > 0)
         {
-             dd('$dateDif>0');
             $reutlt=FALSE;
         }
         if($reutlt==TRUE)
