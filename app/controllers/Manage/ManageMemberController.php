@@ -44,6 +44,18 @@ class Manage_ManageMemberController extends Controller{
                 $photoNewName=date('YmdHis').'.'.$photo
                         ->getClientOriginalExtension();
                 $photo->move('img/members/',$photoNewName); 
+                $member->mem_pic = $photoNewName;
+            }
+            else
+            {   // check default pic 1 = driver
+                if($inputs['mem_level']==1)
+                {
+                     $member->mem_pic = 'driver.png';
+                }
+                else
+                {
+                     $member->mem_pic = 'member.png';
+                }
             }
             $member->mem_name = $inputs['mem_name'];
             $member->mem_lname= $inputs['mem_lname'];
@@ -53,7 +65,6 @@ class Manage_ManageMemberController extends Controller{
             $member->mem_user = $inputs['mem_user'];
             $member->mem_pass = $inputs['mem_pass'];
             $member->mem_email = !empty($inputs['mem_email'])?$inputs['mem_email']:'';
-            $member->mem_pic = $photoNewName;
             $member->mem_sig = 'null';
             $member->mem_level = $inputs['mem_level'];
             $member->save();

@@ -62,16 +62,27 @@
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
-
+                                    @if(!empty($member->mem_pic))
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <img src="{{URL::to('img/members/'.$member->mem_pic.'')}}" class="img-rounded" width="250px" height="250px">
+                                            </div>
+                                    <!--    <div class="col-md-3">
+                                                <img src="signature.png" width="150px" height="150px">
+                                            </div>
+                                    -->
+                                        </div>
+                                    @endif
                                     <div class="row">
                                         <div class="col-md-3">
                                             <label>รูปประจำตัว</label>
                                             <input type="file" name="mem_pic" class="form-control border-input">
                                         </div>
-<!--                                        <div class="col-md-3">
+                                    <!--<div class="col-md-3">
                                             <label>ลายเซ็นต์</label>
                                             <input type="file" name="mem_sig" class="form-control border-input" value="11111">
-                                        </div>-->
+                                        </div>
+                                    -->
                                     </div>
 
                                     <div class="row">
