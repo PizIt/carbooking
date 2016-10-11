@@ -149,7 +149,7 @@ class BookingController extends Controller{
                         $str.= '<td><img src="'.$urlImg.'" class="img-rounded" width="80px" height="80px"></td>';
                         $str.= '<td>'.$c->car_no.' '.$c->car_province.'</td>';
                         $str.= '<td>'.$c->car_type.'</td>';
-                        $str.= '<td><input type="checkbox" value="'.$c->id.'" name="bc_car_id[]"></td>';
+                        $str.= '<td><input type="checkbox" class="chkcar" value="'.$c->id.'" name="bc_car_id[]"></td>';
                         $str.= '</tr>';
                     }
                 }
@@ -191,7 +191,7 @@ class BookingController extends Controller{
                         $str.= '<td>'.++$cnt.'</td>';
                         $str.= '<td><img src="'.$urlImg.'" class="img-rounded" width="80px" height="80px"></td>';
                         $str.= '<td>'.$d->mem_name.' '.$d->mem_lname.'</td>';
-                        $str.= '<td><input type="checkbox" value="'.$d->id.'"  name="bd_driver_id[]"></td>';
+                        $str.= '<td><input type="checkbox" class="chkdriver" value="'.$d->id.'"  name="bd_driver_id[]"></td>';
                         $str.= '</tr>';
                      }
                 }

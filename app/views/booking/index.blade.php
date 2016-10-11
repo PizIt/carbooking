@@ -106,45 +106,39 @@
 <script type="text/javascript">
     function validateList()
     {
-      var carsID = $("input[name^='bc_car_id']");
-      var driversID = $("input[name^='bd_driver_id']");
-      var cntCar = 0;
-      var cntDriver = 0;
+      var carsID = $("input:checkbox:checked.chkcar").map(function(){
+          return this.value;
+      }).get();
+      var driversID = $("input:checkbox:checked.chkdriver").map(function(){
+          return this.value;
+      }).get();
+      var cntCar = carsID.length;
+      var cntDriver = driversID.length;
       //count check drivers ans cars
-      for(i=0;i<carsID.length;i++)
-      {
-        if(carsID.eq(i).is(':checked'))
-        {
-            cntCar++;
-        }
-      }
-      for(i=0;i<driversID.length;i++)
-      {
-        if(driversID.eq(i).is(':checked'))
-        {
-            cntDriver++;
-        } 
-      }
       if((cntCar > 0) && (cntDriver > 0))
       {
         $('#form').submit();
-      }
-      else
+      }else
       {
-            swal({title:'ผิดพลาด',text:'โปรดตรวจสอบรายการที่จอง',type:'error'});   
+          swal({title:'ผิดพลาด',text:'โปรดตรวจสอบรายการที่จอง',type:'error'});   
+          return false;
+           
       }
     }
+    // set datetime default
+    var dateNow = new Date();
+    var dateTimeNow = dateNow.getDay()+'-'+dateNow.getMonth()+'-'+dateNow.getFullYear();
+        dateTimeNow += ' '+dateNow.getHours()+':'+dateNow.getMinutes();
     $('#dateStart').datetimepicker({
-        value:'',
+        minDate: dateTimeNow,
         format:'d-m-Y H:i',
         yearOffset:543
     });
     $('#dateEnd').datetimepicker({
-        value:'',
+        minDate:dateTimeNow,
         format:'d-m-Y H:i',
         yearOffset:543
-    });
-
+    }); 
     $('#openMap').click(function(){
         if($('#openMap').text()=='แสดงแผนที่')
         {
@@ -172,6 +166,7 @@
                     // Select Car And Driver 
                     $.ajax({
                        type: 'get' ,
+                       async: false,
                        url: "booking/car-and-driver?dateStart="+dateStart+"&dateEnd="+dateEnd,
                        success: function (data) {
                            if(data!='false')
@@ -181,7 +176,6 @@
                            }
                            else
                            {
-                               swal({title:'ไม่พบรายการ',text:'โปรดตรวจสอบวัน-เวลาที่จอง;',type:'error'}); 
                                 $("#listFree").html('');
                                 $("#listFree").fadeOut('slow');
                            }
