@@ -1,5 +1,6 @@
 @extends('default')
 @section('content')
+<?php $disable = (((Session::get('level')>2) || (Auth::id()==$member->id))) ? 'disabled style=background-color:#eee' : ''; ?>
 <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -117,6 +118,7 @@
                                         </div>
                                     </div>
                                       <input type="hidden" name="id" value="{{$main->id}}">
+                                      @if(((Session::get('level')>2) || (Auth::id()==$member->id)))
                                         <div class="row">
                                             <div class="col-md-1">
                                                 <input type="submit" class="btn btn-danger btn-block" value="บันทึก">
@@ -125,6 +127,7 @@
                                                 <input type="reset" class="btn btn-default btn-block" value="ล้าง">
                                             </div>
                                         </div>
+                                      @endif
                                     @endif
                                  </form>
                              </div>

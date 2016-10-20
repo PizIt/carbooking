@@ -6,6 +6,7 @@ class NotificationController extends Controller
         $alertUseCar=null;
         $alertActExp=null;
         $level = Session::get('level');
+        $member = Member::find(Auth::id());
         $str="";
         $sqlAlertUseCar = Car::where(DB::raw('(car_dst_alert-car_dst_count)'),'<=',500)
                 ->select('id','car_no','car_province',DB::raw('car_dst_alert-car_dst_count AS dst'))

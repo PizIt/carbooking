@@ -90,7 +90,7 @@
                                                                 <tr>
                                                                     <td>{{++$cnt}}</td>
                                                                     <td>
-                                                                        <a href="{{URL::to('report/booking/detail')}}">
+                                                                        <a href="{{URL::to('report/booking/detail/'.$l->id)}}">
                                                                             {{$l->mem_name.' '.$l->mem_lname}}
                                                                         </a>
                                                                     </td>

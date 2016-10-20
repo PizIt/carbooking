@@ -9,6 +9,7 @@ class BookingController extends Controller{
     public function postIndex() 
     {
         $inputs = Input::all();
+        $memberBook = Member::find(Auth::id());
         $util = new Util; 
         $booking = new Booking;
         $booking->book_for = $inputs['book_for'];
@@ -20,13 +21,15 @@ class BookingController extends Controller{
         $booking->book_date_from = $util->DateTimeConvertToDate($inputs['book_date_from']);
         $booking->book_date_to = $util->DateTimeConvertToDate($inputs['book_date_to']);
         $booking->book_mem_id = Auth::id();
-        if(Session::get('level')==3)
+        if((Session::get('level')==3) && ($memberBook->mem_dept=='สำนักปลัด'))
         {
             $booking->book_confirm=2;
             $booking->book_id_leader=Auth::id();
-        }else if(Session::get('level')==4)
+        }
+        else if(Session::get('level')==4)
         {
             $booking->book_confirm=3;
+            $booking->book_id_leader=Auth::id();
             $booking->book_id_master=Auth::id();
         }
         if($booking->save())

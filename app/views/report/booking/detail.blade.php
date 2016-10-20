@@ -64,15 +64,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>ใช้เพื่อ</label>
-                                                    <input type="text" name="book_for" class="form-control border-input" placeholder="จุดประสงค์การใช้งาน" value="{{$booking->book_for}}" 
-                                                           {{((Auth::id()==$booking->book_mem_id) || (Session::get('level')>2)) ? '' : 'disabled style="background-color:#eee"'}}>
+                                                    <input type="text" name="book_for" class="form-control border-input" placeholder="จุดประสงค์การใช้งาน" value="{{$booking->book_for}}" readonly style="background-color:#eee">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>สถานที่เดินทาง</label>
-                                                    <input type="text" name="book_location" class="form-control border-input" placeholder="ไปที่ไหน" value="{{$booking->book_location}}"
-                                                            {{((Auth::id()==$booking->book_mem_id) || (Session::get('level')>2)) ? '' : 'disabled style="background-color:#eee"'}}>
+                                                    <input type="text" name="book_location" class="form-control border-input" placeholder="ไปที่ไหน" value="{{$booking->book_location}}" readonly style="background-color:#eee">
                                                 </div>
                                             </div>
                                         </div>
@@ -89,8 +87,7 @@
                                             <div class="col-md-8">
                                                 <div class="form-group">
                                                     <label>รายละเอียดเพิ่มเติม</label>
-                                                    <textarea rows="5" name="book_details" class="form-control border-input"
-                                                               {{((Auth::id()==$booking->book_mem_id) || (Session::get('level') > 2)) ? '' : 'disabled style="background-color:#eee"'}}>{{$booking->book_details}}</textarea>
+                                                    <textarea rows="5" name="book_details" class="form-control border-input" readonly style="background-color:#eee">{{$booking->book_details}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -156,67 +153,60 @@
                                             <table class="table table-bordered table-striped">
                                                 <tr style="text-align:center">
                                                     <td colspan="2"><strong>ความเห็นของหัวหน้าสำนักปลัด</strong></td>
-                                                    @if($booking->book_type=='นอกเขตพื้นที่')
-                                                    <td colspan="2"><strong>ความเห็นของนายกเทศมนตรี</strong></td>  
-                                                    @endif
+                                                    <td colspan="2"><strong>ความเห็นของนายกเทศมนตรี</strong></td>                                                 
                                                 </tr>
                                                 <tr style="text-align:center">
                                                     <td style="width:25%">
                                                         <label>
-                                                            <input type="radio" class="border-input" name="confirm_leader" value="2" 
-                                                                   {{$booking->book_confirm >= 2  ? 'checked' : ''}} {{((Session::get('level') >= 3)&&(Session::get('dept')=='สำนักปลัด')) ? '':'disabled'}}>
+                                                            <input type="radio" class="border-input" name="confirm_leader"  value="2" 
+                                                                   {{$booking->book_confirm >= 2  ? 'checked' : ''}} disabled>
                                                             <strong class="text-success">อนุญาต</strong>
                                                         </label>
                                                     </td>
                                                     <td style="width:25%">
                                                         <label>
-                                                                <input type="radio" class="border-input" name="confirm_leader" value="-1" 
-                                                                    {{$booking->book_confirm == 0  ? 'checked' : ''}} {{((Session::get('level') >= 3)&&(Session::get('dept')=='สำนักปลัด'))  ? '':'disabled'}}>
+                                                                <input type="radio" class="border-input" name="confirm_leader" value="0" 
+                                                                    {{$booking->book_confirm == 0  ? 'checked' : ''}} disabled>
                                                             <strong class="text-danger">ไม่อนุญาต</strong>
                                                         </label>
                                                     </td>
-                                                    @if($booking->book_type=='นอกเขตพื้นที่')
                                                     <td style="width:25%">
                                                         <label>
                                                             <input type="radio" class="border-input" name="confirm_master" value="3" 
-                                                                   {{$booking->book_confirm ==3  ? 'checked' : ''}} {{Session::get('level')==4 ? '':'disabled'}}>
+                                                                   {{$booking->book_confirm ==3  ? 'checked' : ''}} disabled>
                                                             <strong class="text-success">อนุญาต</strong>
                                                         </label>
                                                     </td>
                                                     <td style="width:25%">
                                                         <label>
-                                                            <input type="radio" class="border-input" name="confirm_master" value="-1" 
-                                                                   {{$booking->book_confirm == 0  ? 'checked' : ''}} {{Session::get('level')==4 ? '':'disabled'}}>
+                                                            <input type="radio" class="border-input" name="confirm_master" value="0" 
+                                                                   {{$booking->book_confirm == 0  ? 'checked' : ''}} disabled>
                                                             <strong class="text-danger">ไม่อนุญาต</strong>
                                                         </label>
                                                     </td>
                                                 </tr>
-                                                @endif
+                                                
                                                 <tr style="text-align:left">
                                                     <td style="width:50%" colspan="2">
                                                         <label>
                                                             <strong>{{!empty($leader) ? $leader->mem_name.' '.$leader->mem_lname.' : '.$leader->mem_position : ''}}</strong>
                                                         </label>
                                                     </td>
-                                                    @if($booking->book_type=='นอกเขตพื้นที่')
                                                       <td style="width:50%" colspan="2">
                                                         <label>
                                                             <strong>{{!empty($master) ? $master->mem_name.' '.$master->mem_lname.' : '.$master->mem_position : ''}}</strong>
                                                         </label>
                                                     </td>
-                                                    @endif
                                                 </tr>
                                                  <tr style="text-align:center">
                                                      <td colspan="2"><strong>หมายเหตุ  </strong>
                                                             <input type="text" name="book_note_leader" class="form-control border-input" placeholder="หมายเหตุ" 
-                                                                   value="{{!empty($booking->book_note_leader) ? $booking->book_note_leader : ''}}" {{((Session::get('level') >= 3)&&(Session::get('dept')=='สำนักปลัด'))  ? '':'readonly style="background-color:beige;"'}}>
+                                                                   value="{{!empty($booking->book_note_leader) ? $booking->book_note_leader : ''}}" readonly style="background-color:beige;">
                                                      </td>
-                                                      @if($booking->book_type=='นอกเขตพื้นที่')
                                                      <td colspan="2"><strong>หมายเหตุ  </strong>
                                                             <input type="text" name="book_note_master" class="form-control border-input" placeholder="หมายเหตุ" 
-                                                                   value="{{!empty($booking->book_note_master) ? $booking->book_note_master : ''}}" {{Session::get('level')==4 ? '':'readonly style="background-color:beige;"'}}>
-                                                     </td> 
-                                                     @endif
+                                                                   value="{{!empty($booking->book_note_master) ? $booking->book_note_master : ''}}" readonly style="background-color:beige;">
+                                                     </td>                                                 
                                                 </tr>
                                             </table>
                                         </div>
@@ -224,11 +214,6 @@
                                         <input type="hidden" name="lat" id="lat" value="{{!empty($booking->book_gps_lat) ? $booking->book_gps_lat:''}}">
                                         <input type="hidden" name="lng" id="lng" value="{{!empty($booking->book_gps_lon) ? $booking->book_gps_lon:''}}">
                                         <input type="hidden" name="id" value="{{$booking->id}}">
-                                        @if((Auth::id()==$booking->book_mem_id) || (Session::get('level') > 2))
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-danger btn-fill btn-wd">บันทึก</button>
-                                        </div>
-                                        @endif
                                         <div class="clearfix"></div>
                                     </form>
                                 </div>
@@ -264,12 +249,6 @@
               animation:google.maps.Animation.BOUNCE,
               position : {lat: lat, lng: lng}
           });
-        //get lat&lan
-        marker.addListener('dragend',function(){
-            var position = marker.getPosition();
-            $('#lat').val(position.lat());
-            $('#lng').val(position.lng());
-        });
         } 
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt7OP8jq0nhzMKFqd7AIKTvU_4N43_81M&callback=initMap"async defer></script>

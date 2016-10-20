@@ -42,6 +42,7 @@ class LoginController extends Controller
                 }
                 Session::put('name',$memberName);
                 Session::put('level',$level);
+                Session::put('dept',$member->mem_dept);
                 return "success";
             }
              return "fail";

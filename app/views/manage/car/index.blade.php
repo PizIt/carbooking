@@ -6,13 +6,15 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="content">
-                                <div class="header">
-                                    <p class="text-left">
-                                        <a href="{{url('manage/car/create')}}" class="btn btn-default">
-                                            <i class="glyphicon glyphicon-plus"></i> เพิ่มข้อมูลสมาชิก
-                                        </a>
-                                    </p>
-                                </div>
+                                @if(Session::get('level')>2)
+                                    <div class="header">
+                                        <p class="text-left">
+                                            <a href="{{url('manage/car/create')}}" class="btn btn-default">
+                                                <i class="glyphicon glyphicon-plus"></i> เพิ่มข้อมูลสมาชิก
+                                            </a>
+                                        </p>
+                                    </div>
+                                @endif
                                 <div class="content table-responsive table-full-width">
                                     <table class="table table-striped">
                                         <thead>
@@ -33,6 +35,7 @@
                                                     $currentPage=$car->getCurrentPage();
                                                     $perPage = $car->getPerPage();
                                                     $cnt = ($currentPage*$perPage)-$perPage;
+                                                    $dis = Session::get('level') > 2 ? 'dis=false' : 'dis=true';
                                                  ?>
                                                 @foreach($car as $c)
                                                     <?php $dateExp = $util->ThaiDate($c->car_act_exp);?>
@@ -46,7 +49,7 @@
                                                         <td>{{$dateExp}}</td>
                                                         <td style="text-align: center"><i class="{{$c->car_status=='Y' ? 'glyphicon glyphicon-ok icon-success icon-next' : 'glyphicon glyphicon-remove icon-danger'}}"></i></td>
                                                         <td style="text-align:center">
-                                                            <a href="{{url("manage/car/update/$c->id")}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
+                                                            <a href="{{url("manage/car/update/$c->id?$dis")}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
                                                             @if(Session::get('level')>2)
                                                                 <a href="#" onclick="del({{$c->id}})"> <i class="glyphicon glyphicon-trash"></i></a>&nbsp;
                                                             @endif

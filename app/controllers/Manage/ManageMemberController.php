@@ -3,7 +3,7 @@ class Manage_ManageMemberController extends Controller{
     public function getIndex()
     {
         $data = array(
-            'member'=>Member::paginate(20)
+            'member'=>Member::paginate(30)
         );
         return View::make('manage.member.index',$data);
     }

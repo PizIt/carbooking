@@ -36,6 +36,23 @@ class Report_ReportBookingController extends Controller{
         }
         $listPage = $listBooking->paginate(30);
         $data = array('listBooking'=>$listPage);
-        return View::make('report.booking',$data);
+        return View::make('report.booking.index',$data);
+    }
+    public function getDetail($id)
+    {
+        $booking = Booking::find($id);
+        $member = Member::find($booking->book_mem_id);
+        $carBook = DB::table('cars')->join('booking_car','cars.id','=','booking_car.bc_car_id')
+                                    ->where('booking_car.bc_book_id','=',$id)
+                                    ->orderBy('cars.car_no','asc')->get();
+        $driverBook = DB::table('members')->join('booking_driver','members.id','=','booking_driver.bd_driver_id')
+                                    ->where('booking_driver.bd_book_id','=',$id)
+                                    ->orderBy('members.mem_name','asc')->get();
+        $leader = !empty($booking->book_id_leader) ? Member::find($booking->book_id_leader) : null ;
+        $master = !empty($booking->book_id_master) ? Member::find($booking->book_id_master) : null ;
+        $data = array('booking'=>$booking,'member'=>$member,
+                      'leader'=>$leader,'master'=>$master,
+                      'driverBook'=>$driverBook,'carBook'=>$carBook);
+        return View::make('report.booking.detail',$data);
     }
 }

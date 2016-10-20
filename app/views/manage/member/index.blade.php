@@ -7,13 +7,15 @@
                         <div class="card">
                             <div class="content">
                                 <div class="row">
-                                    <div class="col-md-12">
-                                          <p class="text-left">
-                                            <a href="{{url('manage/member/create')}}" class="btn btn-default">
-                                                <i class="glyphicon glyphicon-plus"></i> เพิ่มข้อมูลสมาชิก
-                                            </a>
-                                          </p>
+                                    @if(Session::get('level')>2)
+                                        <div class="col-md-12">
+                                              <p class="text-left">
+                                                <a href="{{url('manage/member/create')}}" class="btn btn-default">
+                                                    <i class="glyphicon glyphicon-plus"></i> เพิ่มข้อมูลสมาชิก
+                                                </a>
+                                              </p>
                                         </div>
+                                    @endif
                                         <div class="content table-responsive table-full-width">
                                             <table class="table table-striped">
                                                 <thead>
@@ -31,24 +33,28 @@
                                                             $currentPage = $member->getCurrentPage();
                                                             $perPage = $member->getPerPage();
                                                             $cnt = ($currentPage*$perPage)-$perPage;
+                                                            $dis = Session::get('level') > 2 ? 'dis=false' : 'dis=true';
                                                         ?>
                                                         @foreach($member as $m)
 
                                                         <?php 
-                                                        $position=$m->mem_level;
-                                                        if($position==1)
-                                                        {
-                                                            $position="พนักงานขับรถ";
-                                                        }elseif ($position==2)
-                                                        {
-                                                            $position="ผู้ขอใช้รถ";
-                                                        }elseif ($position==3)
-                                                        {
-                                                            $position="ผู้อำนวยการกอง";
-                                                        }
-                                                        else{
-                                                            $position="หัวหน้าสำนักปลัด";
-                                                        }
+                                                            
+                                                            $position=$m->mem_level;
+                                                            if($position==1)
+                                                            {
+                                                                $position="พนักงานขับรถ";
+                                                            }elseif ($position==2)
+                                                            {
+                                                                $position="ผู้ขอใช้รถ";
+                                                            }elseif ($position==3)
+                                                            {
+                                                                $position="ผู้อำนวยการกอง";
+                                                            }
+                                                            elseif($position==4){
+                                                                $position="หัวหน้าสำนักปลัด";
+                                                            }elseif($position==5){
+                                                                 $position="นายกเทศมนตรี";
+                                                            }
 
                                                         ?>
                                                         <tr>
@@ -58,9 +64,11 @@
                                                             <td>{{$m->mem_dept}}</td>
                                                             <td>{{$m->mem_tel}}</td>
                                                             <td><?=$position?></td>
-                                                            <td style="text-align:center">
-                                                                <a href="{{url("manage/member/update/$m->id")}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
+                                                            <td style="text-align:left">
+                                                                <a href="{{url("manage/member/update/$m->id?$dis")}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
+                                                                @if(Session::get('level') > 2 && Session::get('level') >= $m->mem_level)
                                                                 <a href="#" onclick="del({{$m->id}})"> <i class="glyphicon glyphicon-trash"></i></a>&nbsp;
+                                                                @endif
                                                             </td>
                                                         </tr>
                                                         @endforeach
@@ -78,7 +86,6 @@
                     </div>
                 </div>
             </div>
-        </div>
 <script type="text/javascript">
     function del(id)
     {

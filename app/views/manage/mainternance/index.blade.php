@@ -23,7 +23,7 @@
                                                     <td><label>รถที่เข้าซ่อม</label></td>
                                                     <td><label>ผู้บันทึก</label></td>
                                                     <td><label>ร้านซ่อม</label></td>
-                                                    <td><label>ค่าใช้จ่าย</label></td>
+                                                    <td style="text-align: center"><label>ค่าใช้จ่าย</label></td>
                                                     <td><label>จัดการ</label></td>
                                                 </thead>
                                                 <tbody>
@@ -39,7 +39,7 @@
                                                                 <td>{{$l[1];}}</td>
                                                                 <td>{{$l[2];}}</td>
                                                                 <td>{{$l[3];}}</td>
-                                                                <td>{{$l[4];}}</td>
+                                                                <td style="text-align: right">{{$l[4];}}</td>
                                                                 <td style="text-align:left">
                                                                     <a href="{{url("manage/mainternance/update/$l[5]")}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
                                                                     @if(($l[6]==Auth::id())||(Session::get('level')>2))

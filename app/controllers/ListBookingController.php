@@ -2,9 +2,13 @@
 class ListBookingController extends Controller{
     public function getIndex()
     {   
-        $listBooking = DB::table('members')
-                    ->join('booking' ,'booking.book_mem_id','=','members.id')
-                    ->orderBy('booking.id','DESC')->paginate(30);
+        $listBooking = DB::table('booking')
+                    ->join('members' ,'members.id','=','booking.book_mem_id')
+                    ->orderBy('booking.id','DESC')
+                    ->select(DB::raw('booking.id AS id'),DB::raw('members.id AS idmem')
+                            ,'mem_name','mem_lname','book_for','book_location'
+                            ,'book_date_from','book_date_to','book_confirm')
+                    ->paginate(30);
         $data = array('listBooking'=>$listBooking);
         return View::make('listbooking.index',$data);
     }
@@ -48,31 +52,40 @@ class ListBookingController extends Controller{
             // confirm
             $confrim = $booking->book_confirm;
             $confrimLeader = !empty($inputs['confirm_leader']) ? $inputs['confirm_leader'] : '';
-            $confrimMaster = !empty($inputs['confirm_master']) ? $inputs['confirm_master'] : '';
+            $confrimMaster = !empty($inputs['confirm_master']) ? $inputs['confirm_master']:'';
+            //dd($confrimMaster);
             if(!empty($confrimLeader))
             {
-                if(($confrim>=1)&&($confrim<3))
+                if((($confrim >= 1)&&($confrim < 3)))
                 {
-                    if($confrimLeader>0)
+                    if($confrimLeader > 0)
                     {
-                        $confrim =$confrimLeader;
-                        $booking->book_id_leader=Auth::id();
-                    }else
+                        if($booking->book_type=='ในเขตพื้นที่')
+                        {
+                            $confrim = 3;
+                        }else
+                        {
+                           $confrim = $confrimLeader;
+                        }                 
+                    }
+                    else
                     {
                         $confrim=0;
                     }
                 }
+                $booking->book_id_leader = Auth::id();
             }
-            if(!empty($confrimMaster))
+            if($confrimMaster!='')
             {
-                if($confrimMaster>0)
+                if($confrimMaster == 3)
                 {
                  $confrim =$confrimMaster;
-                 $booking->book_id_master=Auth::id();
-                }else
+                }
+                else
                 {
                  $confrim=0;
                 }
+                $booking->book_id_master=Auth::id();
             }
             $booking->book_confirm=$confrim;
             $booking->save();

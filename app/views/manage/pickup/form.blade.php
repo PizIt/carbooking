@@ -59,7 +59,9 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-3 form-group">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-7 form-group">
                                             <label>ใช้ในงาน</label>
                                             <input type="text" class="form-control border-input" name="pk_for" value="{{!empty($pickup->pk_for) ? $pickup->pk_for : ''}}" required>
                                         </div>
@@ -80,7 +82,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6 form-group">
+                                        <div class="col-md-7 form-group">
                                             <label>รายละเอียดการเบิก</label>
                                             <textarea rows="5" class="form-control border-input" name="pk_details">{{!empty($pickup->pk_details) ? $pickup->pk_details : ''}}</textarea>
                                         </div>

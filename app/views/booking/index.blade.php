@@ -37,8 +37,8 @@
                                                 <div class="form-group">
                                                     <label>ประเภท</label>
                                                     <select class="form-control border-input" name="book_type">
-                                                        <option value="ภายใน">ภายใน</option>
-                                                        <option value="ภายนอก">ภายนอก</option>
+                                                        <option value="ในเขตพื้นที่">ในเขตพื้นที่</option>
+                                                        <option value="นอกเขตพื้นที่">นอกเขตพื้นที่</option>
                                                     </select>
                                                 </div>
                                             </div>

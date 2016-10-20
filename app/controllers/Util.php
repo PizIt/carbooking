@@ -27,7 +27,7 @@ class Util
     {
          $dateSplit = explode("-",$datetime);
          $timeSplit = explode(" ",$dateSplit[2]);
-         $dateFarmat = $timeSplit[0].'-'.$dateSplit[1].'-'.$dateSplit[0]." ".$timeSplit[1];
+         $dateFarmat = $timeSplit[0].'-'.$dateSplit[1].'-'.($dateSplit[0]+543)." ".$timeSplit[1];
         return $dateFarmat;
     }
      public function DateTimeConvertToTimeView($datetime) //YmdHis to H:i

@@ -53,8 +53,10 @@
                                                     <td class="<?=$color?>"><?=$status?></td>
                                                     <td>
                                                         <a href="{{URL::to('listbooking/update/'.$l->id)}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
-                                                        <a href="#" onclick="print({{$l->id}})"><i class="glyphicon glyphicon-print"></i></a>&nbsp;
+<!--                                                        <a href="#" onclick="print({{$l->id}})"><i class="glyphicon glyphicon-print"></i></a>&nbsp;-->
+                                                        @if(($l->idmem==Auth::id()) ||(Session::get('level')>2) )
                                                         <a href="#" onclick="del({{$l->id}})"><i class="glyphicon glyphicon-trash"></i></a>&nbsp;
+                                                        @endif
                                                     </td>
                                                 </tr>
                                                 @endforeach
