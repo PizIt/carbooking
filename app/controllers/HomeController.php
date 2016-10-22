@@ -12,7 +12,7 @@ class HomeController extends BaseController {
             $booking = Booking::find($id);
             $bookingCars = $booking->bookingCars->lists('bc_car_id');
             $bookingDrivers = $booking->bookingDrivers->lists('bd_driver_id');
-
+            
             $member = Member::find($booking->book_mem_id);
             $car = Car::whereIn('id',(array)$bookingCars)->get();
             $driver = Member::whereIn('id',(array)$bookingDrivers)->get();
@@ -86,7 +86,7 @@ class HomeController extends BaseController {
             $inputs = Input::all();
             $dateVal = [$inputs['start'],$inputs['end']]; // date start - end
             
-           $booking = DB::table('booking')->where('booking.book_confirm','>',1)
+           $booking = DB::table('booking')->where('booking.book_confirm','=',3)
                    ->where(function($result) use($dateVal){
                     
                     $result->orWhere(function($q)use($dateVal)

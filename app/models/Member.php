@@ -24,9 +24,9 @@ class Member extends Eloquent implements UserInterface, RemindableInterface {
 	protected $hidden = array('mem_pass', 'remember_token');
         
         public function car(){
-            return $this->hasMany('car','car_driver_id');
+            return $this->hasMany('Car','car_driver_id');
         }
          public function booking(){
-            return $this->hasMany('booking','book_mem_id');
+            return $this->hasMany('Booking','book_mem_id');
          }
 }

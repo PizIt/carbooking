@@ -4,7 +4,7 @@ class PickFuel extends Eloquent {
     
     public function car()
  	{
- 		return $this->belongsTo('car','id');
+ 		return $this->belongsTo('Car','id');
  	}
 }
 

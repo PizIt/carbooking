@@ -4,10 +4,10 @@ class Booking extends Eloquent {
     
     public function bookingCars()
     {
-        return $this->hasMany('bookingcar','bc_book_id');
+        return $this->hasMany('BookingCar','bc_book_id');
     }
     public function bookingDrivers()
     {
-        return $this->hasMany('bookingdriver','bd_book_id');
+        return $this->hasMany('BookingDriver','bd_book_id');
     }
 }
