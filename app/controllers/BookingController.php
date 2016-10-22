@@ -104,6 +104,14 @@ class BookingController extends Controller{
                         {
                             $q->whereBetween('book_date_to',$dateVal);
                         });
+                        $result->orWhere(function($q)use($dateVal)
+                        {
+                            $q->whereRaw("'".$dateVal[0]."'".'BETWEEN book_date_from AND book_date_to');
+                        });
+                          $result->orWhere(function($q)use($dateVal)
+                        {
+                            $q->whereRaw("'".$dateVal[1]."'".'BETWEEN book_date_from AND book_date_to');
+                        });
                     })->lists('id');
             $data= (array)$booking;
 
