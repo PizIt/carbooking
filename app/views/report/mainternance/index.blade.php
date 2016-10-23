@@ -46,7 +46,7 @@
                                                         <tr>
                                                             <th width="15%" style="text-align:center"><label>ทะเบียนรถ</label></th>
                                                             <th width="10%" style="text-align:center"><label>ประเภท</label></th>
-                                                            <th width="10%" style="text-align:center"><label>พขร.ที่รับผิดชอบรถ</label></th>
+                                                            <th width="10%" style="text-align:center"><label>ชื่อผู้บันทึก</label></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
