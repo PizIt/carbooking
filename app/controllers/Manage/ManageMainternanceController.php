@@ -3,53 +3,55 @@ class Manage_ManageMainternanceController extends Controller
 {
     public function getIndex()
     {
-        $sql =  MainternanceCar::join('members','members.id','=','mn_mem_id')
-                                ->join('cars','cars.id','=','mn_car_id')
-                                ->join('shop','shop.id','=','mn_shop_id');
-        $main  =$sql->select(DB::raw('mainternance_car.id as id'),DB::raw('mainternance_car.mn_mem_id as idmem')
-                                ,'mn_date_save','mem_name','mem_lname'
-                                ,'shop_name','car_no','car_province')
-                                ->orderBy('mn_date_save','DESC')->paginate(30);
-        $details = $sql->lists('mainternance_car.id');
-        $totalPay = MainternanceDetail::whereIn('mnd_mn_id',$details)
-                    ->groupBy('mnd_mn_id')
-                    ->select('mnd_mn_id',DB::raw("SUM(mnd_qty*mnd_baht) AS total"))->get(); 
-        $list[][] = array();
-        $util = new Util;
-        $row = 0;
-        foreach ($main as $m) 
+        $sql  =  MainternanceCar::join('cars','cars.id','=','mn_car_id')
+                ->join('members','members.id','=','mn_mem_id');
+        $listMainter =$sql
+                ->select(DB::raw('mainternance_car.id AS id'),DB::raw('mainternance_car.mn_mem_id AS idmem')
+                        ,'mn_date_save','cars.car_no','cars.car_province','cars.car_type',
+                        'cars.car_dept','mem_name','mem_lname')
+                ->orderBy('mn_date_save','DESC')
+                ->paginate(30);
+        $listId = $sql->lists('mainternance_car.id');
+        $details = MainternanceDetail::whereIn('mnd_mn_id',$listId)
+                ->groupBy('mnd_mn_id')
+                ->select('mnd_mn_id',DB::raw('SUM(mnd_qty*mnd_baht) AS total'))
+                ->get();
+        $list = null;
+        if((count($listMainter)>0)&&(count($details)>0))
         {
-            $list[$row][0] = $util->ThaiDate($m->mn_date_save);
-            $list[$row][1] = $m->car_no.' '.$m->car_province;
-            $list[$row][2] = $m->mem_name.' '.$m->mem_lname;
-            $list[$row][3] = $m->shop_name;
-            foreach ($totalPay as $t) 
+            $list[][] = array();
+            $util = new Util;
+            $row=0;
+            foreach ($listMainter as $l)
             {
-                if($m->id==$t->mnd_mn_id)
+                $list[$row][0]=$util->ThaiDate($l->mn_date_save);
+                $list[$row][1]=$l->car_no.' '.$l->car_province;
+                $list[$row][2]=$l->car_type;
+                $list[$row][3]=$l->mem_name.' '.$l->mem_lname;
+                $list[$row][4]=$l->car_dept;
+                foreach ($details as $d)
                 {
-                    $total = $t->total;
-                    $vat = $total*.07;
-                    $list[$row][4] = number_format($total+$vat,2);
+                    if($l->id==$d->mnd_mn_id)
+                    {
+                        $total = $d->total;
+                        $vat = $total*.07;
+                        $list[$row][5]=$total+$vat;
+                    }
                 }
+                $list[$row][6]=$l->idmem;
+                $list[$row][7]=$l->id;
+                $row++;
             }
-            $list[$row][5]=$m->id;
-            $list[$row][6]=$m->idmem;
-            $row++;
-        }
-        $data = array('list'=>$list,'main'=>$main);
+        }   
+        $data = array('list'=>$list,'main'=>$listMainter);
         return View::make('manage.mainternance.index',$data);
     }
     public function getCreate()
     {
         $cars = Car::where('car_driver_id',Auth::id())->orderBy('car_no','ASC')->get();
         $member = Member::find(Auth::id());
-        $shop = Shop::orderBy('shop_name','ASC')->get();
-        $data = array('cars'=>$cars,'member'=>$member,'shop'=>$shop);
+        $data = array('cars'=>$cars,'member'=>$member);
         return View::make('manage.mainternance.form',$data);
-    }
-    public function getUpdateList()
-    {
-        return Input::get('mnd_list');
     }
     public function postUpdateList()
     {
@@ -67,10 +69,9 @@ class Manage_ManageMainternanceController extends Controller
         $detail = MainternanceDetail::where('mnd_mn_id',$mainternance->id)->get();
         $cars = Car::where('car_driver_id',$mainternance->mn_mem_id)->orderBy('car_no','ASC')->get();
         
-        $member = Member::find($mainternance->mn_mem_id);
-        $shop = Shop::orderBy('shop_name','ASC')->get();
-        $data = array('cars'=>$cars,'member'=>$member,
-                      'shop'=>$shop,'main'=>$mainternance,'detail'=>$detail);
+        $member = Member::find($mainternance->mn_mem_id); 
+        $data = array('cars'=>$cars,'member'=>$member
+                      ,'main'=>$mainternance,'detail'=>$detail);
         return View::make('manage.mainternance.form',$data);
     }
     public function getDelete($id)
@@ -91,7 +92,7 @@ class Manage_ManageMainternanceController extends Controller
         $util = new Util;
         $inputs = Input::all();
         $mainternance->mn_car_id= $inputs['mn_car_id'];
-        $mainternance->mn_shop_id=$inputs['mn_shop_id'];
+        $mainternance->mn_shop=$inputs['mn_shop'];
         $mainternance->mn_mem_id=Auth::id();
         $mainternance->mn_details=$inputs['mn_details'];
         $mainternance->mn_date_save=$util->DateConvertToDate($inputs['mn_date_save']) ;
@@ -108,7 +109,7 @@ class Manage_ManageMainternanceController extends Controller
         if(is_object($mainternance))
         {  
             $mainternance->mn_car_id= $inputs['mn_car_id'];
-            $mainternance->mn_shop_id=$inputs['mn_shop_id'];
+            $mainternance->mn_shop=$inputs['mn_shop'];
             $mainternance->mn_details=$inputs['mn_details'];
             $mainternance->mn_date_save=$util->DateConvertToDate($inputs['mn_date_save']) ;
             $mainternance->mn_car_dis=$inputs['mn_car_dis'];
@@ -116,6 +117,5 @@ class Manage_ManageMainternanceController extends Controller
         }
         return Redirect::back()->with('message','บันทึกข้อมูลเรียบร้อย');
     }
-    
 }
 

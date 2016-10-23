@@ -6,7 +6,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                ข้อมูลส่วนตัวผู้ใช้งาน
+                                <strong>ข้อมูลส่วนตัวผู้ใช้งาน</strong>
                             </div>
                            
                             <div class="content">

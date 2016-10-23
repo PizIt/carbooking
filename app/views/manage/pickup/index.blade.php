@@ -84,7 +84,7 @@
                                                             <td style="text-align:right">{{$p->pk_now_km}}</td>
                                                              <td style="text-align:left">
                                                                     <a href="{{url("manage/pickup/update/$p->id")}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
-                                                                    <?php if((($p->idmem==Auth::id()) || (Session::get('level')>=3))&&($p->updated==TRUE)) {?>
+                                                                    <?php if((($p->idmem==Auth::id()) || (Session::get('level')>=3))) {?>
                                                                     <a href="#" onclick="del({{$p->id}})"> <i class="glyphicon glyphicon-trash"></i></a>&nbsp;
                                                                     <?php } ?>
                                                             </td>

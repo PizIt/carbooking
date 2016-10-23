@@ -35,6 +35,9 @@ class MemberController extends Controller
         $member->mem_email = !empty($inputs['mem_email'])?$inputs['mem_email']:'';
         $member->mem_sig = 'null';
         $member->save();
+        // change name member
+        $memberName = $member->mem_name.' '.$member->mem_lname;
+        Session::put('name',$memberName);
         }
         return Redirect::back()->with('message','แก้ไขข้อมูลเรียบร้อย');
     }

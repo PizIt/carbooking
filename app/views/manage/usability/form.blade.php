@@ -1,5 +1,6 @@
 @extends('default')
 @section('content')
+<?php $disable = (((Session::get('level') > 2) || (Auth::id()==$useCar->us_id_driver))) ? '' : 'disabled style=background-color:#eee'; ?>
  <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -16,7 +17,7 @@
                                         <div class="row">
                                             <div class="col-md-3 form-group">
                                                 <label>หมายเลขทะเบียนรถ</label>
-                                                <select class="form-control border-input" name="us_car_id">
+                                                <select class="form-control border-input" name="us_car_id" {{$disable}}>
                                                    @foreach($cars as $c)
                                                    <option value="{{$c->id}}" {{!empty($useCar->us_car_id)&&($c->id==$useCar->us_car_id) ? 'selected' : ''}}>{{$c->car_no.' '.$c->car_province.' ('.$c->car_type.')'}}</option>
                                                    @endforeach
@@ -24,7 +25,7 @@
                                             </div>
                                             <div class="col-md-4 form-group">
                                                 <label>ชื่อพนักงานขับรถ</label>
-                                                <select class="form-control border-input" name="us_id_driver">
+                                                <select class="form-control border-input" name="us_id_driver" {{$disable}}>
                                                      @foreach($drivers as $d)
                                                      <option value="{{$d->id}}" {{!empty($useCar->us_id_driver)&&($d->id==$useCar->us_id_driver) ? 'selected' : ''}}>{{$d->mem_name.' '.$d->mem_lname}}</option>
                                                      @endforeach
@@ -46,48 +47,50 @@
                                     <div class="row">
                                         <div class="col-md-3 form-group">
                                             <label>วันเวลาที่เดินทาง</label>
-                                            <input type="text" id="dateStart"  name="us_date_start" class="form-control border-input" value="{{!empty($useCar->us_date_start)? $dateStart : ''}}" required placeholder="dd-MM-YYYY HH:ii">
+                                            <input type="text" id="dateStart"  name="us_date_start" class="form-control border-input" value="{{!empty($useCar->us_date_start)? $dateStart : ''}}" required placeholder="dd-MM-YYYY HH:ii" {{$disable}}>
                                         </div>
                                          <div class="col-md-3 form-group">
                                             <label>วันเวลาที่กลับสำนักงาน</label>
-                                            <input type="text" id="dateEnd"  name="us_date_end" class="form-control border-input" value="{{!empty($useCar->us_date_end)? $dateEnd : ''}}" required placeholder="dd-MM-YYYY HH:ii">
+                                            <input type="text" id="dateEnd"  name="us_date_end" class="form-control border-input" value="{{!empty($useCar->us_date_end)? $dateEnd : ''}}" required placeholder="dd-MM-YYYY HH:ii" {{$disable}}>
                                         </div>
                                     </div>
                                     <div class="row">
                                       
                                         <div class="col-md-3 form-group">
                                             <label>ชื่อผู้ใช้รถ</label>
-                                            <input type="text"  name="us_name_user" class="form-control border-input" value="{{!empty($useCar->us_name_user)? $useCar->us_name_user : ''}}" required>
+                                            <input type="text"  name="us_name_user" class="form-control border-input" value="{{!empty($useCar->us_name_user)? $useCar->us_name_user : ''}}" required {{$disable}}>
                                         </div>
                                         <div class="col-md-4 form-group">
                                             <label>สถานที่ไป</label>
-                                            <input type="text"  name="us_location" class="form-control border-input" value="{{!empty($useCar->us_location)? $useCar->us_location : ''}}" required>
+                                            <input type="text"  name="us_location" class="form-control border-input" value="{{!empty($useCar->us_location)? $useCar->us_location : ''}}" required {{$disable}}>
                                         </div>
                                        
                                     </div>
                                     <div class="row">
                                         <div class="col-md-2 form-group">
                                             <label>เลขกิโลก่อนเดินทาง</label>
-                                            <input type="number" name="us_dst_start" class="form-control border-input" value="{{!empty($useCar->us_dst_start)? $useCar->us_dst_start : ''}}" required>
+                                            <input type="number" name="us_dst_start" class="form-control border-input" value="{{!empty($useCar->us_dst_start)? $useCar->us_dst_start : ''}}" required {{$disable}}>
                                         </div>
                                         <div class="col-md-2 form-group">
                                             <label>เลขกิโลหลังเดินทาง</label>
-                                            <input type="number"  name="us_dst_end" class="form-control border-input" value="{{!empty($useCar->us_dst_end)? $useCar->us_dst_end : ''}}" required> 
+                                            <input type="number"  name="us_dst_end" class="form-control border-input" value="{{!empty($useCar->us_dst_end)? $useCar->us_dst_end : ''}}" required {{$disable}}> 
                                         </div>
                                         <div class="col-md-3 form-group">
                                             <label>หมายเหตุ</label>
-                                            <input type="text"  name="us_note" class="form-control border-input" value="{{!empty($useCar->us_note)? $useCar->us_note : ''}}">
+                                            <input type="text"  name="us_note" class="form-control border-input" value="{{!empty($useCar->us_note)? $useCar->us_note : ''}}" {{$disable}}>
                                         </div>
                                     </div>
                                         <input type="hidden" name="id" value="{{!empty($useCar->id) ? $useCar->id : ''}}">
-                                        <div class="row">
-                                            <div class="col-md-1">
-                                                <input type="submit" class="btn btn-danger btn-block" value="บันทึก">
+                                        @if(empty($disable))
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                    <input type="submit" class="btn btn-danger btn-block" value="บันทึก">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <input type="reset" class="btn btn-default btn-block" value="ล้าง">
+                                                </div>
                                             </div>
-                                            <div class="col-md-1">
-                                                <input type="reset" class="btn btn-default btn-block" value="ล้าง">
-                                            </div>
-                                        </div>
+                                        @endif
                                  </form>
                              </div>
                         </div>

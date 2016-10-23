@@ -1,6 +1,6 @@
 @extends('default')
 @section('content')
-<?php $disable = (((Session::get('level')>2) || (Auth::id()==$member->id))) ? 'disabled style=background-color:#eee' : ''; ?>
+<?php $disable = (((Session::get('level') > 2) || (Auth::id()==$member->id))) ? '' : 'disabled style=background-color:#eee'; ?>
 <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -17,7 +17,7 @@
                                     <div class="row">
                                         <div class="col-md-3 form-group">
                                             <label>หมายเลขทะเบียนรถ</label>
-                                            <select class="form-control border-input" name="mn_car_id">
+                                            <select class="form-control border-input" name="mn_car_id" {{$disable}}>
                                                 @foreach($cars as $c)
                                                 <option value="{{$c->id}}" {{(!empty($main->mn_car_id) && $main->mn_car_id==$c->id) ? 'selected' : ''}}>{{$c->car_no.' '.$c->car_province.' ('.$c->car_type.')'}}</option>
                                                 @endforeach
@@ -25,36 +25,32 @@
                                         </div>
                                         <div class="col-md-3 form-group">
                                             <label>เลขระยะทางเมื่อเข้าซ่อม</label>
-                                            <input type="text" class="form-control border-input" name="mn_car_dis" value="{{!empty($main->mn_car_dis) ? $main->mn_car_dis : ''}}" required>
+                                            <input type="text" class="form-control border-input" name="mn_car_dis" value="{{!empty($main->mn_car_dis) ? $main->mn_car_dis : ''}}" required {{$disable}}>
                                         </div>
                                         <div class="col-md-3 form-group">
                                             <?php 
                                             $util = new Util;
                                             ?>
                                             <label>วันที่บันทึก</label>
-                                            <input type="text" id="dateSave" class="form-control border-input" name="mn_date_save" value="{{!empty($main->mn_date_save) ? $util->DateConvertToView($main->mn_date_save): ''}}" required>
+                                            <input type="text" id="dateSave" class="form-control border-input" name="mn_date_save" value="{{!empty($main->mn_date_save) ? $util->DateConvertToView($main->mn_date_save): ''}}" required {{$disable}}>
                                         </div>
                                          <div class="col-md-3 form-group">
                                             <label>ชื่อผู้บันทึก</label>
-                                            <input type="text" class="form-control border-input" value="{{$member->mem_name.' '.$member->mem_lname}}" readonly>
+                                            <input type="text" class="form-control border-input" value="{{$member->mem_name.' '.$member->mem_lname}}" readonly {{$disable}}>
                                         </div>
                                     </div>
                                         
                                     <div class="row">
                                         <div class="col-md-6 form-group">
                                             <label>รายละเอียดการซ่อม</label>
-                                            <textarea rows="5" class="form-control border-input" name="mn_details">{{!empty($main->mn_details) ? $main->mn_details : '' }}</textarea>
+                                            <textarea rows="5" class="form-control border-input" name="mn_details" {{$disable}}>{{!empty($main->mn_details) ? $main->mn_details : '' }}</textarea>
                                         </div>
                                         <div class="col-md-6 form-group">
-                                            <label>ร้านซ่อม</label> <a href="#">[ เพิ่มสถานที่ซ่อม ]</a>
-                                            <select class="form-control border-input" name="mn_shop_id">
-                                                 @foreach($shop as $s)
-                                                <option value="{{$s->id}}" {{(!empty($main->mn_shop_id) && $main->mn_shop_id==$s->id) ? 'selected' : ''}}>{{$s->shop_name}}</option>
-                                                 @endforeach
-                                            </select>
+                                            <label>สถานที่ซ่อม</label>
+                                            <textarea rows="5" class="form-control border-input" name="mn_shop" {{$disable}}>{{!empty($main->mn_shop) ? $main->mn_shop : '' }}</textarea>
                                         </div>
                                     </div>
-                                    @if((Request::segment(2)=='mainternance')&&(Request::segment(3)=='create'))
+                                    @if((Request::segment(2)=='mainternance')&&(Request::segment(3)=='create') && (empty($disable)))
                                     <div class="row">
                                             <div class="col-md-1">
                                                 <input type="submit" class="btn btn-danger btn-block" value="บันทึก">
@@ -65,13 +61,18 @@
                                         </div>
                                     @endif
                                     <hr>
-                                     @if((Request::segment(2)=='mainternance')&&(Request::segment(3)=='update'))
-                                    <div class="row">
-                                        <div class="header">
-                                            <a href="#" data-toggle="modal" data-target="#ShowDetails"><i class="ti-pencil-alt2"></i>เพิ่มรายการซ่อม</a>
+                                    @if((Request::segment(2)=='mainternance')&&(Request::segment(3)=='update'))
+                                        
+                                        <div class="row">
+                                            <div class="header">
+                                                @if(empty($disable))
+                                                   <a href="#" data-toggle="modal" data-target="#ShowDetails"><i class="ti-pencil-alt2"></i>เพิ่มรายการซ่อม</a>
+                                                @else
+                                                   <i class="ti-pencil-alt2"></i>รายการซ่อม
+                                                @endif
+                                            </div>
                                         </div>
-                                    </div>
-                                   
+                                        
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="content table-responsive table-full-width">
@@ -97,7 +98,12 @@
                                                                 <td>{{$d->mnd_qty}}</td>
                                                                 <td><?php echo number_format($d->mnd_baht,2); ?></td>
                                                                 <td><?php echo number_format($sum,2); ?></td>
-                                                                <td><a href="#" onclick="del({{$d->id}})"><i class="ti-trash"></i></a></td>
+                                                                <td>
+                                                                    @if(empty($disable))
+                                                                        <a href="#" onclick="del({{$d->id}})"><i class="ti-trash"></i></a>
+                                                                    @endif
+                                                                </td>
+                                                                
                                                             </tr>
                                                             <?php $total+=$sum; ?>
                                                             @endforeach

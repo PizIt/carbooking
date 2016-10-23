@@ -37,7 +37,7 @@
                                                 <table class="table table-bordered table-striped" border="0">
                                                     <thead>
                                                         <tr>
-                                                            <th rowspan="2" width="5%"><label>#</label></th>
+                                                            <th rowspan="2" width="5%" style="text-align: center"><label>#</label></th>
                                                             <th rowspan="2" width="10%" style="text-align:center"><label>วันที่ซ่อม</label></th>
                                                             <th colspan="3" width="20%" style="text-align:center"><label>ข้อมูลรถที่ซ่อม</label></th>
                                                             <th rowspan="2" width="10%" style="text-align:center"><label>กอง</label></th>
@@ -54,8 +54,8 @@
                                                             <?php $cnt=1; $sum=0;?>
                                                             @foreach($list as $l)
                                                                 <tr>
-                                                                    <td>{{$cnt++}}</td>
-                                                                    <td><a href="#">{{$l[0];}}</a></td>
+                                                                    <td style="text-align: center">{{$cnt++}}</td>
+                                                                    <td><a href="{{URL::to('report/mainternance/detail/'.$l[6])}}" target="_blank">{{$l[0];}}</a></td>
                                                                     <td>{{$l[1];}}</td>
                                                                     <td>{{$l[2];}}</td>
                                                                     <td>{{$l[3];}}</td>

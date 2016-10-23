@@ -6,7 +6,6 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="content">
-                                <div class="row">
                                     @if(Session::get('level')>2)
                                         <div class="col-md-12">
                                               <p class="text-left">
@@ -85,7 +84,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
 <script type="text/javascript">
     function del(id)
     {

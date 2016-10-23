@@ -1,6 +1,6 @@
 @extends('default')
 @section('content')
-<?php $disable = ((!empty(Input::get('dis'))) &&  (Input::get('dis')== 'true')) ? 'disabled style=background-color:#eee' : '' ?>
+<?php $disable =  ((Session::get('level') <= 2) || (Auth::id()!=$member->id)) ? 'disabled style=background-color:#eee' : '' ?>
   <div class="content">
             <div class="container-fluid">
                 <div class="row">

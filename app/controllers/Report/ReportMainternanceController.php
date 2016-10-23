@@ -4,13 +4,14 @@ class Report_ReportMainternanceController extends Controller{
     {   
         $inputs = Input::all();
         $year = !empty($inputs['year']) ? $inputs['year'] :null;
-        //dd($year);
+        
         $sql  =  MainternanceCar::where(DB::raw('YEAR(mn_date_save)'),$year-543)
                 ->join('cars','cars.id','=','mn_car_id')
                 ->join('members','members.id','=','mn_mem_id');
         $listMainter =$sql
                 ->select('mainternance_car.id','mn_date_save','cars.car_no','cars.car_province','cars.car_type',
                         'cars.car_dept','mem_name','mem_lname')
+                ->orderBy('mn_date_save','DESC')
                 ->get();
         $listId = $sql->lists('mainternance_car.id');
         $details = MainternanceDetail::whereIn('mnd_mn_id',$listId)
@@ -39,10 +40,21 @@ class Report_ReportMainternanceController extends Controller{
                         $list[$row][5]=$total+$vat;
                     }
                 }
+                $list[$row][6]=$l->id; // id mainternance
                 $row++;
             }
         }   
         $data = array('list'=>$list);
-        return View::make('report.mainternance',$data);
+        return View::make('report.mainternance.index',$data);
+    }
+    public function getDetail($id)
+    {
+        $mainternance = MainternanceCar::find($id);
+        $detail = MainternanceDetail::where('mnd_mn_id',$mainternance->id)->get();
+        $car = Car::find($mainternance->mn_car_id);
+        $member = Member::find($mainternance->mn_mem_id); 
+        $data = array('car'=>$car,'member'=>$member
+                      ,'main'=>$mainternance,'detail'=>$detail);
+        return View::make('report.mainternance.detail',$data);
     }
 }
