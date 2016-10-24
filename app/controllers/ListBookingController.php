@@ -1,4 +1,5 @@
 <?php
+header('Content-type: text/plain; charset=utf-8');
 class ListBookingController extends Controller{
     public function getIndex()
     {   
@@ -54,10 +55,12 @@ class ListBookingController extends Controller{
             $confrimLeader = !empty($inputs['confirm_leader']) ? $inputs['confirm_leader'] : '';
             $confrimMaster = !empty($inputs['confirm_master']) ? $inputs['confirm_master']:'';
             //dd($confrimMaster);
+            $str="";
             if(!empty($confrimLeader)&&(Session::get('level')==3)) // confirm=2
             {
-                if((($confrim >= 1)&&($confrim < 3)))
-                {
+                $str="if";
+                if((($confrim >= 1)&&($confrim <= 3)))
+                { $str.='$confrim'.$confrim;
                     if($confrimLeader > 0)
                     {
                         if($booking->book_type=='ในเขตพื้นที่')
@@ -73,12 +76,14 @@ class ListBookingController extends Controller{
                         $confrim = 0;
                     }
                 }
-                else // confirm == 0
+                else if($confrimLeader!=-1 && $booking->book_type=='ในเขตพื้นที่') // confirm == 0
                 {
-                        $confrim = 0;   
+                        $confrim = 3;   
                 }
                 $booking->book_id_leader =  Auth::id();
             }
+            $str='ทดสอบๆๆๆ';
+            dd($str);
             if(($confrimMaster!='')&&(Session::get('level')==4)) // confirm=3
             {
                 if($confrimMaster == 3)

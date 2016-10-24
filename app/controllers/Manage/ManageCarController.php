@@ -1,4 +1,5 @@
 <?php
+header('Content-type: text/plain; charset=utf-8');
 class Manage_ManageCarController extends Controller{
   public function getIndex()
     {

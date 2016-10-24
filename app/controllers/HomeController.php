@@ -1,5 +1,5 @@
 <?php
-
+header('Content-type: text/plain; charset=utf-8');
 class HomeController extends BaseController {
 
 	public function getIndex()
