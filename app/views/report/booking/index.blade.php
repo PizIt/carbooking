@@ -57,8 +57,8 @@
                                                             <td><label>ผู้จอง</label></td>
                                                             <td><label>ใช้เพื่อ</label></td>
                                                             <td><label>สถานที่เดินทาง</label></td>
-                                                            <td style="width:15% "><label>วันเวลา</label></td>
-                                                            <td style="width:15%"><label>ถึงเวลา</label></td>
+                                                            <td><label>ประเภท</label></td>
+                                                            <td style="text-align: center"><label>วันเวลา</label></td>
                                                             <td style="width:10%"><label>สถานะ</label></td>
                                                         </tr>
                                                     </thead>
@@ -99,8 +99,8 @@
                                                                     </td>
                                                                     <td>{{$l->book_for}}</td>
                                                                     <td>{{$l->book_location}}</td>
-                                                                    <td>{{$dataStart}}</td>
-                                                                    <td>{{$dataEnd}}</td>
+                                                                    <td>{{$l->book_type}}</td>
+                                                                     <td style="text-align: center">{{$util->ThaiDateTime($l->book_date_from).' - '.$util->ThaiDateTime($l->book_date_to)}}</td>
                                                                     <td class="{{$color}}">{{$status}}</td>
                                                                 </tr>
                                                             @endforeach

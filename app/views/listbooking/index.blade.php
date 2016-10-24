@@ -19,6 +19,7 @@
                                         <td><label>ผู้จอง</label></td>
                                         <td><label>ใช้เพื่อ</label></td>
                                         <td><label>สถานที่เดินทาง</label></td>
+                                        <td><label>ประเภท</label></td>
                                         <td style="text-align: center"><label>วันเวลา</label></td>
                                         <td><label>สถานะ</label></td>
                                         <td><label>จัดการ</label></td>
@@ -52,6 +53,7 @@
                                                     <td class="text-info">{{$l->mem_name.' '.$l->mem_lname}}</td>
                                                     <td>{{$l->book_for}}</td>
                                                     <td>{{$l->book_location}}</td>
+                                                    <td>{{$l->book_type}}</td>
                                                     <td style="text-align: center">{{$util->ThaiDateTime($l->book_date_from).' - '.$util->ThaiDateTime($l->book_date_to)}}</td>
                                                     <td class="<?=$color?>"><?=$status?></td>
                                                     <td>

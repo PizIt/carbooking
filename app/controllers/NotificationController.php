@@ -9,7 +9,7 @@ class NotificationController extends Controller
         $member = Member::find(Auth::id());
         $str="";
         $sqlAlertUseCar = Car::where(DB::raw('(car_dst_alert-car_dst_count)'),'<=',500)
-                ->select('id','car_no','car_province',DB::raw('car_dst_alert-car_dst_count AS dst'))
+                ->select('id','car_no','car_province','car_dst_alert',DB::raw('car_dst_alert-car_dst_count AS dst'))
                 ->orderBy('dst','ASC');
         $sqlAlertActExp = Car::where('car_exp_alert',1) 
                 ->select('id','car_no','car_province',DB::raw('DATEDIFF(car_act_exp,CURDATE()) AS valDate'))
@@ -31,11 +31,19 @@ class NotificationController extends Controller
         }
         foreach ($alertUseCar as $u)
         {
-            $str .= '<li><a href="#">'.$u->car_no.' '.$u->car_province.' อีก '.$u->dst.' กม. ครบระยะ</a></li>';
-          
+            $property = 'onclick="updateDst('.$u->id.')"'; 
+            if($u->dst >= 0)
+            {
+                $str .= '<li><a href="#" '.$property.'>'.$u->car_no.' '.$u->car_province.' อีก '.$u->dst.' กม. ครบระยะ</a></li>';
+            }
+            else
+            {
+                $str .= '<li><a href="#" '.$property.'>'.$u->car_no.' '.$u->car_province.' ใช้งานเกินระยะแล้ว '.($u->dst*(-1)).' กม.</a></li>';
+            }
         }
         foreach ($alertActExp as $a)
         {
+            
             if($a->valDate>0)
             {
                 $str .= '<li><a href="#">'.$a->car_no.' '.$a->car_province.' | อีก '.$a->valDate.' วัน พรบ.หมดอายุ</a></li>';

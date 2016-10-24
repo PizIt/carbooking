@@ -156,7 +156,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" id="notification" data-toggle="dropdown" style="font-family:TH SarabunPSK;font-size:20px;">
                                     <i class="ti-bell"></i>
-                                    <p class="notification">{{Session::get('notification')}}</p>
+                                    <p class="notification" id="cntNotification">{{Session::get('notification')}}</p>
                                     <p>การแจ้งเตือน</p>
                                     <b class="caret"></b>
                                 </a>
@@ -235,6 +235,27 @@
                     }
        });
    });
+   //
+   function updateDst(id)
+   {
+      swal({
+            title: 'อัพเดทการแจ้งเตือน ?',
+            type: 'question',
+            showCancelButton: true,
+     
+            confirmButtonText: 'Yes!!'
+          }).then(function() {
+                $.ajax({
+                   async: true,
+                   type: 'get',
+                   url:"{{URL::to('manage/car/update-dst')}}/"+id,
+                   success: function (data) {
+                        swal({title:'อัพเดทข้อมูลเรียบร้อย',timer: 2000}); 
+                        $('#cntNotification').html(data);
+                    }
+                });
+            });
+   }
 </script>
 </body>
      @section('costom-js') @show   

@@ -6,7 +6,7 @@ class ListBookingController extends Controller{
                     ->join('members' ,'members.id','=','booking.book_mem_id')
                     ->orderBy('booking.id','DESC')
                     ->select(DB::raw('booking.id AS id'),DB::raw('members.id AS idmem')
-                            ,'mem_name','mem_lname','book_for','book_location'
+                            ,'mem_name','mem_lname','book_for','book_location','book_type'
                             ,'book_date_from','book_date_to','book_confirm')
                     ->paginate(30);
         $data = array('listBooking'=>$listBooking);

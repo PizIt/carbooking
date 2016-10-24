@@ -85,6 +85,14 @@ class Manage_ManageCarController extends Controller{
         }
         return Redirect::back()->with('message','แก้ไขข้อมูลเรียบร้อย');
     }
-
+    public function getUpdateDst($id)
+    {
+        $car  = Car::find($id);
+        $car->car_dst_count=0;
+        $car->save();
+        Session::put('notification',Session::get('notification')-1);
+        $cntNoti  = Session::get('notification');
+        return $cntNoti;
+    }
 }
 
