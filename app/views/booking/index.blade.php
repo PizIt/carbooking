@@ -5,7 +5,6 @@
 @section('content')  
   <div class="content">
             <div class="container-fluid">   
-                
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
@@ -13,7 +12,7 @@
                                     <strong>รายละเอียดการจอง</strong>
                                 </div>
                                 <div class="content">
-                                    <form  method="POST" id="form" name="form" data-toggle="validator" role="form" onsubmit="validateList();return false;">
+                                    <form  method="POST" id="form" name="form" data-toggle="validator" role="form">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
@@ -97,7 +96,7 @@
                                         <input type="hidden" name="lat" id="lat">
                                          <input type="hidden" name="lon" id="lng">
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-danger btn-fill btn-wd" onclick="validateList()">จองรถ</button>
+                                            <input type="submit" value="จองรถ" onclick="return check()" class="btn btn-danger btn-fill btn-wd">
                                         </div>
                                     </form>
                                 </div>
@@ -107,7 +106,7 @@
             </div>
         </div>
 <script type="text/javascript">
-    function validateList()
+    function check()
     {
       var carsID = $("input:checkbox:checked.chkcar").map(function(){
           return this.value;
@@ -120,7 +119,7 @@
       //count check drivers ans cars
       if((cntCar > 0) && (cntDriver > 0))
       {
-        $('#form').submit();
+        return true;
       }else
       {
           swal({title:'ผิดพลาด',text:'โปรดตรวจสอบรายการที่จอง',type:'error'});   

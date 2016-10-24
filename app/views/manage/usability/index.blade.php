@@ -125,7 +125,7 @@
     {
     swal({title:'ต้องการลบข้อมูลหรือไม่' ,type: 'question',showCancelButton: true})
             .then(function(){
-                 location.replace('{{URL::to("manage/pickup/delete")}}/'+id);
+                 location.replace('{{URL::to("manage/usability/delete")}}/'+id);
             });
     }
 </script>

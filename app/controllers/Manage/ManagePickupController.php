@@ -81,4 +81,10 @@ class Manage_ManagePickupController extends Controller
         }
         return Redirect::back()->with('message','แก้ไขข้อมูลเรียบร้อย');     
     }
+    public function getDelete($id)
+    {
+        $pick = PickFuel::find($id);
+        $pick->delete();
+        return Redirect::back()->with('message','ลบข้อมูลเรียบร้อย');     
+    }
 }

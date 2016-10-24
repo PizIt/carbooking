@@ -3,7 +3,12 @@
 จัดการข้อมูลรถ
 @stop
 @section('content')
-<?php $disable = Session::get('level') <= 2 ? 'disabled style=background-color:#eee' : '' ?>
+   <?php 
+        $disable="";
+        if(Request::segment(3)!='create'){
+        $disable =  (Session::get('level') <= 2) ? 'disabled style=background-color:#eee' : '' ;
+        }
+    ?>
 <div class="content">
             <div class="container-fluid">
                 <div class="row">

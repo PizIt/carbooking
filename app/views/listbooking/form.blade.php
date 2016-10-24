@@ -167,14 +167,14 @@
                                                     <td style="width:25%">
                                                         <label>
                                                             <input type="radio" class="border-input" name="confirm_leader" value="2" 
-                                                                   {{$booking->book_confirm >= 2  ? 'checked' : ''}} {{((Session::get('level') >= 3)&&(Session::get('dept')=='สำนักปลัด')) ? '':'disabled'}}>
+                                                                   {{$booking->book_confirm >= 2  ? 'checked' : ''}} {{((Session::get('level') == 3)&&(Session::get('dept')=='สำนักปลัด')) ? '':'disabled'}}>
                                                             <strong class="text-success">อนุญาต</strong>
                                                         </label>
                                                     </td>
                                                     <td style="width:25%">
                                                         <label>
                                                                 <input type="radio" class="border-input" name="confirm_leader" value="-1" 
-                                                                    {{$booking->book_confirm == 0  ? 'checked' : ''}} {{((Session::get('level') >= 3)&&(Session::get('dept')=='สำนักปลัด'))  ? '':'disabled'}}>
+                                                                    {{$booking->book_confirm == 0  ? 'checked' : ''}} {{((Session::get('level') == 3)&&(Session::get('dept')=='สำนักปลัด'))  ? '':'disabled'}}>
                                                             <strong class="text-danger">ไม่อนุญาต</strong>
                                                         </label>
                                                     </td>
@@ -212,7 +212,7 @@
                                                  <tr style="text-align:center">
                                                      <td colspan="2"><strong>หมายเหตุ  </strong>
                                                             <input type="text" name="book_note_leader" class="form-control border-input" placeholder="หมายเหตุ" 
-                                                                   value="{{!empty($booking->book_note_leader) ? $booking->book_note_leader : ''}}" {{((Session::get('level') >= 3)&&(Session::get('dept')=='สำนักปลัด'))  ? '':'readonly style="background-color:beige;"'}}>
+                                                                   value="{{!empty($booking->book_note_leader) ? $booking->book_note_leader : ''}}" {{((Session::get('level') == 3)&&(Session::get('dept')=='สำนักปลัด'))  ? '':'readonly style="background-color:beige;"'}}>
                                                      </td>
                                                       @if($booking->book_type=='นอกเขตพื้นที่')
                                                      <td colspan="2"><strong>หมายเหตุ  </strong>

@@ -3,7 +3,12 @@
 บันทึกการใช้งานรถ
 @stop
 @section('content')
-<?php $disable = (((Session::get('level') > 2) || (Auth::id()==$useCar->us_id_driver))) ? '' : 'disabled style=background-color:#eee'; ?>
+  <?php 
+        $disable="";
+        if(Request::segment(3)!='create'){
+        $disable = (((Session::get('level') > 2) || (Auth::id()==$useCar->us_id_driver))) ? '' : 'disabled style=background-color:#eee';
+        }
+    ?>
  <div class="content">
             <div class="container-fluid">
                 <div class="row">

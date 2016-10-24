@@ -21,9 +21,7 @@
     <link href="{{URL::to('assets/css/themify-icons.css')}}" rel="stylesheet">
     <!--   Core JS Files   -->
     <script src="{{URL::to('assets/js/jquery-1.10.2.js')}}" type="text/javascript"></script>
-       <!--  Notifications Plugin    -->
-    <!--<script src="{{URL::to('assets/js/jquery-1.10.2.js')}}"></script>-->
-    <link href="{{URL::to('assets/css/animate.min.css')}}" rel="stylesheet"/>
+    
     @section('costom-style') @show
      <!--Login -->
     @if(!Auth::check())
@@ -33,14 +31,12 @@
     @section('costom-html')@show
 </head>
 <body>
-
 <div class="wrapper">
     <div class="sidebar" data-background-color="white" data-active-color="danger">
     	<div class="sidebar-wrapper">
             <div class="logo">
                <center> <img src="{{URL::to('assets/pic/logo.png')}}" width="200px" height="190px"></center>
             </div>
-
             <ul class="nav">
                 <li class="{{Request::segment(1)=="home"?'active':''}}">
                     <a href="{{url('home')}}">
@@ -133,7 +129,6 @@
             </ul>
     	</div>
     </div>
-
     <div class="main-panel">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -195,7 +190,6 @@
             <div class="container-fluid">
                 <nav class="pull-left">
                     <ul>
-
                         <li>
                             <a href="http://www.creative-tim.com">
                                 Creative Tim

@@ -68,7 +68,7 @@ class HomeController extends BaseController {
                     $i=0;
                     foreach ($driver as $d) 
                     {
-                        $str.=''.++$i.'. '.$d->mem_name.' '.$d->mem_lname.'<br/>';
+                        $str.=''.++$i.'. '.$d->mem_name.' '.$d->mem_lname.' [ <i class="glyphicon glyphicon-earphone"></i> '.$d->mem_tel.' ] <br/>';
                     }    
                     $str.='</td>';
                 $str.='</table>';

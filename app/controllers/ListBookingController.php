@@ -54,7 +54,7 @@ class ListBookingController extends Controller{
             $confrimLeader = !empty($inputs['confirm_leader']) ? $inputs['confirm_leader'] : '';
             $confrimMaster = !empty($inputs['confirm_master']) ? $inputs['confirm_master']:'';
             //dd($confrimMaster);
-            if(!empty($confrimLeader))
+            if(!empty($confrimLeader)&&(Session::get('level')==3)) // confirm=2
             {
                 if((($confrim >= 1)&&($confrim < 3)))
                 {
@@ -63,19 +63,23 @@ class ListBookingController extends Controller{
                         if($booking->book_type=='ในเขตพื้นที่')
                         {
                             $confrim = 3;
-                        }else
+                        }else if($booking->book_type=='นอกเขตพื้นที่')
                         {
                            $confrim = $confrimLeader;
                         }                 
                     }
                     else
                     {
-                        $confrim=0;
+                        $confrim = 0;
                     }
                 }
-                $booking->book_id_leader = Auth::id();
+                else // confirm == 0
+                {
+                        $confrim = 0;   
+                }
+                $booking->book_id_leader =  Auth::id();
             }
-            if($confrimMaster!='')
+            if(($confrimMaster!='')&&(Session::get('level')==4)) // confirm=3
             {
                 if($confrimMaster == 3)
                 {

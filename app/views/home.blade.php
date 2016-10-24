@@ -118,9 +118,9 @@
     </div>
 @stop
 @section('costom-js')
-        <link rel='stylesheet' href='{{URL::to('assets/fullcalendar/fullcalendar.css')}}'/>
+        <link rel='stylesheet' href='{{URL::to('assets/fullcalendar/fullcalendar.min.css')}}'/>
         <script src='{{URL::to('assets/fullcalendar/lib/jquery.min.js')}}'></script>
         <script src='{{URL::to('assets/fullcalendar/lib/moment.min.js')}}'></script>
-        <script src='{{URL::to('assets/fullcalendar/fullcalendar.js')}}'></script>
+        <script src='{{URL::to('assets/fullcalendar/fullcalendar.min.js')}}'></script>
         <script src='{{URL::to('assets/fullcalendar/lang-all.js')}}'></script>
 @stop
