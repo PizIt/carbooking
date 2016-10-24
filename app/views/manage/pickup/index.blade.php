@@ -1,4 +1,7 @@
 @extends('default')
+@section('brand')
+บันทึกการเบิกน้ำมัน
+@stop
 @section('content')
         <div class="content">
             <div class="container-fluid">

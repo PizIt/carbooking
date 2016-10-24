@@ -1,4 +1,7 @@
 @extends('default')
+@section('brand')
+บันทึกการซ่อมบำรุงรภ
+@stop
 @section('content')
 <?php $disable = (((Session::get('level') > 2) || (Auth::id()==$member->id))) ? '' : 'disabled style=background-color:#eee'; ?>
 <div class="content">
@@ -176,6 +179,10 @@
         });
     }
     @endif
+   //Set DatetimePicker
+   $.datetimepicker.setLocale('th');
+   //Form Validator
+   $('#form').validator();
 </script>
 @stop
 @section('custom-detail')
@@ -214,4 +221,13 @@
       </div>
     </div>
 </form>
+@stop
+@section('costom-style')
+   <!--JS IN HEAD-->
+   <!--datetimepicker-->
+        <link rel="stylesheet" type="text/css" href="{{URL::to('assets/datetimepicker/jquery.datetimepicker.css')}}" >
+        <script src="{{URL::to('assets/datetimepicker/jquery.js')}}"></script>
+        <script src="{{URL::to('assets/datetimepicker/build/jquery.datetimepicker.full.min.js')}}"></script>
+    <!--validations-->
+        <script src="{{URL::to('assets/validator/js/validator.js')}}"></script>
 @stop

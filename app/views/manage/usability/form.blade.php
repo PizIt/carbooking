@@ -1,4 +1,7 @@
 @extends('default')
+@section('brand')
+บันทึกการใช้งานรถ
+@stop
 @section('content')
 <?php $disable = (((Session::get('level') > 2) || (Auth::id()==$useCar->us_id_driver))) ? '' : 'disabled style=background-color:#eee'; ?>
  <div class="content">
@@ -109,5 +112,18 @@
         format:'d-m-Y H:i',
         yearOffset:543
         });
+   //Set DatetimePicker
+   $.datetimepicker.setLocale('th');
+   //Form Validator
+   $('#form').validator();
 </script>
+@stop
+@section('costom-style')
+   <!--JS IN HEAD-->
+   <!--datetimepicker-->
+        <link rel="stylesheet" type="text/css" href="{{URL::to('assets/datetimepicker/jquery.datetimepicker.css')}}" >
+        <script src="{{URL::to('assets/datetimepicker/jquery.js')}}"></script>
+        <script src="{{URL::to('assets/datetimepicker/build/jquery.datetimepicker.full.min.js')}}"></script>
+    <!--validations-->
+        <script src="{{URL::to('assets/validator/js/validator.js')}}"></script>
 @stop

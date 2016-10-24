@@ -1,4 +1,7 @@
 @extends('default')
+@section('brand')
+ข้อมูลส่วนตัว
+@stop
 @section('content')
   <div class="content">
             <div class="container-fluid">
@@ -90,4 +93,13 @@
                 </div>
             </div>
         </div>
+<script type="text/javascript">
+   //Form Validator
+   $('#form').validator();
+</script>
+@stop
+@section('costom-style')
+   <!--JS IN HEAD-->
+    <!--validations-->
+        <script src="{{URL::to('assets/validator/js/validator.js')}}"></script>
 @stop

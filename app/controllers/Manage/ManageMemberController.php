@@ -100,6 +100,9 @@ class Manage_ManageMemberController extends Controller{
         $member->mem_sig = 'null';
         $member->mem_level = $inputs['mem_level'];
         $member->save();
+        // change name member
+        $memberName = $member->mem_name.' '.$member->mem_lname;
+        Session::put('name',$memberName);
         }
         return Redirect::back()->with('message','แก้ไขข้อมูลเรียบร้อย');
     }

@@ -1,4 +1,7 @@
 @extends('default')
+@section('brand')
+จองรถ
+@stop
 @section('content')  
   <div class="content">
             <div class="container-fluid">   
@@ -206,7 +209,19 @@
             $('#lng').val(position.lng());
         });
         } 
-    
+   //Set DatetimePicker
+   $.datetimepicker.setLocale('th');
+   //Form Validator
+   $('#form').validator();
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt7OP8jq0nhzMKFqd7AIKTvU_4N43_81M&callback=initMap"async defer></script>
+@stop
+@section('costom-style')
+   <!--JS IN HEAD-->
+   <!--datetimepicker-->
+        <link rel="stylesheet" type="text/css" href="{{URL::to('assets/datetimepicker/jquery.datetimepicker.css')}}" >
+        <script src="{{URL::to('assets/datetimepicker/jquery.js')}}"></script>
+        <script src="{{URL::to('assets/datetimepicker/build/jquery.datetimepicker.full.min.js')}}"></script>
+    <!--validations-->
+        <script src="{{URL::to('assets/validator/js/validator.js')}}"></script>
 @stop

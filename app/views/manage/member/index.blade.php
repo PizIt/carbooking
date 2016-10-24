@@ -1,4 +1,7 @@
 @extends('default')
+@section('brand')
+จัดารข้อมูลสมาชิก
+@stop
 @section('content')
         <div class="content">
             <div class="container-fluid">
@@ -32,7 +35,6 @@
                                                             $currentPage = $member->getCurrentPage();
                                                             $perPage = $member->getPerPage();
                                                             $cnt = ($currentPage*$perPage)-$perPage;
-                                                            $dis = Session::get('level') > 2 ? 'dis=false' : 'dis=true';
                                                         ?>
                                                         @foreach($member as $m)
 
@@ -64,8 +66,8 @@
                                                             <td>{{$m->mem_tel}}</td>
                                                             <td><?=$position?></td>
                                                             <td style="text-align:left">
-                                                                <a href="{{url("manage/member/update/$m->id?$dis")}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
-                                                                @if(Session::get('level') > 2 && Session::get('level') >= $m->mem_level)
+                                                                <a href="{{url("manage/member/update/$m->id")}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
+                                                                @if(Session::get('level') > 2 && Session::get('level') >= $m->mem_level && Auth::id()!=$m->id)
                                                                 <a href="#" onclick="del({{$m->id}})"> <i class="glyphicon glyphicon-trash"></i></a>&nbsp;
                                                                 @endif
                                                             </td>

@@ -1,4 +1,7 @@
 @extends('default')
+@section('brand')
+รายงานการจองรถ
+@stop
 @section('content')  
   <div class="content">
             <div class="container-fluid">                  

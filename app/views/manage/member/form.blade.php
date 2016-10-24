@@ -1,6 +1,14 @@
 @extends('default')
+@section('brand')
+จัดการข้อมูลสมาชิก
+@stop
 @section('content')
-<?php $disable =  ((Session::get('level') <= 2) || (Auth::id()!=$member->id)) ? 'disabled style=background-color:#eee' : '' ?>
+    <?php 
+        $disable="";
+        if(Request::segment(3)!='create'){
+        $disable =  ((Session::get('level') <= 2) || (Auth::id()!=$member->id)) ? 'disabled style=background-color:#eee' : '' ;
+        }
+    ?>
   <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -124,4 +132,13 @@
                 </div>
             </div>
         </div>
+<script type="text/javascript">
+   //Form Validator
+   $('#form').validator();
+</script>
+@stop
+@section('costom-style')
+   <!--JS IN HEAD-->
+    <!--validations-->
+        <script src="{{URL::to('assets/validator/js/validator.js')}}"></script>
 @stop

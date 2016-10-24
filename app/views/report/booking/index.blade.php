@@ -1,4 +1,7 @@
 @extends('default')
+@section('brand')
+รายงานการจองรถ
+@stop
 @section('content')
     <div class="content">
             <div class="container-fluid">
@@ -130,5 +133,14 @@
        timepicker:false,
        yearOffset:543
         });
+    //Set DatetimePicker
+   $.datetimepicker.setLocale('th');
 </script>
+@stop
+@section('costom-style')
+   <!--JS IN HEAD-->
+   <!--datetimepicker-->
+        <link rel="stylesheet" type="text/css" href="{{URL::to('assets/datetimepicker/jquery.datetimepicker.css')}}" >
+        <script src="{{URL::to('assets/datetimepicker/jquery.js')}}"></script>
+        <script src="{{URL::to('assets/datetimepicker/build/jquery.datetimepicker.full.min.js')}}"></script>
 @stop

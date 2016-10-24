@@ -1,4 +1,7 @@
 @extends('default')
+@section('brand')
+รายการจองรถ
+@stop
 @section('content')  
   <div class="content">
             <div class="container-fluid">                  
@@ -64,14 +67,14 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>ใช้เพื่อ</label>
-                                                    <input type="text" name="book_for" class="form-control border-input" placeholder="จุดประสงค์การใช้งาน" value="{{$booking->book_for}}" 
+                                                    <input type="text" name="book_for" class="form-control border-input" placeholder="จุดประสงค์การใช้งาน" required value="{{$booking->book_for}}" 
                                                            {{((Auth::id()==$booking->book_mem_id) || (Session::get('level')>2)) ? '' : 'disabled style="background-color:#eee"'}}>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>สถานที่เดินทาง</label>
-                                                    <input type="text" name="book_location" class="form-control border-input" placeholder="ไปที่ไหน" value="{{$booking->book_location}}"
+                                                    <input type="text" name="book_location" class="form-control border-input" placeholder="ไปที่ไหน" required value="{{$booking->book_location}}"
                                                             {{((Auth::id()==$booking->book_mem_id) || (Session::get('level')>2)) ? '' : 'disabled style="background-color:#eee"'}}>
                                                 </div>
                                             </div>
@@ -271,6 +274,19 @@
             $('#lng').val(position.lng());
         });
         } 
+    //Set DatetimePicker
+    $.datetimepicker.setLocale('th');
+    //Form Validator
+    $('#form').validator();
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt7OP8jq0nhzMKFqd7AIKTvU_4N43_81M&callback=initMap"async defer></script>
+@stop
+@section('costom-style')
+   <!--JS IN HEAD-->
+   <!--datetimepicker-->
+        <link rel="stylesheet" type="text/css" href="{{URL::to('assets/datetimepicker/jquery.datetimepicker.css')}}" >
+        <script src="{{URL::to('assets/datetimepicker/jquery.js')}}"></script>
+        <script src="{{URL::to('assets/datetimepicker/build/jquery.datetimepicker.full.min.js')}}"></script>
+    <!--validations-->
+        <script src="{{URL::to('assets/validator/js/validator.js')}}"></script>
 @stop

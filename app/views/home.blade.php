@@ -1,4 +1,7 @@
 @extends('default')
+@section('brand')
+ปฏิธินการใช้รถ
+@stop
 @section('costom-style')
 <style>
 	#calendar {
