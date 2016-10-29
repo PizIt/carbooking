@@ -153,8 +153,8 @@
                             </a>
                         </li>
                             @if((Session::get('level')!=2)&&(Session::get('notification')>0))
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" id="notification" data-toggle="dropdown" style="font-family:TH SarabunPSK;font-size:20px;">
+                            <li class="dropdown" id="notification">
+                                <a href="#" class="dropdown-toggle"  data-toggle="dropdown" style="font-family:TH SarabunPSK;font-size:20px;">
                                     <i class="ti-bell"></i>
                                     <p class="notification" id="cntNotification">{{Session::get('notification')}}</p>
                                     <p>การแจ้งเตือน</p>
@@ -225,16 +225,17 @@
 @endif
 <script type="text/javascript">
    //Notifications
-   $('#notification').click(function(){
+   $(document).on('click', '#notification', function(){
        $.ajax({
            async: true,
            type: 'get',
            url:"{{URL::to('notification')}}",
            success: function (data){
-                      $('#listNotification').html(data);
+                      data!=''? console.log(data):  console.log(3);
+                      $('#notification ul').html(data);
                     }
        });
-   });
+   }); 
    //
    function updateDst(id)
    {
