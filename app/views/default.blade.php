@@ -231,7 +231,6 @@
            type: 'get',
            url:"{{URL::to('notification')}}",
            success: function (data){
-                      data!=''? console.log(data):  console.log(3);
                       $('#notification ul').html(data);
                     }
        });
@@ -242,8 +241,7 @@
       swal({
             title: 'อัพเดทการแจ้งเตือน ?',
             type: 'question',
-            showCancelButton: true,
-     
+            showCancelButton: true,   
             confirmButtonText: 'Yes!!'
           }).then(function() {
                 $.ajax({
