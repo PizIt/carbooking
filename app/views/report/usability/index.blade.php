@@ -13,13 +13,17 @@
                                        
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>แยกตาม</label>
-                                                <select class="form-control border-input" name="sort">
-                                                    <option value="cars" {{(!empty(Input::get('sort'))&&('cars'==Input::get('sort'))) ? 'selected' : ''}}>รถ</option>
-                                                    <option value="driver" {{(!empty(Input::get('sort'))&&('driver'==Input::get('sort'))) ? 'selected' : ''}}>พนักงานขับรถ</option>
-                                                </select>
-                                            </div>
+                                            @if(Session::get('level')>2)
+                                                <div class="form-group">
+                                                    <label>แยกตาม</label>
+                                                    <select class="form-control border-input" name="sort">
+                                                        <option value="cars" {{(!empty(Input::get('sort'))&&('cars'==Input::get('sort'))) ? 'selected' : ''}}>รถ</option>
+                                                        <option value="driver" {{(!empty(Input::get('sort'))&&('driver'==Input::get('sort'))) ? 'selected' : ''}}>พนักงานขับรถ</option>
+                                                    </select>
+                                                </div>
+                                            @else
+                                                <input type="hidden" name="sort" value="cars">
+                                            @endif
                                             <div class="form-group">
                                                 <label>ประจำเดือน</label>
                                                 <select class="form-control border-input" name="month">

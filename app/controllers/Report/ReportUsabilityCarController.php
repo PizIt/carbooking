@@ -14,6 +14,11 @@ class Report_ReportUsabilityCarController extends Controller{
             {
                 $sql->where(DB::raw('MONTH(usability_car.us_date_start)'),$month);
             }
+            if(Session::get('level')==1)
+            {
+                $casr = Car::where('car_driver_id',Auth::id())->lists('id');
+                $sql->whereIn(DB::raw('usability_car.us_car_id'),$casr);
+            }
             $sql->join('cars','cars.id','=','usability_car.us_car_id');
 
             $listUse =  $sql->groupBy('usability_car.us_car_id')
@@ -46,7 +51,7 @@ class Report_ReportUsabilityCarController extends Controller{
            
             }
         }
-        else
+        else //  by driver
         {
             $sql = UsabilityCar::where(DB::raw('YEAR(usability_car.us_date_start)'),$year);
             if($month!=0)

@@ -3,8 +3,18 @@ header('Content-type: text/plain; charset=utf-8');
 class Manage_ManageMemberController extends Controller{
     public function getIndex()
     {
+        $level = Input::get('level');
+        $member=null;
+        if(!empty($level))
+        {
+            $member= Member::where('mem_level',$level)->paginate(30);    
+        }else
+        {
+          $member= Member::paginate(30);    
+        }
+
         $data = array(
-            'member'=>Member::paginate(30)
+            'member'=>$member
         );
         return View::make('manage.member.index',$data);
     }

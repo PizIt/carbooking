@@ -46,12 +46,12 @@
                 </li>
                 @if(Auth::check())
                     @if(Session::get('level')!=1)
-                    <li class="{{Request::segment(1)=="booking"?'active':''}}">
-                        <a href="{{url('booking')}}">
-                            <i class="ti-car"></i>
-                            <p style="font-size:16px;">จองรถ</p>
-                        </a>
-                    </li>
+                        <li class="{{Request::segment(1)=="booking"?'active':''}}">
+                            <a href="{{url('booking')}}">
+                                <i class="ti-car"></i>
+                                <p style="font-size:16px;">จองรถ</p>
+                            </a>
+                        </li>
                     @endif
                      <li class="{{Request::segment(1)=="listbooking"?'active':''}}">
                         <a href="{{url('listbooking')}}">
@@ -80,50 +80,54 @@
                         </a>
                     </li>
                     @if(Session::get('level')!=2)
-                       <li class="{{((Request::segment(1)=="manage")&&(Request::segment(2)=="usability"))?'active':''}}">
-                        <a href="{{url('manage/usability')}}">
-                            <i class="glyphicon glyphicon-dashboard"></i>
-                            <p style="font-size:16px;">บันทึกการใช้รถ</p>
-                        </a>
-                    </li>
-                          <li class="{{((Request::segment(1)=="manage")&&(Request::segment(2)=="pickup"))?'active':''}}">
-                        <a href="{{url('manage/pickup')}}">
-                            <i class="glyphicon glyphicon-oil"></i>
-                            <p style="font-size:16px;">บันทึกการเบิกน้ำมัน</p>
-                        </a>
-                    </li>
-                         <li class="{{((Request::segment(1)=="manage")&&(Request::segment(2)=="mainternance"))?'active':''}}">
-                        <a href="{{url('manage/mainternance')}}">
-                            <i class="glyphicon glyphicon-wrench"></i>
-                            <p style="font-size:16px;">บันทึกการซ่อมบำรุงรถ</p>
-                        </a>
-                    </li>
+                        <li class="{{((Request::segment(1)=="manage")&&(Request::segment(2)=="usability"))?'active':''}}">
+                            <a href="{{url('manage/usability')}}">
+                                <i class="glyphicon glyphicon-dashboard"></i>
+                                <p style="font-size:16px;">บันทึกการใช้รถ</p>
+                            </a>
+                        </li>
+                              <li class="{{((Request::segment(1)=="manage")&&(Request::segment(2)=="pickup"))?'active':''}}">
+                            <a href="{{url('manage/pickup')}}">
+                                <i class="glyphicon glyphicon-oil"></i>
+                                <p style="font-size:16px;">บันทึกการเบิกน้ำมัน</p>
+                            </a>
+                        </li>
+                             <li class="{{((Request::segment(1)=="manage")&&(Request::segment(2)=="mainternance"))?'active':''}}">
+                            <a href="{{url('manage/mainternance')}}">
+                                <i class="glyphicon glyphicon-wrench"></i>
+                                <p style="font-size:16px;">บันทึกการซ่อมบำรุงรถ</p>
+                            </a>
+                        </li>
                     @endif
-                    @if(Session::get('level')>2)
-                    <li class="{{(Request::segment(1)=='report')&&(Request::segment(2)=='booking') ?'active':''}}">
-                        <a href="{{url('report/booking')}}">
-                            <i class="ti-map"></i>
-                            <p style="font-size:16px;">รายงานการจองรถ</p>
-                        </a>
-                    </li>
-                    <li  class="{{(Request::segment(1)=='report')&&(Request::segment(2)=='usability')?'active':''}}">
-                        <a href="{{url('report/usability')}}">
-                            <i class="glyphicon glyphicon-scale"></i>
-                            <p style="font-size:16px;">รายงานการใช้งานรถ</p>
-                        </a>
-                    </li>
-                    <li class="{{(Request::segment(1)=='report')&&(Request::segment(2)=='pickup')?'active':''}}">
-                        <a href="{{url('report/pickup')}}">
-                            <i class="ti-paint-bucket"></i>
-                            <p style="font-size:16px;">รายงานการเบิกน้ำมัน</p>
-                        </a>
-                    </li>
-                    <li class="{{(Request::segment(1)=='report')&&(Request::segment(2)=='mainternance')?'active':''}}">
-                        <a href="{{url('report/mainternance')}}">
-                            <i class="ti-settings"></i>
-                            <p style="font-size:16px;">รายงานการซ่อมบำรุง</p>
-                        </a>
-                    </li>
+                    @if((Session::get('level')>2)||(Session::get('level')==1))
+                        @if(Session::get('level')>2)
+                        <li class="{{(Request::segment(1)=='report')&&(Request::segment(2)=='booking') ?'active':''}}">
+                            <a href="{{url('report/booking')}}">
+                                <i class="ti-map"></i>
+                                <p style="font-size:16px;">รายงานการจองรถ</p>
+                            </a>
+                        </li>
+                        @endif
+                        <li  class="{{(Request::segment(1)=='report')&&(Request::segment(2)=='usability')?'active':''}}">
+                            <a href="{{url('report/usability')}}">
+                                <i class="glyphicon glyphicon-scale"></i>
+                                <p style="font-size:16px;">รายงานการใช้งานรถ</p>
+                            </a>
+                        </li>
+                        @if(Session::get('level')>2)
+                        <li class="{{(Request::segment(1)=='report')&&(Request::segment(2)=='pickup')?'active':''}}">
+                            <a href="{{url('report/pickup')}}">
+                                <i class="ti-paint-bucket"></i>
+                                <p style="font-size:16px;">รายงานการเบิกน้ำมัน</p>
+                            </a>
+                        </li>
+                        @endif
+                        <li class="{{(Request::segment(1)=='report')&&(Request::segment(2)=='mainternance')?'active':''}}">
+                            <a href="{{url('report/mainternance')}}">
+                                <i class="ti-settings"></i>
+                                <p style="font-size:16px;">รายงานการซ่อมบำรุง</p>
+                            </a>
+                        </li>
                     @endif
                 @endif
             </ul>

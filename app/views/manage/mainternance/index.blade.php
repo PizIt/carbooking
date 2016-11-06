@@ -48,7 +48,7 @@
                                                             @foreach($list as $l)
                                                                 <tr>
                                                                     <td style="text-align: center">{{++$cnt}}</td>
-                                                                    <td><a href="#">{{$l[0];}}</a></td>
+                                                                    <td>{{$l[0];}}</td>
                                                                     <td>{{$l[1];}}</td>
                                                                     <td>{{$l[2];}}</td>
                                                                     <td>{{$l[3];}}</td>

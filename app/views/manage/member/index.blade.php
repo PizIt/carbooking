@@ -1,6 +1,6 @@
 @extends('default')
 @section('brand')
-จัดารข้อมูลสมาชิก
+จัดการข้อมูลสมาชิก
 @stop
 @section('content')
         <div class="content">
@@ -9,15 +9,33 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="content">
-                                    @if(Session::get('level')>2)
-                                        <div class="col-md-12">
-                                              <p class="text-left">
-                                                <a href="{{url('manage/member/create')}}" class="btn btn-default">
-                                                    <i class="glyphicon glyphicon-plus"></i> เพิ่มข้อมูลสมาชิก
-                                                </a>
-                                              </p>
-                                        </div>
-                                    @endif
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <form method="GET" class="form-inline">
+                                             <div class="form-group">
+                                                 <label>เรียงตาม</label>
+                                                 <select class="form-control border-input" name="level">
+                                                     <option value="">ทั้งหมด</option>
+                                                     <option value="2" {{Input::get('level')=='2' ? 'selected' : ''}}>ผ้ขอใช้รถ</option>
+                                                     <option value="1" {{Input::get('level')=='1' ? 'selected' : ''}}>พนักงานขับรถ</option>
+                                                  </select>
+                                              </div>
+                                              <div class="form-group">
+                                                 <input type="submit" class="btn btn-danger btn-block" value="แสดงข้อมูล">
+                                              </div>
+                                         </form>
+                                     </div>
+                                     @if(Session::get('level')>2)
+                                         <div class="col-md-5">
+                                                <div class="pull-right">
+                                                    <a href="{{url('manage/member/create')}}" class="btn btn-default">
+                                                        <i class="glyphicon glyphicon-plus"></i> เพิ่มข้อมูลสมาชิก
+                                                    </a>
+                                               </div>
+                                         </div>
+                                     @endif
+                                    </div>
+                                    <hr>
                                         <div class="content table-responsive table-full-width">
                                             <table class="table table-striped">
                                                 <thead>
@@ -52,9 +70,7 @@
                                                                 $position="ผู้อำนวยการกอง";
                                                             }
                                                             elseif($position==4){
-                                                                $position="หัวหน้าสำนักปลัด";
-                                                            }elseif($position==5){
-                                                                 $position="นายกเทศมนตรี";
+                                                                $position="หัวหน้า สป. / นายก";
                                                             }
 
                                                         ?>
@@ -67,7 +83,7 @@
                                                             <td><?=$position?></td>
                                                             <td style="text-align:left">
                                                                 <a href="{{url("manage/member/update/$m->id")}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;
-                                                                @if(Session::get('level') > 2 && Session::get('level') >= $m->mem_level && Auth::id()!=$m->id)
+                                                                @if(Session::get('level') > 2 && Session::get('level') >= $m->mem_level && Auth::id()!=$m->id && Session::get('dept')==$m->mem_dept)
                                                                 <a href="#" onclick="del({{$m->id}})"> <i class="glyphicon glyphicon-trash"></i></a>&nbsp;
                                                                 @endif
                                                             </td>
