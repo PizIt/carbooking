@@ -9,7 +9,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="content">
-                                <form>
+                                @if(Request::segment(4)=='car')
                                         <div class="row">
                                             <div class="col-md-3">
                                                  <label><strong>เดือน / ปี </strong>[{{$txtDate}}] </label>
@@ -98,8 +98,87 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <hr>
-                            </form>
+                                                              
+                            @else
+                            
+                               <div class="row">
+                                            <div class="col-md-3">
+                                                 <label><strong>เดือน / ปี </strong>[{{$txtDate}}] </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                 <label><strong>พนักงานขับรถ</strong> {{$driver->mem_name.' '.$driver->mem_lname}}</label>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+                                <div class="row">
+                                           <div class="col-md-12">
+                                               <div class="content table-responsive table-full-width" style="overflow-x:auto;">
+                                                   <table class="table table-bordered table-striped fix" >
+                                                       <thead>
+                                                           <tr>
+                                                               <th rowspan="2" width="1%"><label>#</label></th>
+                                                               <th rowspan="2" width="10%"  style="text-align:center"><label>รถ</label></th>
+                                                               <th colspan="2" width="6%" style="text-align:center"><label>ออกเดินทาง</label></th>
+                                                               <th rowspan="2" width="15%" style="text-align:center"><label>ผู้ใช้รถ</label></th>
+                                                               <th rowspan="2" width="15%" style="text-align:center"><label>สถานที่ไป</label></th>
+                                                               <th rowspan="2" style="text-align:center"><label>ระยะทางก่อนใช้</label></th>
+                                                               <th colspan="2" width="6%" style="text-align:center"><label>กลับถึงสำนักงาน</label></th>
+                                                               <th rowspan="2" style="text-align:center"><label>ระยะทางหลังใช้</label></th>
+                                                               <th rowspan="2" style="text-align:center"><label>รวมระยะ</label></th>
+                                                               <th rowspan="2" style="text-align:center"><label><i class="glyphicon glyphicon-asterisk"></i></label></th>
+                                                           </tr>
+                                                           <tr>
+                                                               <th width="8%" style="text-align:center"><label>วันที่</label></th>
+                                                               <th width="5%" style="text-align:center"><label>เวลา</label></th>
+                                                               <th width="8%" style="text-align:center"><label>วันที่</label></th>
+                                                               <th width="5%" style="text-align:center"><label>เวลา</label></th>
+                                                           </tr>
+                                                       </thead>
+                                                       <tbody>
+                                                           @if(count($usecar)>0)
+                                                               <?php 
+                                                                   $date = new Util;
+                                                                   $currentPage=$usecar->getCurrentPage();
+                                                                   $perPage = $usecar->getPerPage();
+                                                                   $cnt = ($currentPage*$perPage)-$perPage;
+                                                               ?>
+                                                               @foreach($usecar as $u)
+                                                                   <?php
+                                                                       $dstStart = $u->us_dst_start;
+                                                                       $dstEnd = $u->us_dst_end;
+                                                                   ?>
+                                                                   <tr>
+                                                                           <td>{{++$cnt}}</td>
+                                                                           <td>{{$u->car_no.' '.$u->car_province}}</td>
+                                                                           <td>{{$date->ThaiDate(substr($u->us_date_start,0,10));}}</td>
+                                                                           <td>{{$date->DateTimeConvertToTimeView($u->us_date_start);}}</td>
+                                                                           <td>{{$u->us_name_user}}</td>
+                                                                           <td><div id="mylayout">{{$u->us_location}}</div></td>
+                                                                           <td style="text-align:right">{{$dstStart}}</td>
+                                                                           <td>{{$date->ThaiDate(substr($u->us_date_end,0,10));}}</td>
+                                                                           <td>{{$date->DateTimeConvertToTimeView($u->us_date_end);}}</td>
+                                                                           <td style="text-align:right">{{$dstEnd}}</td>
+                                                                           <td style="text-align:right">{{$dstEnd-$dstStart}}</td>
+                                                                           <?php if(!empty($u->us_note)){?>
+                                                                               <td style="text-align:center"><i class="glyphicon glyphicon-asterisk info" data-toggle="note" data-placement="top" title="{{$u->us_note}}"></i></td>
+                                                                           <?php } else{?>
+                                                                               <td style="text-align:center"></td>
+                                                                           <?php }?>
+                                                                   </tr>
+                                                               @endforeach
+                                                           @endif
+                                                       </tbody>
+                                                   </table>
+                                                   <center>
+                                                       {{$usecar->links();}}
+                                                   </center>
+                                               </div>
+                                           </div>
+                                       </div>
+                            
+                            @endif
+                            <hr>  
                         </div>
                     </div>
                 </div>

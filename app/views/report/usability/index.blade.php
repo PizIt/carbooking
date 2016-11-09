@@ -80,7 +80,7 @@
                                                                 @foreach($list as $l)
                                                                 <tr>
                                                                     <td style="text-align:center">{{$cnt++;}}</td>
-                                                                    <td><a href="{{URL::to('report/usability/detail/'.$l[5].'/'.Input::get('month').'/'.Input::get('year'))}}" target="_blank">{{$l[0];}}</a></td>
+                                                                    <td><a href="{{URL::to('report/usability/detail/car/'.$l[5].'/'.Input::get('month').'/'.Input::get('year'))}}" target="_blank">{{$l[0];}}</a></td>
                                                                     <td>{{$l[1];}}</td>
                                                                     <td>{{$l[2];}}</td>
                                                                     <td style="text-align:center">{{$l[3];}}</td>
@@ -115,7 +115,7 @@
                                                                 @foreach($list as $l)
                                                                 <tr>
                                                                     <td>1</td>
-                                                                    <td><a href="#">{{$l[0];}}</a></td>
+                                                                    <td><a href="{{URL::to('report/usability/detail/driver/'.$l[4].'/'.Input::get('month').'/'.Input::get('year'))}}" target="_blank">{{$l[0];}}</a></td>
                                                                     <td>{{$l[1];}}</td>
                                                                     <td align="right">{{$l[2];}}</td>
                                                                     <td align="right">{{number_format($l[3])}}</td>                                                          

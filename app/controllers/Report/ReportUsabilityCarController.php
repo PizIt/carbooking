@@ -83,6 +83,7 @@ class Report_ReportUsabilityCarController extends Controller{
                             $list[$row][3] = $d->totalDst;
                         }
                     }
+                    $list[$row][4] = $l->id;
                     $row++;
                 }
             }
@@ -90,26 +91,53 @@ class Report_ReportUsabilityCarController extends Controller{
         $data = array('list'=>$list);
         return View::make('report.usability.index',$data);
     }
-    public function getDetail($idCar,$month,$year)
+    public function getDetail($type,$id,$month,$year)
     {
-        $car = Car::find($idCar);
-        $driver = Member::find($car->car_driver_id);
-        $sql= UsabilityCar::where(DB::raw('YEAR(us_date_start)'),'=',($year-543))->where('us_car_id','=',$idCar);
-        $util = new Util;
+        $data=null;
         $txtDate="";
-        if($month > 0) // 0 = all month
+        if($type=='car')
         {
-             $sql=$sql->where(DB::raw('MONTH(us_date_start)'),'=',$month);
-             $month=$util->listMonth($month);
-             $txtDate =$month.' / ';
+            $car = Car::find($id);
+            $driver = Member::find($car->car_driver_id);
+            $sql= UsabilityCar::where(DB::raw('YEAR(us_date_start)'),'=',($year-543))->where('us_car_id','=',$id);
+            $util = new Util;
+            if($month > 0) // 0 = all month
+            {
+                 $sql=$sql->where(DB::raw('MONTH(us_date_start)'),'=',$month);
+                 $month=$util->listMonth($month);
+                 $txtDate =$month.' / ';
+            }
+            $useCar=$sql->join('members','members.id','=','us_id_driver')
+                    ->select('us_name_user','us_location','us_date_start','us_date_end','us_dst_start'
+                            ,'us_dst_end','mem_name','mem_lname','us_note')
+                    ->orderBy('us_date_start','desc')
+                    ->paginate(30);
+            // label date
+
+            $txtDate .=($year);
+            $data = array('car'=>$car,'driver'=>$driver,'txtDate'=>$txtDate,'usecar'=>$useCar);
         }
-        $useCar=$sql->join('members','members.id','=','us_id_driver')
-                ->select('us_name_user','us_location','us_date_start','us_date_end','us_dst_start','us_dst_end','mem_name','mem_lname','us_note')
-                ->paginate(30);
-        // label date
-        
-        $txtDate .=($year);
-        $data = array('car'=>$car,'driver'=>$driver,'txtDate'=>$txtDate,'usecar'=>$useCar);
+        else // driver
+        {
+            $driver = Member::find($id);
+            $sql=  UsabilityCar::where(DB::raw('YEAR(us_date_start)'),'=',($year-543))->where('us_id_driver','=',$id);
+            $util = new Util;
+            if($month > 0) // 0 = all month
+            {
+                 $sql=$sql->where(DB::raw('MONTH(us_date_start)'),'=',$month);
+                 $month=$util->listMonth($month);
+                 $txtDate =$month.' / ';
+            }
+            $useCar=$sql->join('cars','usability_car.us_car_id','=','cars.id')
+                    ->select('us_name_user','us_location','us_date_start','us_date_end'
+                            ,'car_no','car_province','us_dst_start','us_dst_end','us_note')
+                    ->orderBy('us_date_start','desc')
+                    ->paginate(30);
+            // label date
+            $txtDate .=($year);
+            $data = array('driver'=>$driver,'txtDate'=>$txtDate,'usecar'=>$useCar);
+        }
+       
         return View::make('report.usability.detail',$data);
     }
 }
