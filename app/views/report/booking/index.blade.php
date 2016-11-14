@@ -24,13 +24,13 @@
                                                 <label>กอง</label>
                                                 <select class="form-control border-input" name="dept">
                                                     <option value="">ทั้งหมด</option>
-                                                    <option value="สำนักปลัด" {{Input::get('dept')=='สำนักปลัด'? 'selected': ''}}>สำนักปลัด</option>
-                                                    <option value="ช่าง" {{Input::get('dept')=='ช่าง'? 'selected': ''}}>ช่าง</option>
-                                                    <option value="คลัง" {{Input::get('dept')=='คลัง'? 'selected': ''}}>คลัง</option>
                                                     <option value="การศึกษา" {{Input::get('dept')=='การศึกษา'? 'selected': ''}}>การศึกษา</option>
-                                                    <option value="สาธารณสุขและสิ่งแวดล้อม" {{Input::get('dept')=='สาธารณสุขและสิ่งแวดล้อม'? 'selected': ''}}>สาธารณสุขและสิ่งแวดล้อม</option>
+                                                    <option value="คลัง" {{Input::get('dept')=='คลัง'? 'selected': ''}}>คลัง</option>
+                                                    <option value="ช่าง" {{Input::get('dept')=='ช่าง'? 'selected': ''}}>ช่าง</option>
                                                     <option value="วิชาการและแผนงาน" {{Input::get('dept')=='วิชาการและแผนงาน'? 'selected': ''}}>วิชาการและแผนงาน</option>
                                                     <option value="สวัสดีการสังคม" {{Input::get('dept')=='สวัสดีการสังคม'? 'selected': ''}}>สวัสดีการสังคม</option>
+                                                    <option value="สาธารณสุขและสิ่งแวดล้อม" {{Input::get('dept')=='สาธารณสุขและสิ่งแวดล้อม'? 'selected': ''}}>สาธารณสุขและสิ่งแวดล้อม</option>
+                                                    <option value="สำนักปลัด" {{Input::get('dept')=='สำนักปลัด'? 'selected': ''}}>สำนักปลัด</option> 
                                                 </select>
                                             </div>
                                             <div class="form-group">

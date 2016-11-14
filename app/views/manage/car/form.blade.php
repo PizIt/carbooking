@@ -33,12 +33,13 @@
                                         <div class="col-md-3 form-group">
                                             <label>กอง</label>
                                              <select class="form-control border-input" name="car_dept" {{$disable}}>
-                                                <option value="ช่าง" {{((!empty($car->car_dept))&&($car->car_dept=='ช่าง'))? 'selected': ''}}>ช่าง</option>
-                                                <option value="คลัง" {{((!empty($car->car_dept))&&($car->car_dept=='คลัง'))? 'selected': ''}}>คลัง</option>
                                                 <option value="การศึกษา" {{((!empty($car->car_dept))&&($car->car_dept=='การศึกษา'))? 'selected': ''}}>การศึกษา</option>
-                                                <option value="สาธารณสุขและสิ่งแวดล้อม" {{((!empty($car->car_dept))&&($car->car_dept=='สาธารณสุขและสิ่งแวดล้อม'))? 'selected': ''}}>สาธารณสุขและสิ่งแวดล้อม</option>
+                                                <option value="คลัง" {{((!empty($car->car_dept))&&($car->car_dept=='คลัง'))? 'selected': ''}}>คลัง</option>
+                                                <option value="ช่าง" {{((!empty($car->car_dept))&&($car->car_dept=='ช่าง'))? 'selected': ''}}>ช่าง</option>
                                                 <option value="วิชาการและแผนงาน" {{((!empty($car->car_dept))&&($car->car_dept=='วิชาการและแผนงาน'))? 'selected': ''}}>วิชาการและแผนงาน</option>
                                                 <option value="สวัสดีการสังคม" {{((!empty($car->car_dept))&&($car->car_dept=='สวัสดีการสังคม'))? 'selected': ''}}}}>สวัสดีการสังคม</option>
+                                                <option value="สาธารณสุขและสิ่งแวดล้อม" {{((!empty($car->car_dept))&&($car->car_dept=='สาธารณสุขและสิ่งแวดล้อม'))? 'selected': ''}}>สาธารณสุขและสิ่งแวดล้อม</option>
+                                                <option value="สำนักปลัด" {{((!empty($car->car_dept))&&($car->car_dept=='สำนักปลัด'))? 'selected': ''}}}}>สำนักปลัด</option>
                                             </select>
                                         </div>
                                     </div>

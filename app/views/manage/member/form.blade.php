@@ -36,13 +36,13 @@
                                         <div class="col-md-3 form-group">
                                             <label>กอง</label>
                                             <select class="form-control border-input" name="mem_dept" {{$disable}}>
-                                                <option value="สำนักปลัด" {{((!empty($member->mem_dept))&&($member->mem_dept=='สำนักปลัด'))? 'selected': ''}}>สำนักปลัด</option>
-                                                <option value="ช่าง" {{((!empty($member->mem_dept))&&($member->mem_dept=='ช่าง'))? 'selected': ''}}>ช่าง</option>
+                                                 <option value="การศึกษา" {{((!empty($member->mem_dept))&&($member->mem_dept=='การศึกษา'))? 'selected': ''}}>การศึกษา</option>
                                                 <option value="คลัง" {{((!empty($member->mem_dept))&&($member->mem_dept=='คลัง'))? 'selected': ''}}>คลัง</option>
-                                                <option value="การศึกษา" {{((!empty($member->mem_dept))&&($member->mem_dept=='การศึกษา'))? 'selected': ''}}>การศึกษา</option>
-                                                <option value="สาธารณสุขและสิ่งแวดล้อม" {{((!empty($member->mem_dept))&&($member->mem_dept=='สาธารณสุขและสิ่งแวดล้อม'))? 'selected': ''}}>สาธารณสุขและสิ่งแวดล้อม</option>
+                                                <option value="ช่าง" {{((!empty($member->mem_dept))&&($member->mem_dept=='ช่าง'))? 'selected': ''}}>ช่าง</option>
                                                 <option value="วิชาการและแผนงาน" {{((!empty($member->mem_dept))&&($member->mem_dept=='วิชาการและแผนงาน'))? 'selected': ''}}>วิชาการและแผนงาน</option>
                                                 <option value="สวัสดีการสังคม" {{((!empty($member->mem_dept))&&($member->mem_dept=='สวัสดีการสังคม'))? 'selected': ''}}}}>สวัสดีการสังคม</option>
+                                                <option value="สาธารณสุขและสิ่งแวดล้อม" {{((!empty($member->mem_dept))&&($member->mem_dept=='สาธารณสุขและสิ่งแวดล้อม'))? 'selected': ''}}>สาธารณสุขและสิ่งแวดล้อม</option>
+                                                 <option value="สำนักปลัด" {{((!empty($member->mem_dept))&&($member->mem_dept=='สำนักปลัด'))? 'selected': ''}}>สำนักปลัด</option>
                                             </select>
                                         </div>
                                         <div class="col-md-3 form-group">
