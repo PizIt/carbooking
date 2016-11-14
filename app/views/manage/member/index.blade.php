@@ -70,7 +70,7 @@
                                                                 $position="ผู้อำนวยการกอง";
                                                             }
                                                             elseif($position==4){
-                                                                $position="หัวหน้า สป. / นายก";
+                                                                $position="ปลัด/นายก";
                                                             }
 
                                                         ?>

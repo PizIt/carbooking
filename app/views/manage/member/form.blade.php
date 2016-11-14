@@ -105,7 +105,7 @@
                                                 <option value="2" {{(!empty($member->mem_level)&&($member->mem_level=="2")) ? 'selected' :''}}>ผู้ขอใช้รถ</option>
                                                 <option value="1" {{(!empty($member->mem_level)&&($member->mem_level=="1")) ? 'selected' :''}}>พนักงานขับรถ</option>
                                                 <option value="3" {{(!empty($member->mem_level)&&($member->mem_level=="3")) ? 'selected' :''}}>ผู้อำนวยการกอง</option>
-                                                <option value="4" {{(!empty($member->mem_level)&&($member->mem_level=="4")) ? 'selected' :''}}>นายก/ปลัด</option>
+                                                <option value="4" {{(!empty($member->mem_level)&&($member->mem_level=="4")) ? 'selected' :''}}>ปลัด/นายก</option>
                                             </select>
                                         </div>
                                     </div>
