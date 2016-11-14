@@ -157,7 +157,7 @@
                             </a>
                         </li>
                             @if((Session::get('level')!=2)&&(Session::get('notification')>0))
-                            <li class="dropdown" id="notification">
+                            <li class="dropdown" id="notification" onclick="getNotification()">
                                 <a href="#" class="dropdown-toggle"  data-toggle="dropdown" style="font-family:TH SarabunPSK;font-size:20px;">
                                     <i class="ti-bell"></i>
                                     <p class="notification" id="cntNotification">{{Session::get('notification')}}</p>
@@ -229,17 +229,16 @@
 @endif
 <script type="text/javascript">
    //Notifications
-   $(document).on('click', '#notification', function(){
-       $.ajax({
+     function getNotification(){
+         $.ajax({
            async: true,
            type: 'get',
            url:"{{URL::to('notification')}}",
            success: function (data){
                       $('#notification ul').html(data);
                     }
-       });
-   }); 
-   //
+       }); 
+    }
    function updateDst(id)
    {
       swal({
