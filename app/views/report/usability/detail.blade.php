@@ -33,9 +33,6 @@
 
                                         <div class="row">
                                             <div class="col-md-12">
-<!--                                                <div class="header">
-                                                    <strong>รายงานแบบสรุปตามเดือน</strong>
-                                                </div>-->
                                                 <div class="content table-responsive table-full-width" style="overflow-x:auto;">
                                                     <table class="table table-bordered table-striped fix" >
                                                         <thead>
@@ -73,7 +70,7 @@
                                                                         $dstEnd = $u->us_dst_end;
                                                                     ?>
                                                                     <tr>
-                                                                        <td>{{++$cnt}}</td>
+                                                                        <td>{{$cnt++}}</td>
                                                                         <td>{{$date->ThaiDate(substr($u->us_date_start,0,10));}}</td>
                                                                         <td>{{$date->DateTimeConvertToTimeView($u->us_date_start);}}</td>
                                                                         <td>{{$u->us_name_user}}</td>

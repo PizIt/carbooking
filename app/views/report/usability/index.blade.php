@@ -112,9 +112,10 @@
                                                         </thead>
                                                         <tbody>
                                                             @if(count($list)>0)
+                                                                <?php $cnt=1;?>
                                                                 @foreach($list as $l)
                                                                 <tr>
-                                                                    <td>1</td>
+                                                                    <td style="text-align:center">{{$cnt++;}}</td>
                                                                     <td><a href="{{URL::to('report/usability/detail/driver/'.$l[4].'/'.Input::get('month').'/'.Input::get('year'))}}" target="_blank">{{$l[0];}}</a></td>
                                                                     <td>{{$l[1];}}</td>
                                                                     <td align="right">{{$l[2];}}</td>
