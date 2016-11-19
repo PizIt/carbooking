@@ -13,7 +13,7 @@
                                     <div class="col-md-12">
                                         <p class="text-left">
                                             <a href="{{url('manage/car/create')}}" class="btn btn-default">
-                                                <i class="glyphicon glyphicon-plus"></i> เพิ่มข้อมูลสมาชิก
+                                                <i class="glyphicon glyphicon-plus"></i> เพิ่มข้อมูลรถ
                                             </a>
                                         </p>
                                     </div>
