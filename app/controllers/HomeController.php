@@ -110,7 +110,7 @@ class HomeController extends BaseController {
                 'id'=>$b->id,
                 'title'=>$bookTitle,
                 'start'=>$b->book_date_from,
-                'end'=>$b->book_date_to,
+                'end'=>$b->book_date_to, // class color 
                 'allDay'=>FALSE
                 );
             }

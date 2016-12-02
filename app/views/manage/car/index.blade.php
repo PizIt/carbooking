@@ -1,6 +1,10 @@
 @extends('default')
 @section('brand')
-จัดการข้อมูลรถ
+    @if(Session::get('level')>2)
+        จัดการข้อมูลรถ
+    @else
+        ข้อมูลข้อมูลรถ
+    @endif
 @stop
 @section('content')
         <div class="content">

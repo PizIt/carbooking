@@ -1,6 +1,10 @@
 @extends('default')
 @section('brand')
-จัดการข้อมูลสมาชิก
+    @if(Session::get('level')>2)
+        จัดการข้อมูลสมาชิก
+    @else
+        ข้อมูลสมาชิก
+    @endif
 @stop
 @section('content')
     <?php 
