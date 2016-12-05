@@ -1,5 +1,6 @@
 <?php
 header('Content-type: text/plain; charset=utf-8');
+use Carbon\Carbon;
 class Manage_ManageMainternanceController extends Controller
 {
     public function getIndex()
@@ -69,10 +70,12 @@ class Manage_ManageMainternanceController extends Controller
         $mainternance = MainternanceCar::find($id);
         $detail = MainternanceDetail::where('mnd_mn_id',$mainternance->id)->get();
         $cars = Car::where('car_driver_id',$mainternance->mn_mem_id)->orderBy('car_no','ASC')->get();
-        
+        $created = Carbon::parse($mainternance->created_at);
+        $now = new Carbon;
+        $update = $now->diffInDays($created) <= 15 ? true : false;
         $member = Member::find($mainternance->mn_mem_id); 
         $data = array('cars'=>$cars,'member'=>$member
-                      ,'main'=>$mainternance,'detail'=>$detail);
+                      ,'main'=>$mainternance,'detail'=>$detail,'update'=>$update);
         return View::make('manage.mainternance.form',$data);
     }
     public function getDelete($id)

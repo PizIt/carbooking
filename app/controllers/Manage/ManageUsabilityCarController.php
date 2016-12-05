@@ -1,5 +1,6 @@
 <?php
 header('Content-type: text/plain; charset=utf-8');
+use Carbon\Carbon;
 class Manage_ManageUsabilityCarController extends Controller{
     public function getIndex()
     {
@@ -34,7 +35,10 @@ class Manage_ManageUsabilityCarController extends Controller{
         $useCar = UsabilityCar::find($id);
         $cars = Car::orderBy('car_no','asc')->get();
         $drivers = Member::orderBy('mem_name','asc')->where('mem_level',1)->get();
-        $data = array('useCar'=>$useCar,'drivers'=>$drivers,'cars'=>$cars);
+        $created = Carbon::parse($useCar->created_at);
+        $now = new Carbon;
+        $update = $now->diffInDays($created) <= 15 ? true : false;
+        $data = array('useCar'=>$useCar,'drivers'=>$drivers,'cars'=>$cars,'update'=>$update);
         return View::make('manage.usability.form',$data);
     }
      public function getDelete($id)

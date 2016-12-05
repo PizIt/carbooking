@@ -1,5 +1,6 @@
 <?php
 header('Content-type: text/plain; charset=utf-8');
+use Carbon\Carbon;
 class Manage_ManageCarController extends Controller{
   public function getIndex()
     {
@@ -73,14 +74,21 @@ class Manage_ManageCarController extends Controller{
                 $photo->move('img/cars/',$photoNewName);
                 $car->car_pic =  $photoNewName;
             }
+            $actExp = Carbon::parse($util->DateConvertToDate($inputs['car_act_exp']));
+            $dateNow = new Carbon;
+            $actExpDiff = $dateNow->diffInDays($actExp,FALSE) > 30 ? true : false; // 30 days
+            if($actExpDiff)
+            {
+                $car->car_exp_alert = 0;
+                Session::put('notification',Session::get('notification')-1);
+            }
             $car->car_driver_id = $inputs['car_driver_id'];
             $car->car_no = $inputs['car_no'];
             $car->car_province = $inputs['car_province'];
             $car->car_type = $inputs['car_type'];
             $car->car_dept= $inputs['car_dept'];
             $car->car_status = $inputs['car_status'];
-            $car->car_act_exp = $util->DateConvertToDate($inputs['car_act_exp']);
-            $car->car_exp_alert = 0; 
+            $car->car_act_exp = $actExp;
             $car->car_dst_alert = $inputs['car_dst_alert'];
             $car->save();
         }
