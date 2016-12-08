@@ -6,7 +6,7 @@
    <?php 
         $disable="";
         if(Request::segment(3)!='create'){
-        $disable = ((((Session::get('level') > 2) || (Auth::id()==$pickup->pk_id_driver))) && ($update==true))? '' : 'disabled style=background-color:#eee';
+        $disable = ((((Session::get('level') > 2) || (Auth::id()==$pickup->pk_id_driver))) && ($update==true)) ? '' : 'disabled style=background-color:#eee';
         }
     ?>
 <div class="content">

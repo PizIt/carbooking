@@ -40,7 +40,6 @@ class ListBookingController extends Controller{
     {
         $inputs = Input::all();
         $booking = Booking::find($inputs['id']);
-        // ยังไม่เสร็จ
         if(is_object($booking))
         {
             $booking->book_for = $inputs['book_for'];
@@ -74,13 +73,13 @@ class ListBookingController extends Controller{
                         $confrim = 0;
                     }
                 }
-                else if($confrimLeader!=-1 && $booking->book_type=='ในเขตพื้นที่') // confirm == 0
+                else if($confrimLeader!=0 && $booking->book_type=='ในเขตพื้นที่') // confirm == 0
                 {
                         $confrim = 3;   
                 }
                 $booking->book_id_leader =  Auth::id();
             }
-            if(($confrimMaster!='')&&(Session::get('level')==4)) // confirm=3
+            if((($confrimMaster!='')&&(!empty($booking->book_id_master)))||(Session::get('level')==4)) // confirm=3
             {
                 if($confrimMaster == 3)
                 {

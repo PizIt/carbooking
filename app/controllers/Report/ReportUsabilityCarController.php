@@ -6,6 +6,7 @@ class Report_ReportUsabilityCarController extends Controller{
         $inputs = Input::all();
         $month = !empty($inputs['month']) ? $inputs['month']: null; // null
         $year = !empty($inputs['year']) ? ''.($inputs['year']-543): null; // null
+        $level = Session::get('level');
         $list=null;
         if(!empty($inputs['sort']) && $inputs['sort'] =='cars')
         {
@@ -14,10 +15,16 @@ class Report_ReportUsabilityCarController extends Controller{
             {
                 $sql->where(DB::raw('MONTH(usability_car.us_date_start)'),$month);
             }
-            if(Session::get('level')==1)
+            // check sort report
+            if($level==1)
             {
-                $casr = Car::where('car_driver_id',Auth::id())->lists('id');
-                $sql->whereIn(DB::raw('usability_car.us_car_id'),$casr);
+                $cars = Car::where('car_driver_id',Auth::id())->lists('id');
+                $sql->whereIn(DB::raw('usability_car.us_car_id'),$cars);
+            }
+            else if($level==3) // leader
+            {
+                $driver = Car::where('car_dept',Session::get('dept'))->lists('id');
+                $sql->whereIn(DB::raw('usability_car.us_car_id'),$driver);
             }
             $sql->join('cars','cars.id','=','usability_car.us_car_id');
 
@@ -57,6 +64,11 @@ class Report_ReportUsabilityCarController extends Controller{
             if($month!=0)
             {
                 $sql->where(DB::raw('MONTH(usability_car.us_date_start)'),$month);
+            }
+            if($level==3)
+            {
+                $driver = Member::where('mem_level',1)->where('mem_dept',Session::get('dept'))->lists('id');
+                $sql->whereIn(DB::raw('usability_car.us_id_driver'),$driver);
             }
             $sql->join('members','members.id','=','usability_car.us_id_driver');
             

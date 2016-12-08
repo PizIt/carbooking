@@ -10,7 +10,7 @@
    <?php 
         $disable="";
         if(Request::segment(3)!='create'){
-        $disable =  (Session::get('level') <= 2) ? 'disabled style=background-color:#eee' : '' ;
+        $disable =  (Session::get('level') <= 2) ? 'readonly style=background-color:#eee' : '' ;
         }
     ?>
 <div class="content">

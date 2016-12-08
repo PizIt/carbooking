@@ -7,13 +7,19 @@ class Report_ReportPickFuelController extends Controller{
         $month = !empty($inputs['month']) ? ''.$inputs['month']+1: null;
         $year = !empty($inputs['year']) ? ''.($inputs['year']-543): null;
         $list=null;
+        $level = Session::get('level');
          // dd($month);
         if(!empty($inputs['sort']) && $inputs['sort'] =='all')
         {
             $sql=PickFuel::where(DB::raw('YEAR(pick_fuel.pk_date_save)'),$year)
                         ->where(DB::raw('MONTH(pk_date_save)'),$month)
                         ->join('cars','cars.id','=','pick_fuel.pk_car_id');
-            
+            // check sort report
+            if($level==3) // leader
+            {
+                $driver = Car::where('car_dept',Session::get('dept'))->lists('id');
+                $sql->whereIn(DB::raw('pick_fuel.pk_car_id'),$driver);
+            }
             $listPick =  $sql->groupBy('pick_fuel.pk_car_id')->orderBy('cars.car_no','ASC')
                         ->select('cars.id','cars.car_no','cars.car_province','cars.car_dept','cars.car_type')
                         ->get();

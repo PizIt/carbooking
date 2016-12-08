@@ -3,6 +3,16 @@
 รายการจองรถ
 @stop
 @section('content')  
+   <?php 
+        $disable="";
+        $style = "readonly='readonly' style='background-color:#eee'";
+        if(Request::segment(3)!='create'){
+        $disable = (Auth::id()==$booking->book_mem_id) ? '' : $style;
+        }
+        $disLeader='';$disMaster='';
+        !empty($booking->book_id_leader)&&(Auth::id()!=$booking->book_id_leader) ? $disLeader = $style : '';
+        !empty($booking->book_id_master)&&(Auth::id()!=$booking->book_id_master) ? $disMaster = $style : '';
+    ?>
   <div class="content">
             <div class="container-fluid">                  
                 <div class="row">
@@ -12,7 +22,7 @@
                                    <strong>รายละเอียดการจองรถ</strong>
                                 </div>
                                 <div class="content">
-                                    <form method="POST" name="form" data-toggle="validator" role="form">
+                                    <form method="POST" name="form"   data-toggle="validator" role="form" >
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
@@ -68,14 +78,14 @@
                                                 <div class="form-group">
                                                     <label>ใช้เพื่อ</label>
                                                     <input type="text" name="book_for" class="form-control border-input" placeholder="จุดประสงค์การใช้งาน" required value="{{$booking->book_for}}" 
-                                                           {{((Auth::id()==$booking->book_mem_id) || (Session::get('level')>2)) ? '' : 'disabled style="background-color:#eee"'}}>
+                                                           {{$disable}}>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>สถานที่เดินทาง</label>
                                                     <input type="text" name="book_location" class="form-control border-input" placeholder="ไปที่ไหน" required value="{{$booking->book_location}}"
-                                                            {{((Auth::id()==$booking->book_mem_id) || (Session::get('level')>2)) ? '' : 'disabled style="background-color:#eee"'}}>
+                                                            {{$disable}}>
                                                 </div>
                                             </div>
                                         </div>
@@ -92,8 +102,7 @@
                                             <div class="col-md-8">
                                                 <div class="form-group">
                                                     <label>รายละเอียดเพิ่มเติม</label>
-                                                    <textarea rows="5" name="book_details" class="form-control border-input"
-                                                               {{((Auth::id()==$booking->book_mem_id) || (Session::get('level') > 2)) ? '' : 'disabled style="background-color:#eee"'}}>{{$booking->book_details}}</textarea>
+                                                    <textarea rows="5" name="book_details" class="form-control border-input"{{$disable}}>{{$booking->book_details}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -167,14 +176,14 @@
                                                     <td style="width:25%">
                                                         <label>
                                                             <input type="radio" class="border-input" name="confirm_leader" value="2" 
-                                                                   {{$booking->book_confirm >= 2  ? 'checked' : ''}} {{((Session::get('level') == 3)&&(Session::get('dept')=='สำนักปลัด')) ? '':'disabled'}}>
+                                                                   {{$booking->book_confirm >= 2  ? 'checked' : ''}} {{((Session::get('level') == 3)&&(Session::get('dept')=='สำนักปลัด')) ? '':'disabled'}} {{$disLeader}}>
                                                             <strong class="text-success">อนุญาต</strong>
                                                         </label>
                                                     </td>
                                                     <td style="width:25%">
                                                         <label>
-                                                                <input type="radio" class="border-input" name="confirm_leader" value="-1" 
-                                                                    {{$booking->book_confirm == 0  ? 'checked' : ''}} {{((Session::get('level') == 3)&&(Session::get('dept')=='สำนักปลัด'))  ? '':'disabled'}}>
+                                                            <input type="radio" class="border-input" name="confirm_leader" value="-1" 
+                                                                    {{$booking->book_confirm == 0  ? 'checked' : ''}} {{((Session::get('level') == 3)&&(Session::get('dept')=='สำนักปลัด'))  ? '':'disabled'}} {{$disLeader}}>
                                                             <strong class="text-danger">ไม่อนุญาต</strong>
                                                         </label>
                                                     </td>
@@ -182,14 +191,14 @@
                                                     <td style="width:25%">
                                                         <label>
                                                             <input type="radio" class="border-input" name="confirm_master" value="3" 
-                                                                   {{$booking->book_confirm ==3  ? 'checked' : ''}} {{Session::get('level')==4 ? '':'disabled'}}>
+                                                                   {{$booking->book_confirm ==3  ? 'checked' : ''}} {{Session::get('level')==4 ? '':'disabled'}} {{$disMaster}}>
                                                             <strong class="text-success">อนุญาต</strong>
                                                         </label>
                                                     </td>
                                                     <td style="width:25%">
                                                         <label>
                                                             <input type="radio" class="border-input" name="confirm_master" value="-1" 
-                                                                   {{$booking->book_confirm == 0  ? 'checked' : ''}} {{Session::get('level')==4 ? '':'disabled'}}>
+                                                                   {{$booking->book_confirm == 0  ? 'checked' : ''}} {{Session::get('level')==4 ? '':'disabled'}} {{$disMaster}}>
                                                             <strong class="text-danger">ไม่อนุญาต</strong>
                                                         </label>
                                                     </td>
@@ -212,12 +221,12 @@
                                                  <tr style="text-align:center">
                                                      <td colspan="2"><strong>หมายเหตุ  </strong>
                                                             <input type="text" name="book_note_leader" class="form-control border-input" placeholder="หมายเหตุ" 
-                                                                   value="{{!empty($booking->book_note_leader) ? $booking->book_note_leader : ''}}" {{((Session::get('level') == 3)&&(Session::get('dept')=='สำนักปลัด'))  ? '':'readonly style="background-color:beige;"'}}>
+                                                                   value="{{!empty($booking->book_note_leader) ? $booking->book_note_leader : ''}}" {{((Session::get('level') == 3)&&(Session::get('dept')=='สำนักปลัด'))  ? '':'readonly style="background-color:beige;"'}}{{$disLeader}}>
                                                      </td>
                                                       @if($booking->book_type=='นอกเขตพื้นที่')
                                                      <td colspan="2"><strong>หมายเหตุ  </strong>
                                                             <input type="text" name="book_note_master" class="form-control border-input" placeholder="หมายเหตุ" 
-                                                                   value="{{!empty($booking->book_note_master) ? $booking->book_note_master : ''}}" {{Session::get('level')==4 ? '':'readonly style="background-color:beige;"'}}>
+                                                                   value="{{!empty($booking->book_note_master) ? $booking->book_note_master : ''}}" {{Session::get('level')==4 ? '':'readonly style="background-color:beige;"'}} {{$disMaster}}>
                                                      </td> 
                                                      @endif
                                                 </tr>
@@ -227,11 +236,9 @@
                                         <input type="hidden" name="lat" id="lat" value="{{!empty($booking->book_gps_lat) ? $booking->book_gps_lat:''}}">
                                         <input type="hidden" name="lng" id="lng" value="{{!empty($booking->book_gps_lon) ? $booking->book_gps_lon:''}}">
                                         <input type="hidden" name="id" value="{{$booking->id}}">
-                                        @if((Auth::id()==$booking->book_mem_id) || (Session::get('level') > 2))
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-danger btn-fill btn-wd">บันทึก</button>
+                                            <button type="submit" class="btn btn-danger btn-fill btn-wd" id="save">บันทึก</button>
                                         </div>
-                                        @endif
                                         <div class="clearfix"></div>
                                     </form>
                                 </div>
@@ -250,7 +257,10 @@
          $( "#rowMap" ).fadeOut( "slow");
          $('#openMap').text('แสดงแผนที่');
     }
-})
+  })
+  $('#save').click(function(){
+     $('input[type=radio]').removeAttr('disabled');
+  });
  window.onload= function(){
         $('#rowMap').hide();
     } 

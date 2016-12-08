@@ -4,11 +4,23 @@ class Report_ReportMainternanceController extends Controller{
     public function getIndex()
     {   
         $inputs = Input::all();
+        $level = Session::get('level');
         $year = !empty($inputs['year']) ? $inputs['year'] :null;
         
         $sql  =  MainternanceCar::where(DB::raw('YEAR(mn_date_save)'),$year-543)
                 ->join('cars','cars.id','=','mn_car_id')
                 ->join('members','members.id','=','mn_mem_id');
+        // check sort report
+        if($level==3)
+        {
+            $cars = Car::where('car_dept',Session::get('dept'))->lists('id');
+            $sql->whereIn(DB::raw('mainternance_car.mn_car_id'),$cars);
+        }
+        else if($level==1)
+        {
+            $cars = Car::where('car_driver_id',Auth::id())->lists('id');
+            $sql->whereIn(DB::raw('mainternance_car.mn_car_id'),$cars);
+        }
         $listMainter =$sql
                 ->select('mainternance_car.id','mn_date_save','cars.car_no','cars.car_province','cars.car_type',
                         'cars.car_dept','mem_name','mem_lname')

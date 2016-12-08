@@ -9,8 +9,9 @@
 @section('content')
     <?php 
         $disable="";
+        $style = "disabled style=background-color:#eee";
         if(Request::segment(3)!='create'){
-        $disable =  ((Session::get('level') == 4) || (Auth::id()==$member->id)) ? '' : 'disabled style=background-color:#eee' ;
+        $disable =  ((Session::get('level') == 4) || (Auth::id()==$member->id)) ? '' : $style ;
         }
     ?>
   <div class="content">
@@ -81,10 +82,6 @@
                                             <div class="col-md-3">
                                                 <img src="{{URL::to('img/members/'.$member->mem_pic.'')}}" class="img-rounded" width="250px" height="250px">
                                             </div>
-                                    <!--    <div class="col-md-3">
-                                                <img src="signature.png" width="150px" height="150px">
-                                            </div>
-                                    -->
                                         </div>
                                     @endif
                                     
@@ -95,22 +92,28 @@
                                                 <input type="file" name="mem_pic" class="form-control border-input">
                                             </div>
                                         <?php } ?>
-                                    <!--<div class="col-md-3">
-                                            <label>ลายเซ็นต์</label>
-                                            <input type="file" name="mem_sig" class="form-control border-input" value="11111">
-                                        </div>
-                                    -->
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-3">
                                             <label>ระดับสมาชิก</label>
-                                            <select class="form-control border-input" name="mem_level" {{$disable}}>
-                                                <option value="2" {{(!empty($member->mem_level)&&($member->mem_level=="2")) ? 'selected' :''}}>ผู้ขอใช้รถ</option>
-                                                <option value="1" {{(!empty($member->mem_level)&&($member->mem_level=="1")) ? 'selected' :''}}>พนักงานขับรถ</option>
-                                                <option value="3" {{(!empty($member->mem_level)&&($member->mem_level=="3")) ? 'selected' :''}}>ผู้อำนวยการกอง</option>
-                                                <option value="4" {{(!empty($member->mem_level)&&($member->mem_level=="4")) ? 'selected' :''}}>ปลัด/นายก</option>
-                                            </select>
+                                            @if(!empty($member->id) && Auth::id()==$member->id)
+                                            <select class="form-control border-input" name="mem_level" disabled>
+                                                    <option value="2" {{(!empty($member->mem_level)&&($member->mem_level=="2")) ? 'selected' :''}}>ผู้ขอใช้รถ</option>
+                                                    <option value="1" {{(!empty($member->mem_level)&&($member->mem_level=="1")) ? 'selected' :''}}>พนักงานขับรถ</option>
+                                                    <option value="3" {{(!empty($member->mem_level)&&($member->mem_level=="3")) ? 'selected' :''}}>ผู้อำนวยการกอง</option>
+                                                    <option value="4" {{(!empty($member->mem_level)&&($member->mem_level=="4")) ? 'selected' :''}}>ปลัด/นายก</option>
+                                                </select>
+                                            @else
+                                                 <select class="form-control border-input" name="mem_level" {{$disable}}>
+                                                    <option value="2" {{(!empty($member->mem_level)&&($member->mem_level=="2")) ? 'selected' :''}}>ผู้ขอใช้รถ</option>
+                                                    <option value="1" {{(!empty($member->mem_level)&&($member->mem_level=="1")) ? 'selected' :''}}>พนักงานขับรถ</option>
+                                                    @if(Session::get('level')==4)
+                                                        <option value="3" {{(!empty($member->mem_level)&&($member->mem_level=="3")) ? 'selected' :''}}>ผู้อำนวยการกอง</option>
+                                                        <option value="4" {{(!empty($member->mem_level)&&($member->mem_level=="4")) ? 'selected' :''}}>ปลัด/นายก</option>
+                                                    @endif
+                                                </select>
+                                            @endif
                                         </div>
                                     </div>
 
